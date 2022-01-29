@@ -10,9 +10,9 @@ var config = {
   physics: {
     default: "matter",
     matter: {
-      gravity: { y: 1 },
+      gravity: { y: 3 },
       debug: true,
-      enableSleep: false
+      // enableSleep: true
     },
   },
 }
@@ -32,7 +32,7 @@ function preload() {
   this.load.atlas("player", "assets/sprites/steve/spritesheet.png", "assets/sprites/steve/spritesheet.json")
   this.load.json("steve-physics", "assets/sprites/steve/physics.json")
 }
-
+var teste 
 function create() {
   this.add.image(0, 0, 'halloween-background').setOrigin(0, 0)
 
@@ -41,20 +41,40 @@ function create() {
   tileset = map.addTilesetImage("map_tileset", "tiles")
 
   CollideLayer = map.createLayer("mapTMX", tileset, 0, 0)
-
-  CollideLayer.setCollisionBetween(1, 50)
+  details = map.createLayer("secondLayer", tileset, 0, 0) // Layer sem colisões
   
-  this.matter.world.convertTilemapLayer(CollideLayer)
+  CollideLayer.setCollisionByProperty({ collides: true }) // Colisão
 
-  CollideLayer.setCollisionByExclusion([-1]);
+  this.matter.world.convertTilemapLayer(CollideLayer)
+  this.matter.world.convertTilemapLayer(details)
+
+  var colliders = []
+
+  map.findObject('ghostCollision', obj => {
+    if (obj.name === 'removeGhost' || obj.name === 'setJump')
+      colliders.push({
+        x: obj.x,
+        y: obj.y,
+        width: obj.width,
+        height: obj.height,
+        label: obj.name
+      })
+  })
+
+  colliders.forEach((obj) =>
+    this.matter.add.rectangle(
+      obj.x + (obj.width / 2), obj.y + (obj.height / 2),
+      obj.width, obj.height,
+      { isStatic: true, label: obj.label }
+    )
+  )
+
+  this.matter.world.setBounds(0, 0, game.config.width*2, 1300)
 
   // Player shape
   physicsCache = this.cache.json.get("steve-physics")
 
-  player = this.matter.add.sprite(400, 300, "player", "Idle1.png", { shape: physicsCache.Steve }).setFixedRotation()
-  this.matter.world.setBounds(0, 0, game.config.width*2, 1300)
-
-  noCollisionsLayer = map.createLayer("noCollisions", tileset, 0, 0) // Só carrego o layer, não seto nenhuma colisão
+  player = this.matter.add.sprite(400, 400, "player", "Idle1.png", { shape: physicsCache.Steve }).setFixedRotation()
 
   // Map collision
 
@@ -64,24 +84,17 @@ function create() {
 
   cursors = this.input.keyboard.createCursorKeys()
 
-  this.matter.world.on("collisionactive", (skater, ground) => {
-    skaterTouchingGround = true
+  this.matter.world.on("collisionactive", (event, bodyA, bodyB) => {
+    if (bodyA.label === "setJump")
+      skaterTouchingGround = true
+    else
+      skaterTouchingGround = false
   })
 
   this.matter.world.on('collisionend', function (event, bodyA, bodyB) {
-    console.log('collision End: ', event);
-  });
-  // this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
-  //   console.log("começou: ", bodyA, bodyB)
-  //   // if((bodyA.label == "plane" && bodyB.label == "obstacle") || (bodyB.label == "plane" && bodyA.label == "obstacle")) {
-  //   //     if(plane.anims.getCurrentKey() != "explode") {
-  //   //         plane.play("explode");
-  //   //         plane.once(Phaser.Animations.Events.SPRITE_ANIMATION_COMPLETE, () => {
-  //   //             plane.destroy();
-  //   //         });
-  //   //     }
-  //   // }
-  // });
+    skaterTouchingGround = false
+  })
+
 
   // animation
   this.anims.create({
@@ -154,8 +167,7 @@ function updateMovePlayer() {
       player.play("stop", true)
   }
   if (cursors.up.isDown && skaterTouchingGround) {
-    player.setVelocityY(-10)
-    skaterTouchingGround = false
+    player.setVelocityY(-30)
   }
 
   if (!skaterTouchingGround)

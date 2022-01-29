@@ -4,11 +4,11 @@
 		"type": "fromPhysicsEditor",
 		"label": "Steve",
 		"isStatic": false,
-		"density": 0.1,
+		"density": 10,
 		"restitution": 0,
 		"friction": 0,
 		"frictionAir": 0.01,
-		"frictionStatic": 0.5,
+		"frictionStatic": 0.01,
 		"collisionFilter": {
 			"group": 0,
 			"category": 1,
@@ -19,8 +19,7 @@
 				"label": "",
 				"isSensor": false,
 				"vertices": [
-					[ { "x":114, "y":14 }, { "x":72, "y":50 }, { "x":83, "y":88 }, { "x":136, "y":138 }, { "x":141, "y":47 } ],
-					[ { "x":93, "y":138 }, { "x":136, "y":138 }, { "x":83, "y":88 } ]
+					[ { "x":114, "y":20 }, { "x":89, "y":45 }, { "x":89, "y":138 }, { "x":134, "y":138 }, { "x":134, "y":45 } ]
 				]
 			}
 		]
