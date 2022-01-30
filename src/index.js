@@ -1,4 +1,6 @@
-var config = {
+import Player from './js/Player.js'
+
+var game = new Phaser.Game({
   type: Phaser.AUTO,
   width: 2000,//5600
   height: 1000,
@@ -15,10 +17,20 @@ var config = {
       // enableSleep: true
     },
   },
+})
+
+const gameState = {
+  enemies: [],
+  player: {
+    velocityX: 10,
+    velocityY: 30,
+  },
+  setVelocityX, 
+  setVelocityY
 }
 
-var game = new Phaser.Game(config)
-let skaterTouchingGround
+var player, player
+
 
 function preload() {
   // background
@@ -32,145 +44,116 @@ function preload() {
   this.load.atlas("player", "assets/sprites/steve/spritesheet.png", "assets/sprites/steve/spritesheet.json")
   this.load.json("steve-physics", "assets/sprites/steve/physics.json")
 }
-var teste 
+
+
 function create() {
   this.add.image(0, 0, 'halloween-background').setOrigin(0, 0)
-
+  
   // Map config
-  map = this.make.tilemap({key: "map_json"})
-  tileset = map.addTilesetImage("map_tileset", "tiles")
+  var map = this.make.tilemap({key: "map_json"})
+  var tileset = map.addTilesetImage("map_tileset", "tiles")
 
-  CollideLayer = map.createLayer("mapTMX", tileset, 0, 0)
-  details = map.createLayer("secondLayer", tileset, 0, 0) // Layer sem colisões
+  this.matter.world.setBounds(0, 0, 6000, 1800)
+
+  // Object Collisions (to fix ghost collision)
+    map.findObject('ghostCollision', obj => {
+      if (obj.name === 'removeGhost' || obj.name === 'setJump' || obj.name === "lava")
+        this.matter.add.rectangle(
+          obj.x + (obj.width / 2), obj.y + (obj.height / 2),
+          obj.width, obj.height,
+          { isStatic: true, label: obj.name }
+        )
+    })
+
+  // Player shape
+    player = new Player(this, "steve")
+    player.sprite.setBounce(0.1)
+
+
+  
+  var CollideLayer = map.createLayer("mapTMX", tileset, 0, 0)
+
+  map.createLayer("secondLayer", tileset, 0, 0) // Layer sem colisões
   
   CollideLayer.setCollisionByProperty({ collides: true }) // Colisão
 
   this.matter.world.convertTilemapLayer(CollideLayer)
-  this.matter.world.convertTilemapLayer(details)
-
-  var colliders = []
-
-  map.findObject('ghostCollision', obj => {
-    if (obj.name === 'removeGhost' || obj.name === 'setJump')
-      colliders.push({
-        x: obj.x,
-        y: obj.y,
-        width: obj.width,
-        height: obj.height,
-        label: obj.name
-      })
-  })
-
-  colliders.forEach((obj) =>
-    this.matter.add.rectangle(
-      obj.x + (obj.width / 2), obj.y + (obj.height / 2),
-      obj.width, obj.height,
-      { isStatic: true, label: obj.label }
-    )
-  )
-
-  this.matter.world.setBounds(0, 0, game.config.width*2, 1300)
-
-  // Player shape
-  physicsCache = this.cache.json.get("steve-physics")
-
-  player = this.matter.add.sprite(400, 400, "player", "Idle1.png", { shape: physicsCache.Steve }).setFixedRotation()
-
-  // Map collision
 
   // Camera
-  this.cameras.main.setBounds(0, 0, 4000, 1300)
-  this.cameras.main.startFollow(player)
+    this.cameras.main.setBounds(0, 0, 6000, 1800)
+    this.cameras.main.startFollow(player.sprite)
+  
+  // Lava damage
+    CollideLayer.forEachTile((tile) => {
+      // In Tiled, the platform tiles have been given a "type" property which is a string
 
-  cursors = this.input.keyboard.createCursorKeys()
+    })
 
-  this.matter.world.on("collisionactive", (event, bodyA, bodyB) => {
-    if (bodyA.label === "setJump")
-      skaterTouchingGround = true
-    else
-      skaterTouchingGround = false
-  })
+  // Collisions
+    this.matter.world.on("collisionactive", (event, bodyA, bodyB) => {
+      if (bodyA.label === "setJump")
+        player.allowJump = true
+      else if (bodyA.label === "lava") {
+        player.changeVelocityX(1)
+        player.changeVelocityY(20)
+        player.sprite.setTint(0xff0000)
+        player.allowJump = true
+      }
 
-  this.matter.world.on('collisionend', function (event, bodyA, bodyB) {
-    skaterTouchingGround = false
-  })
+      player.inFloor = true
+    })
 
+    this.matter.world.on('collisionend', (event, bodyA) => {
+      console.log("saindo da colisão")
+      if (bodyA.label === "lava") {
+        player.changeVelocityX(10)
+        player.changeVelocityY(30)
+        player.sprite.clearTint()
+      }
+      player.allowJump = false
+      player.inFloor = false
+    })
 
-  // animation
-  this.anims.create({
-    key: "run",
-    frameRate: 15,
-    frames: this.anims.generateFrameNames("player", {
-      prefix: "Run",
-      suffix: ".png",
-      start: 1,
-      end: 8,
-      zeroPad: 1
-    }),
-    repeat: -1
-  })
-  this.anims.create({
-    key: "stop",
-    frameRate: 15,
-    frames: this.anims.generateFrameNames("player", {
-      prefix: "Idle",
-      suffix: ".png",
-      start: 1,
-      end: 10,
-      zeroPad: 1
-    }),
-    repeat: -1
-  })
-  this.anims.create({
-    key: "jump",
-    frameRate: 5,
-    frames: this.anims.generateFrameNames("player", {
-      prefix: "Jump",
-      suffix: ".png",
-      start: 4,
-      end: 9,
-      zeroPad: 1
-    }),
-    repeat: -1
-  })
-
+    
+  this.cursors = this.input.keyboard.createCursorKeys()
 }
 
 function update() {
-  updateMovePlayer()
-}
+  var {left, right, up} = this.cursors
 
-function flipPlayer(pos) { 
-  if (player.scaleX != pos)
-    player.scaleX = pos
-  player.setFixedRotation()
-}
+  if (right.isDown) {
+    player.sprite.setVelocityX(player.velocity.x)
 
-function updateMovePlayer() {
-  if (cursors.right.isDown) {
-    player.setVelocityX(+10)
-    flipPlayer(1)
-
-    if (skaterTouchingGround)
-      player.play("run", true)
-
-  } else if (cursors.left.isDown) {
-    player.setVelocityX(-10)
-    flipPlayer(-1)
-
-    if (skaterTouchingGround)
-      player.play("run", true)
-
+    fliplayer(1)
+    verifyAnimation("run")
+  }
+  else if (left.isDown) {
+    player.sprite.setVelocityX(-player.velocity.x)
+    fliplayer(-1)
+    verifyAnimation("run")
+    
   } else {
-    player.setVelocityX(0)
-    if (skaterTouchingGround)
-      player.play("stop", true)
+    player.sprite.setVelocityX(0)
+    verifyAnimation("stop")
   }
-  if (cursors.up.isDown && skaterTouchingGround) {
-    player.setVelocityY(-30)
-  }
+  if (up.isDown && player.allowJump)
+    player.sprite.setVelocityY(-player.velocity.y)
+}
 
-  if (!skaterTouchingGround)
-    player.play("jump", true)
+function fliplayer(pos) { 
+  if (player.sprite.scaleX != pos)
+    player.sprite.scaleX = pos
+  player.sprite.setFixedRotation()
+}
 
+function verifyAnimation(type) {
+  player.inFloor 
+    ? player.sprite.play(type, true) 
+    : player.sprite.play("jump", true)
+}
+function setVelocityX(velocity) {
+  gameState.player.velocityX = velocity
+}
+function setVelocityY(velocity) {
+  gameState.player.velocityY = velocity
 }
