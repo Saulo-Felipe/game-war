@@ -218,12 +218,6 @@
             <key type="filename">../../../../../png/Idle7.png</key>
             <key type="filename">../../../../../png/Idle8.png</key>
             <key type="filename">../../../../../png/Idle9.png</key>
-            <key type="filename">../../../../../png/Jump1.png</key>
-            <key type="filename">../../../../../png/Jump10.png</key>
-            <key type="filename">../../../../../png/Jump11.png</key>
-            <key type="filename">../../../../../png/Jump12.png</key>
-            <key type="filename">../../../../../png/Jump2.png</key>
-            <key type="filename">../../../../../png/Jump3.png</key>
             <key type="filename">../../../../../png/Jump4.png</key>
             <key type="filename">../../../../../png/Jump5.png</key>
             <key type="filename">../../../../../png/Jump6.png</key>
@@ -290,12 +284,6 @@
             <filename>../../../../../png/Idle7.png</filename>
             <filename>../../../../../png/Idle8.png</filename>
             <filename>../../../../../png/Idle9.png</filename>
-            <filename>../../../../../png/Jump1.png</filename>
-            <filename>../../../../../png/Jump10.png</filename>
-            <filename>../../../../../png/Jump11.png</filename>
-            <filename>../../../../../png/Jump12.png</filename>
-            <filename>../../../../../png/Jump2.png</filename>
-            <filename>../../../../../png/Jump3.png</filename>
             <filename>../../../../../png/Jump4.png</filename>
             <filename>../../../../../png/Jump5.png</filename>
             <filename>../../../../../png/Jump6.png</filename>

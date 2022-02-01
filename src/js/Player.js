@@ -10,7 +10,54 @@ export default function Player(scene, skin) {
 
   var physicsCache = scene.cache.json.get("steve-physics") 
   this.sprite = scene.matter.add.sprite(500, 400, "player", "Idle1.png", { shape: physicsCache.Steve }).setFixedRotation()
+  this.sprite.setBounce(0.1)
 
+  scene.matter.world.on("collisionactive", (event, bodyA, bodyB) => {
+    //     var activedCollisions = event.source.pairs.collisionActive
+
+    // for (var i = 0; i < activedCollisions.length; i++) {
+    //   let {bodyA, bodyB} = activedCollisions[i]
+
+    //   console.log("Active: ", bodyA, bodyB)
+    // }
+
+    // if (bodyB.parent.label === "Steve") {
+    //   if (bodyA.label === "setJump")
+    //     this.allowJump = true
+    //   else if (bodyA.label === "lava") {
+    //     this.changeVelocityX(1)
+    //     this.changeVelocityY(20)
+    //     this.sprite.setTint(0xff0000)
+    //     this.allowJump = true
+    //   }
+
+      this.inFloor = true
+    // }
+  })
+  scene.matter.world.on("collisionstart", (event) => {
+            var activedCollisions = event.source.pairs.collisionActive
+
+    for (var i = 0; i < activedCollisions.length; i++) {
+      let {bodyA, bodyB} = activedCollisions[i]
+
+      console.log("Active: ", bodyA, bodyB)
+    }
+  })
+  scene.matter.world.on('collisionend', (event) => {
+
+
+    // if (bodyB.parent.label === "Steve") {
+    //   if (bodyA.label === "lava") {
+    //     this.changeVelocityX(10)
+    //     this.changeVelocityY(30)
+    //     this.sprite.clearTint()
+    //   }
+    //   if (this.allowJump)
+    //     this.allowJump = false
+    //   if (this.inFloor)
+    //     this.inFloor = false
+    // }
+  })
 
   // Functions
   this.changeVelocityX = (velocity) => {
@@ -21,7 +68,24 @@ export default function Player(scene, skin) {
     if (this.velocity.y !== velocity)
       this.velocity.y = velocity
   }
+  this.verifyAnimation = (type) => {
+    this.inFloor
+      ? this.sprite.play(type, true) 
+      : this.sprite.play("jump", true)
+  }
+  this.fliplayer = (pos) => {
+    if (this.sprite.scaleX != pos) {
+      this.sprite.scaleX = pos
+      this.sprite.setFixedRotation()
+    }      
+  }
+  this.setVelocityX = (vel) => {
+    this.sprite.setVelocityX(vel)
 
+  }
+  this.setVelocityY = (vel) => {
+    this.sprite.setVelocityY(vel)
+  }
 
 
   scene.anims.create({
