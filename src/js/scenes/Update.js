@@ -1,5 +1,5 @@
-export default function update() {
-  let {left, right, up} = this.cursors
+export default function update(time, delta) {
+  let {left, right, up, space} = this.cursors
 
   if (right.isDown) {
     this.player.setVelocityX(this.player.velocity.x)
@@ -18,5 +18,14 @@ export default function update() {
   }
   if (up.isDown && this.player.allowJump) {
     this.player.setVelocityY(-this.player.velocity.y)
+  }
+  if (space.isDown && time > this.lastFired) {
+    var bullet = this.bullets.get()
+
+    if (bullet) {
+      bullet.fire(this.player.sprite.x, this.player.sprite.y);
+      this.lastFired = time + 50
+    }
+    
   }
 }

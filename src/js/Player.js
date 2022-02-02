@@ -9,54 +9,51 @@ export default function Player(scene, skin) {
   this.inFloor = false
 
   var physicsCache = scene.cache.json.get("steve-physics") 
-  this.sprite = scene.matter.add.sprite(500, 400, "player", "Idle1.png", { shape: physicsCache.Steve }).setFixedRotation()
+  this.sprite = scene.matter.add.sprite(500, 900, "player", "Idle1.png", { shape: physicsCache.Steve }).setFixedRotation()
   this.sprite.setBounce(0.1)
 
-  scene.matter.world.on("collisionactive", (event, bodyA, bodyB) => {
-    //     var activedCollisions = event.source.pairs.collisionActive
+  // Player Collisions
+  scene.matter.world.on("collisionactive", (event) => {
+    var pairs = event.pairs
 
-    // for (var i = 0; i < activedCollisions.length; i++) {
-    //   let {bodyA, bodyB} = activedCollisions[i]
+    for (var c = 0; c < pairs.length; c++) {
+      var {bodyA, bodyB} = pairs[c]
 
-    //   console.log("Active: ", bodyA, bodyB)
-    // }
+      if (bodyA.label === "Steve" || bodyB.label === "Steve") {
+        if (!this.inFloor)
+          this.inFloor = true
+  
+        if ((bodyA.label === "setJump" || bodyB.label === "setJump")) {
+          this.allowJump = true
+        }
+        else if (bodyA.label === "lava" || bodyB.label === "lava") {
+          this.changeVelocityX(1)
+          this.changeVelocityY(20)
 
-    // if (bodyB.parent.label === "Steve") {
-    //   if (bodyA.label === "setJump")
-    //     this.allowJump = true
-    //   else if (bodyA.label === "lava") {
-    //     this.changeVelocityX(1)
-    //     this.changeVelocityY(20)
-    //     this.sprite.setTint(0xff0000)
-    //     this.allowJump = true
-    //   }
-
-      this.inFloor = true
-    // }
-  })
-  scene.matter.world.on("collisionstart", (event) => {
-            var activedCollisions = event.source.pairs.collisionActive
-
-    for (var i = 0; i < activedCollisions.length; i++) {
-      let {bodyA, bodyB} = activedCollisions[i]
-
-      console.log("Active: ", bodyA, bodyB)
+          if (!this.allowJump)
+            this.allowJump = true
+  
+          if (!this.sprite.isTinted)
+            this.sprite.setTint(0xff0000)
+        }
+        break;
+      }
     }
   })
-  scene.matter.world.on('collisionend', (event) => {
 
+  scene.matter.world.on('collisionend', (event, bodyA, bodyB) => {
+    if (bodyA.label === "Steve" || bodyB.label === "Steve") {
+      if (bodyA.label === "lava" || bodyB.label === "lava") {
+        this.changeVelocityX(10)
+        this.changeVelocityY(30)
 
-    // if (bodyB.parent.label === "Steve") {
-    //   if (bodyA.label === "lava") {
-    //     this.changeVelocityX(10)
-    //     this.changeVelocityY(30)
-    //     this.sprite.clearTint()
-    //   }
-    //   if (this.allowJump)
-    //     this.allowJump = false
-    //   if (this.inFloor)
-    //     this.inFloor = false
-    // }
+        if (this.sprite.isTinted)
+          this.sprite.clearTint()
+      }
+      
+      if (this.inFloor)
+        this.inFloor = false
+    }
   })
 
   // Functions
@@ -84,9 +81,9 @@ export default function Player(scene, skin) {
 
   }
   this.setVelocityY = (vel) => {
+    this.allowJump = false
     this.sprite.setVelocityY(vel)
   }
-
 
   scene.anims.create({
     key: "run",

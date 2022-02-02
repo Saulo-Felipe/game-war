@@ -16,7 +16,7 @@
 		},
 		"fixtures": [
 			{
-				"label": "",
+				"label": "Steve",
 				"isSensor": false,
 				"vertices": [
 					[ { "x":114, "y":20 }, { "x":89, "y":45 }, { "x":89, "y":138 }, { "x":134, "y":138 }, { "x":134, "y":45 } ]

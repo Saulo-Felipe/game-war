@@ -1,17 +1,41 @@
-export default function Bullet(scene, type) {
+var Bullet = new Phaser.Class({
+  Extends: Phaser.GameObjects.Image,
 
-  if (type === "steve-bullet") {
-    this.bullet = scene.matter.add.image(300, 800, "bullet")
-    this.bullet.setBody({
-      type: "circle",
-      radius: 10
-    })
-    console.log(this.bullet.setVelocityX(10))
-  }
+  initialize: 
 
+  function Bullet(scene) {
+    Phaser.GameObjects.Image.call(this, scene, 0, 0, "bullet")
+    
+    this.speed = Phaser.Math.GetSpeed(1000, 1)
+  },
+
+  fire: function (x, y) {
+    this.setPosition(x + 50, y)
+
+    this.setActive(true)
+    this.setVisible(true)
+  },
   
-  // setInterval(() => {
-  //   this.bullet.x += 3
-  // }, 100);
+  update: function (time, delta) {
+    if (this.player.sprite.scaleX === 1) {
+      this.x += this.speed * delta
 
-}
+      if (this.x > 6000) {
+        console.log("Saiu da tela")
+        this.setActive(false)
+        this.setVisible(false)
+      }  
+    } else {
+
+      this.x -= this.speed * delta
+
+      if (this.x < -50) {
+        console.log("Saiu da tela")
+        this.setActive(false)
+        this.setVisible(false)
+      }
+    }
+  }
+})
+
+export default Bullet
