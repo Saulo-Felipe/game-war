@@ -26,13 +26,13 @@
             </struct>
         </array>
         <key>allowRotation</key>
-        <false/>
+        <true/>
         <key>shapeDebug</key>
         <false/>
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>phaser</string>
+        <string>json-array</string>
         <key>textureFileName</key>
         <filename></filename>
         <key>flipPVR</key>
@@ -78,7 +78,7 @@
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>pngOptimizationLevel</key>
-        <uint>1</uint>
+        <uint>0</uint>
         <key>webpQualityLevel</key>
         <uint>101</uint>
         <key>textureSubPath</key>
@@ -133,7 +133,7 @@
         </struct>
         <key>dataFileNames</key>
         <map type="GFileNameMap">
-            <key>json</key>
+            <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
                 <filename>spritesheet.json</filename>
@@ -153,7 +153,7 @@
             <string></string>
         </struct>
         <key>autoAliasEnabled</key>
-        <true/>
+        <false/>
         <key>trimSpriteNames</key>
         <false/>
         <key>prependSmartFolderName</key>
@@ -167,13 +167,13 @@
             <key>scaleMode</key>
             <enum type="ScaleMode">Smooth</enum>
             <key>extrude</key>
-            <uint>1</uint>
+            <uint>0</uint>
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMargin</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">Trim</enum>
+            <enum type="SpriteSettings::TrimMode">None</enum>
             <key>tracerTolerance</key>
             <int>200</int>
             <key>heuristicMask</key>
@@ -186,21 +186,8 @@
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">../../../../../png/Dead1.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.67027,0.490446</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>46,39,93,79</rect>
-                <key>scale9Paddings</key>
-                <rect>46,39,93,79</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">../../../../../png/Dead10.png</key>
+            <key type="filename">../../../../../png/Dead2.png</key>
             <key type="filename">../../../../../png/Dead3.png</key>
             <key type="filename">../../../../../png/Dead4.png</key>
             <key type="filename">../../../../../png/Dead5.png</key>
@@ -208,6 +195,16 @@
             <key type="filename">../../../../../png/Dead7.png</key>
             <key type="filename">../../../../../png/Dead8.png</key>
             <key type="filename">../../../../../png/Dead9.png</key>
+            <key type="filename">../../../../../png/Idle-shoot1.png</key>
+            <key type="filename">../../../../../png/Idle-shoot10.png</key>
+            <key type="filename">../../../../../png/Idle-shoot2.png</key>
+            <key type="filename">../../../../../png/Idle-shoot3.png</key>
+            <key type="filename">../../../../../png/Idle-shoot4.png</key>
+            <key type="filename">../../../../../png/Idle-shoot5.png</key>
+            <key type="filename">../../../../../png/Idle-shoot6.png</key>
+            <key type="filename">../../../../../png/Idle-shoot7.png</key>
+            <key type="filename">../../../../../png/Idle-shoot8.png</key>
+            <key type="filename">../../../../../png/Idle-shoot9.png</key>
             <key type="filename">../../../../../png/Idle1.png</key>
             <key type="filename">../../../../../png/Idle10.png</key>
             <key type="filename">../../../../../png/Idle2.png</key>
@@ -224,6 +221,11 @@
             <key type="filename">../../../../../png/Jump7.png</key>
             <key type="filename">../../../../../png/Jump8.png</key>
             <key type="filename">../../../../../png/Jump9.png</key>
+            <key type="filename">../../../../../png/Run-shoot1.png</key>
+            <key type="filename">../../../../../png/Run-shoot2.png</key>
+            <key type="filename">../../../../../png/Run-shoot3.png</key>
+            <key type="filename">../../../../../png/Run-shoot4.png</key>
+            <key type="filename">../../../../../png/Run-shoot5.png</key>
             <key type="filename">../../../../../png/Run1.png</key>
             <key type="filename">../../../../../png/Run2.png</key>
             <key type="filename">../../../../../png/Run3.png</key>
@@ -232,24 +234,16 @@
             <key type="filename">../../../../../png/Run6.png</key>
             <key type="filename">../../../../../png/Run7.png</key>
             <key type="filename">../../../../../png/Run8.png</key>
+            <key type="filename">../../../../../png/Shooting1.png</key>
+            <key type="filename">../../../../../png/Shooting2.png</key>
+            <key type="filename">../../../../../png/Shooting3.png</key>
+            <key type="filename">../../../../../png/Shooting4.png</key>
+            <key type="filename">../../../../../png/Shooting5.png</key>
+            <key type="filename">../../../../../png/Shooting6.png</key>
+            <key type="filename">../../../../../png/Shooting7.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>46,39,93,79</rect>
-                <key>scale9Paddings</key>
-                <rect>46,39,93,79</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../../png/Dead2.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.648649,0.471338</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>
@@ -274,6 +268,16 @@
             <filename>../../../../../png/Dead7.png</filename>
             <filename>../../../../../png/Dead8.png</filename>
             <filename>../../../../../png/Dead9.png</filename>
+            <filename>../../../../../png/Idle-shoot1.png</filename>
+            <filename>../../../../../png/Idle-shoot10.png</filename>
+            <filename>../../../../../png/Idle-shoot2.png</filename>
+            <filename>../../../../../png/Idle-shoot3.png</filename>
+            <filename>../../../../../png/Idle-shoot4.png</filename>
+            <filename>../../../../../png/Idle-shoot5.png</filename>
+            <filename>../../../../../png/Idle-shoot6.png</filename>
+            <filename>../../../../../png/Idle-shoot7.png</filename>
+            <filename>../../../../../png/Idle-shoot8.png</filename>
+            <filename>../../../../../png/Idle-shoot9.png</filename>
             <filename>../../../../../png/Idle1.png</filename>
             <filename>../../../../../png/Idle10.png</filename>
             <filename>../../../../../png/Idle2.png</filename>
@@ -298,6 +302,18 @@
             <filename>../../../../../png/Run6.png</filename>
             <filename>../../../../../png/Run7.png</filename>
             <filename>../../../../../png/Run8.png</filename>
+            <filename>../../../../../png/Shooting1.png</filename>
+            <filename>../../../../../png/Shooting2.png</filename>
+            <filename>../../../../../png/Shooting3.png</filename>
+            <filename>../../../../../png/Shooting4.png</filename>
+            <filename>../../../../../png/Shooting5.png</filename>
+            <filename>../../../../../png/Shooting6.png</filename>
+            <filename>../../../../../png/Shooting7.png</filename>
+            <filename>../../../../../png/Run-shoot1.png</filename>
+            <filename>../../../../../png/Run-shoot2.png</filename>
+            <filename>../../../../../png/Run-shoot3.png</filename>
+            <filename>../../../../../png/Run-shoot4.png</filename>
+            <filename>../../../../../png/Run-shoot5.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -57,13 +57,10 @@ export default function create() {
   })
   this.lastFired = 0
 
-
   this.speed = Phaser.Math.GetSpeed(300, 1);
-
 
   this.input.on('pointerdown', (event) => {
     console.log("GrouP: ", this.bullets)
-  
   })
 
 

@@ -32,7 +32,7 @@
          "name":"ghostCollision",
          "objects":[
                 {
-                 "height":464.678,
+                 "height":319.748652173913,
                  "id":48,
                  "name":"removeGhost",
                  "rotation":0,
@@ -43,14 +43,14 @@
                  "y":1336.66
                 }, 
                 {
-                 "height":229.333,
+                 "height":86.1966363636366,
                  "id":51,
                  "name":"removeGhost",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":22.667,
-                 "x":841.333,
+                 "width":24.576090909091,
+                 "x":839.423909090909,
                  "y":1570.67
                 }, 
                 {
@@ -76,7 +76,7 @@
                  "y":1211
                 }, 
                 {
-                 "height":345.234,
+                 "height":197.400666666667,
                  "id":58,
                  "name":"removeGhost",
                  "rotation":0,
@@ -182,7 +182,7 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":595.039,
+                 "width":598.164,
                  "x":2642.15,
                  "y":1318.81
                 }, 
@@ -297,7 +297,7 @@
                  "y":808.425
                 }, 
                 {
-                 "height":229.916,
+                 "height":81.6659999999999,
                  "id":104,
                  "name":"removeGhost",
                  "rotation":0,
@@ -308,13 +308,13 @@
                  "y":1570.37
                 }, 
                 {
-                 "height":471.583,
+                 "height":323.416333333333,
                  "id":105,
                  "name":"removeGhost",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":6.75,
+                 "width":9.75,
                  "x":3230.41,
                  "y":1329.25
                 }, 
@@ -330,25 +330,14 @@
                  "y":1329.22
                 }, 
                 {
-                 "height":109.109,
-                 "id":107,
-                 "name":"removeGhost",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":7.33333,
-                 "x":2280.23,
-                 "y":1691.42
-                }, 
-                {
                  "height":11,
                  "id":108,
                  "name":"lava",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":240.333,
-                 "x":2039.33,
+                 "width":247.833,
+                 "x":2031.83,
                  "y":1789.33
                 }, 
                 {
@@ -358,8 +347,8 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":481.955,
-                 "x":3237.13,
+                 "width":491.773181818182,
+                 "x":3233.13,
                  "y":1777.67
                 }, 
                 {
@@ -380,9 +369,75 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":240,
-                 "x":598.896,
+                 "width":258.227272727273,
+                 "x":589.896,
                  "y":1769.85
+                }, 
+                {
+                 "height":148.752470355731,
+                 "id":118,
+                 "name":"lava",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":19.2717391304348,
+                 "x":572.833333,
+                 "y":1653.14146937154
+                }, 
+                {
+                 "height":148.0025,
+                 "id":121,
+                 "name":"lava",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16.9080636363636,
+                 "x":846.333846636364,
+                 "y":1653.540417
+                }, 
+                {
+                 "height":148.752,
+                 "id":125,
+                 "name":"lava",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":19.2717,
+                 "x":2013.45505875758,
+                 "y":1651.68460639394
+                }, 
+                {
+                 "height":108.570181818182,
+                 "id":126,
+                 "name":"lava",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":18.2717,
+                 "x":2278.74293754545,
+                 "y":1691.42703063636
+                }, 
+                {
+                 "height":148.752,
+                 "id":127,
+                 "name":"lava",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":12.7717,
+                 "x":3221.53460421212,
+                 "y":1652.41187912121
+                }, 
+                {
+                 "height":148.752,
+                 "id":128,
+                 "name":"lava",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":9.02169999999978,
+                 "x":3722.92475572727,
+                 "y":1651.85884881818
                 }],
          "offsetx":0.666667,
          "offsety":-0.666667,
@@ -393,7 +448,7 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":117,
+ "nextobjectid":129,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

@@ -1,23 +1,29 @@
 var Bullet = new Phaser.Class({
   Extends: Phaser.GameObjects.Image,
 
-  initialize: 
-
-  function Bullet(scene) {
+  initialize: function Bullet(scene) {
     Phaser.GameObjects.Image.call(this, scene, 0, 0, "bullet")
     
     this.speed = Phaser.Math.GetSpeed(1000, 1)
+    this.isFlip = false
   },
 
-  fire: function (x, y) {
-    this.setPosition(x + 50, y)
-
+  fire: function (x, y, scaleX) {
+    console.log(this)
+    if (scaleX === -1) {
+      this.isFlip = true
+      this.setPosition(x - 50, y)
+    } else {
+      this.isFlip = false
+      this.setPosition(x + 50, y)      
+    }
+    
     this.setActive(true)
     this.setVisible(true)
   },
   
   update: function (time, delta) {
-    if (this.player.sprite.scaleX === 1) {
+    if (!this.isFlip) {
       this.x += this.speed * delta
 
       if (this.x > 6000) {
@@ -26,7 +32,6 @@ var Bullet = new Phaser.Class({
         this.setVisible(false)
       }  
     } else {
-
       this.x -= this.speed * delta
 
       if (this.x < -50) {

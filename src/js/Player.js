@@ -7,6 +7,7 @@ export default function Player(scene, skin) {
   }
   this.allowJump = false
   this.inFloor = false
+  this.isShooting = false
 
   var physicsCache = scene.cache.json.get("steve-physics") 
   this.sprite = scene.matter.add.sprite(500, 900, "player", "Idle1.png", { shape: physicsCache.Steve }).setFixedRotation()
@@ -66,9 +67,22 @@ export default function Player(scene, skin) {
       this.velocity.y = velocity
   }
   this.verifyAnimation = (type) => {
-    this.inFloor
-      ? this.sprite.play(type, true) 
-      : this.sprite.play("jump", true)
+    if (type === "right" || type === "left") {
+      if (this.isShooting) {
+        this.sprite.play("run-shoot", true)
+        this.changeVelocityX(5)
+      } else {
+        this.sprite.play("run", true)
+      }
+    } else if (type === "stopped") {
+      if (this.isShooting) {
+        this.sprite.play("stopped-shoot", true)
+      } else {
+        this.sprite.play("stopped", true)
+      }
+    } else {
+      this.sprite.play("jump", true)
+    }
   }
   this.fliplayer = (pos) => {
     if (this.sprite.scaleX != pos) {
@@ -98,10 +112,34 @@ export default function Player(scene, skin) {
     repeat: -1
   })
   scene.anims.create({
-    key: "stop",
+    key: "run-shoot",
+    frameRate: 6,
+    frames: scene.anims.generateFrameNames("player", {
+      prefix: "Run-shoot",
+      suffix: ".png",
+      start: 1,
+      end: 5,
+      zeroPad: 1
+    }),
+    repeat: -1
+  })
+  scene.anims.create({
+    key: "stopped",
     frameRate: 15,
     frames: scene.anims.generateFrameNames("player", {
       prefix: "Idle",
+      suffix: ".png",
+      start: 1,
+      end: 10,
+      zeroPad: 1
+    }),
+    repeat: -1
+  })
+  scene.anims.create({
+    key: "stopped-shoot",
+    frameRate: 10,
+    frames: scene.anims.generateFrameNames("player", {
+      prefix: "Idle-shoot",
       suffix: ".png",
       start: 1,
       end: 10,
