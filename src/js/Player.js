@@ -1,3 +1,5 @@
+import Bullet from "./Items/Bullet.js"
+
 export default function Player(scene, skin) {
   this.life = 100
   this.skin = skin
@@ -9,9 +11,20 @@ export default function Player(scene, skin) {
   this.inFloor = false
   this.isShooting = false
 
+  this.lastFired = 0
+  this.speed = Phaser.Math.GetSpeed(300, 1)
+
+
   var physicsCache = scene.cache.json.get("steve-physics") 
   this.sprite = scene.matter.add.sprite(500, 900, "player", "Idle1.png", { shape: physicsCache.Steve }).setFixedRotation()
   this.sprite.setBounce(0.1)
+
+  // Bullets
+  this.bullets = scene.add.group({
+    classType: Bullet,
+    maxSize: 1000,
+    runChildUpdate: true
+  })
 
   // Player Collisions
   scene.matter.world.on("collisionactive", (event) => {
@@ -51,11 +64,16 @@ export default function Player(scene, skin) {
         if (this.sprite.isTinted)
           this.sprite.clearTint()
       }
+
+      if (bodyA.label === "setJump" || bodyB.label === "setJump") {
+        this.allowJump = false
+      }
       
       if (this.inFloor)
         this.inFloor = false
     }
   })
+  
 
   // Functions
   this.changeVelocityX = (velocity) => {
@@ -66,37 +84,63 @@ export default function Player(scene, skin) {
     if (this.velocity.y !== velocity)
       this.velocity.y = velocity
   }
-  this.verifyAnimation = (type) => {
-    if (type === "right" || type === "left") {
-      if (this.isShooting) {
-        this.sprite.play("run-shoot", true)
-        this.changeVelocityX(5)
-      } else {
+
+  this.moveHorizontal = side => {
+    if (this.inFloor) {
+      if (!this.isShooting) {
         this.sprite.play("run", true)
-      }
-    } else if (type === "stopped") {
-      if (this.isShooting) {
-        this.sprite.play("stopped-shoot", true)
+  
+        this.changeVelocityX(10)
       } else {
-        this.sprite.play("stopped", true)
-      }
+        this.sprite.play("run-shoot", true)
+  
+        this.changeVelocityX(5)
+      }        
+    }
+
+    if (side === "right") {
+      this.fliplayer(1)
+      this.sprite.setVelocityX(this.velocity.x)
     } else {
+      this.fliplayer(-1)
+      this.sprite.setVelocityX(-this.velocity.x)
+    }
+  }
+  this.moveStopped = () => {
+    if (this.inFloor) {
+      if (!this.isShooting)
+        this.sprite.play("stopped", true)
+      else if (this.inFloor)
+        this.sprite.play("stopped-shoot", true)
+    }
+
+    this.sprite.setVelocityX(0)
+  }
+  this.moveUp = () => {
+    if (this.allowJump) {
+      this.allowJump = false
+      this.sprite.setVelocityY(-this.velocity.y)
       this.sprite.play("jump", true)
     }
   }
+
   this.fliplayer = (pos) => {
     if (this.sprite.scaleX != pos) {
       this.sprite.scaleX = pos
       this.sprite.setFixedRotation()
     }      
   }
-  this.setVelocityX = (vel) => {
-    this.sprite.setVelocityX(vel)
 
-  }
-  this.setVelocityY = (vel) => {
-    this.allowJump = false
-    this.sprite.setVelocityY(vel)
+  this.shoot = (time) => {
+    if (this.inFloor && time > this.lastFired) {
+      var bullet = this.bullets.get()
+
+      if (bullet) {
+        bullet.fire(this.sprite.x, this.sprite.y, this.sprite.scaleX)
+        this.lastFired = time + 50
+        this.isShooting = true
+      }
+    }
   }
 
   scene.anims.create({

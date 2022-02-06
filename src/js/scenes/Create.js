@@ -41,60 +41,9 @@ export default function create() {
   this.cameras.main.setBounds(0, 0, 6000, 1800)
   this.cameras.main.startFollow(this.player.sprite)
 
-  this.cursors = this.input.keyboard.createCursorKeys()
-
-
-
-  // this.createShot = function() {
-  //   new Bullet(this, "steve-bullet")
-  // }
-
-
-  this.bullets = this.add.group({
-    classType: Bullet,
-    maxSize: 1000,
-    runChildUpdate: true
-  })
-  this.lastFired = 0
-
-  this.speed = Phaser.Math.GetSpeed(300, 1);
-
   this.input.on('pointerdown', (event) => {
     console.log("GrouP: ", this.bullets)
   })
 
-
-  // this.bullets = this.add.group()
-
-  // this.bullets.createMultiple({
-  //   key: "bullet",
-  //   quantity: 10,
-  //   visible: true,
-  //   active: true,
-  //   hitArea: Phaser.Geom.Rectangle.Contains
-  // })
-  
-  // var cres = 20
-  // var boundsA = this.bullets.children.entries[0]
-  // var boundsB = this.bullets.children.entries[1]
-
-  // this.bullets.children.each((bullet) => {
-  //   bullet.x = 300 + cres
-  //   bullet.y = 1000
-  //   cres += 20
-  // }, this)
-
-  // console.log("bounds: ", boundsA, boundsB)
-
-  // console.log("[GROUP]: ", this.bullets)
-
-  this.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
-    // console.log("=================================")
-    // console.log(bodyA)
-    // console.log(bodyB)
-  })
-
-  function resetBullet(bul) {
-    bul.kill()
-  }
+  this.cursors = this.input.keyboard.createCursorKeys()
 }
