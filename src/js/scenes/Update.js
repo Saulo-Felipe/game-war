@@ -1,24 +1,23 @@
-export default function update(time, delta) {
+export default function update() {
   let {left, right, up, space} = this.cursors
   
   if (right.isDown) {
-    this.player.moveHorizontal("right")
+    this.player.moveHorizontal(false)
   }
   else if (left.isDown) {
-    this.player.moveHorizontal("left")
+    this.player.moveHorizontal(true)
     
   } else {
     this.player.moveStopped()
 
   }
   
-  if (up.isDown) {
+  if (up.isDown && this.player.sprite.body.onFloor()) {
     this.player.moveUp()
   }
 
   if (space.isDown) {
 
-    this.player.shoot(time)
   } else {
     this.player.isShooting = false
   }

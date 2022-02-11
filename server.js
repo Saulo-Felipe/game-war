@@ -10,6 +10,7 @@ app.get("*", (request, response) => {
 
 app.listen(8081, (error) => {
   if (error) return console.log("Erro: ", error)
-
+  console.clear()
   console.log("Server is running!")
+  console.log("PORT: 8081")
 })

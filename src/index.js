@@ -12,15 +12,10 @@ var game = new Phaser.Game({
     update: Update,
   },
   physics: {
-    default: "matter",
-    matter: {
-      gravity: { y: 3 },
-      debug: {
-        showBody: true,
-        showStaticBody: true,
-        showPositions: true
-      },
-      // enableSleep: true
+    default: "arcade",
+    arcade: {
+      gravity: { y: 1500 },
+      debug: true,
     },
   },
 })
