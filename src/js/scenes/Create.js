@@ -1,46 +1,46 @@
 import Player from '../Player.js'
-import Bullet from '../Items/Bullet.js'
 
-export default function create() {
-  this.add.image(0, 0, 'halloween-background').setOrigin(0, 0)
+export default function Create() {
+	this.add.image(0, 0, "background").setOrigin(0, 0)
 
-  // Map config
-  var map = this.make.tilemap({key: "map_json", tileWidth: 120, tileHeight: 120})
-  var tileset = map.addTilesetImage("map_tileset", "tiles")
 
-  // Object Collisions (to fix ghost collision)
-  map.findObject('ghostCollision', obj => {
-    if (obj.name === 'removeGhost' || obj.name === 'setJump' || obj.name === "lava")
-      console.log()
+	this.player = new Player(this)
+
+
+	// Map
+	this.map = this.make.tilemap({ key: "halloween_tilemap", tileWidth: 120, tileHeight: 120 })
+	this.tiles = this.map.addTilesetImage("halloween_tileset", "halloween_tileset", 120, 120)
+
+	  // Layers
+	this.platform = this.map.createLayer("platforms", this.tiles)
+
+		// Map collision
+	this.platform.setCollisionByProperty({ collides: true })
+	this.physics.add.collider(this.player.sprite, this.platform, null, null, this)
+
+		// Lava group
+
+  this.lavaGroup = this.physics.add.staticGroup({})
+
+  this.map.findObject('lava', obj => {
+  	var objPos = this.lavaGroup.create(obj.x, obj.y)
+  	objPos.body.width = obj.width
+  	objPos.body.height = obj.height
   })
 
-  // Player shape
-  this.player = new Player(this, "steve")
 
 
-  this.collideLayer = map.createLayer("mapTMX", tileset, 0, 0)
-  this.overlapLayer = map.createLayer("overlapTiles", tileset, 0, 0)
+  this.physics.add.overlap(this.player.sprite, this.lavaGroup, () => this.player.property.takingDamage = true)
 
 
-  map.createLayer("secondLayer", tileset, 0, 0) // Layer sem colisões
 
 
-  // Tilemap collision
-  this.collideLayer.setCollisionByProperty({ collides: true })
-  this.physics.add.collider(this.collideLayer, this.player.sprite)
-  this.physics.add.overlapTiles(this.player.sprite, this.overlapLayer, () => console.log("lava"))
-
-
-  // Camera
+	// Camera
+  this.cameras.main.startFollow(this.player.sprite)
   this.cameras.main.setBounds(0, 0, 6000, 1800)
   this.physics.world.setBounds(0, 0, 6000, 1800)
-  this.cameras.main.startFollow(this.player.sprite)
+	
 
 
-  this.input.on('pointerdown', (event) => {
-    console.log("GrouP: ", this.player)
-  })
-
-
-  this.cursors = this.input.keyboard.createCursorKeys()
+	this.keys = this.input.keyboard.createCursorKeys()
 }

@@ -1,15 +1,12 @@
 export default function Preload() {
-    // background
-    this.load.image("halloween-background", "../../assets/maps/halloween/background.png")
-  
-    // Map
-    this.load.image("tiles", "../../assets/maps/halloween/map_tileset.png")
-    this.load.tilemapTiledJSON("map_json", "../../assets/maps/halloween/map_tileset.json")
-    
-    // Player
-    this.load.atlas("player", "../../assets/sprites/steve/spritesheet.png", "../../assets/sprites/steve/spritesheet.json")
-    this.load.json("steve-physics", "../../assets/sprites/steve/physics.json")
+	var assetsDir = "../../assets/"
 
-    // Weapons
-    this.load.image("bullet", "../../assets/weapons/bullet.png")
-  }
+	// Map
+	this.load.image("background", assetsDir+"maps/halloween/background.png")
+	this.load.image("halloween_tileset", assetsDir+"maps/halloween/map_tileset.png")
+	this.load.tilemapTiledJSON("halloween_tilemap", assetsDir+"maps/halloween/halloween_tilemap.json")
+
+	// Player
+	this.load.atlas("steve", assetsDir+"sprites/steve/spritesheet.png", assetsDir+"sprites/steve/spritesheet.json")
+
+}

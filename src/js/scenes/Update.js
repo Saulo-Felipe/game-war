@@ -1,24 +1,21 @@
-export default function update() {
-  let {left, right, up, space} = this.cursors
-  
-  if (right.isDown) {
-    this.player.moveHorizontal(false)
-  }
-  else if (left.isDown) {
-    this.player.moveHorizontal(true)
-    
-  } else {
-    this.player.moveStopped()
+export default function Update() {
+	const {down, up, left, right} = this.keys
 
-  }
-  
-  if (up.isDown && this.player.sprite.body.onFloor()) {
-    this.player.moveUp()
-  }
+	if (right.isDown) 
+		this.player.moveHorizontal(false)
+	else if (left.isDown)
+		this.player.moveHorizontal(true)
+	else 
+		this.player.moveStopped()
 
-  if (space.isDown) {
+	if (up.isDown && this.player.sprite.body.onFloor())
+		this.player.moveJump()
 
-  } else {
-    this.player.isShooting = false
-  }
+
+
+	this.player.setLavaCollision(this.player.property.takingDamage)
+
+
+
+	this.player.property.takingDamage = false
 }
