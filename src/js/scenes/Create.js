@@ -18,22 +18,40 @@ export default function Create() {
 	this.platform.setCollisionByProperty({ collides: true })
 	this.physics.add.collider(this.player.sprite, this.platform, null, null, this)
 
-		// Lava group
-
-  this.lavaGroup = this.physics.add.staticGroup({})
-
+		// Lava positions
+	this.lavaPositions = []
   this.map.findObject('lava', obj => {
-  	var objPos = this.lavaGroup.create(obj.x, obj.y)
-  	objPos.body.width = obj.width
-  	objPos.body.height = obj.height
+  	this.lavaPositions.push({
+  		x: obj.x,
+  		y: obj.y+60,
+  		width: obj.width
+  	})
   })
 
+  // Bullet 
+  	// Collision
+  this.physics.add.collider(this.player.bullets, this.platform, (bullet) => {
+  	const { x, y } = bullet.body.center
 
+  	bullet.disableBody(true, true)
+	  console.log("[shoot] End")
+  	this.add.sprite(x, y, "explosion").play("explodeAnimation")
 
-  this.physics.add.overlap(this.player.sprite, this.lavaGroup, () => this.player.property.takingDamage = true)
+  }, null, this)
 
+  	// fire
+  this.input.on('pointerdown', () => {
+  	this.player.fire()
+  })
 
+  this.anims.create({
+  	key: 'explodeAnimation',
+		frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 11 }),
+    frameRate: 10,
+  })
+ 
 
+  //this.explosionSprite.on('animationcomplete', () => this.explosionSprite.destroy())
 
 	// Camera
   this.cameras.main.startFollow(this.player.sprite)

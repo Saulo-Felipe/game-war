@@ -1,21 +1,26 @@
 export default function Update() {
-	const {down, up, left, right} = this.keys
+	let {down, up, left, right, space} = this.keys
 
-	if (right.isDown) 
+	if (right.isDown)
 		this.player.moveHorizontal(false)
 	else if (left.isDown)
 		this.player.moveHorizontal(true)
-	else 
+	else
 		this.player.moveStopped()
 
 	if (up.isDown && this.player.sprite.body.onFloor())
 		this.player.moveJump()
 
+	if (space.isDown)
+		this.player.fire()
+
+	if (this.player.property.fireTime > 0)
+		this.player.property.fireTime -= 1
+
+	if (this.player.sprite.body.speed > 0) {
+		this.player.lavaCollision()
+	}
 
 
-	this.player.setLavaCollision(this.player.property.takingDamage)
 
-
-
-	this.player.property.takingDamage = false
 }
