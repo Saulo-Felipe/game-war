@@ -10,7 +10,7 @@ new Phaser.Game({
 		preload: Preload,
 		create: Create,
 		update: Update,
-	},
+	},	
 	physics: {
 		default: "arcade",
 		arcade: {

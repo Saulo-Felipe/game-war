@@ -2,7 +2,8 @@ export default function Player(scene) {
 	this.property = {
 		velocityX: 650,
 		velocityY: 1150,
-		fireTime: 20
+		fireTime: 10,
+    isShooting: false,
 	}
 
 	// Player
@@ -16,10 +17,11 @@ export default function Player(scene) {
   	name: "bullets",
   	enable: false,
   	allowGravity: false,
+    collideWorldBounds: true
   })
   this.bullets.createMultiple({
   	key: "purpleBullet",
-  	quantity: 10,
+  	quantity: 100,
   	active: false,
   	visible: false,
   	name: "bullet"
@@ -34,10 +36,18 @@ export default function Player(scene) {
 			this.sprite.setVelocityX(this.property.velocityX)
 
     if (this.sprite.body.onFloor())
-			this.sprite.play("run", true)
-		else
-			this.sprite.play("jump", true)
+      if (this.property.isShooting)
+        this.sprite.play("run-shoot", true)
+      else
+  			this.sprite.play("run", true)
 
+		else
+      if (this.property.isShooting)
+        this.sprite.play("jump-shoot", true)
+      else
+        this.sprite.play("jump", true)
+
+    
 
 		this.flipPlayer(side)
 	}
@@ -46,17 +56,28 @@ export default function Player(scene) {
 		this.sprite.setVelocityX(0)
 
 		if (this.sprite.body.onFloor()) {
-			this.sprite.play("stopped", true)
+      if (this.property.isShooting)
+        this.sprite.play("stopped-shoot", true)
+      else
+        this.sprite.play("stopped", true)
+
 		}
 		else {
-			this.sprite.play("jump", true)
+      if (this.property.isShooting)
+        this.sprite.play("jump-shoot", true)
+      else
+			  this.sprite.play("jump", true)
 		}
 	}
 
 	this.moveJump = () => {
 		this.sprite.setVelocityY(-this.property.velocityY)
-		this.sprite.play("jump", true)
-	}
+    
+    if (this.property.isShooting)
+      this.sprite.play("jump-shoot", true)
+    else
+      this.sprite.play("jump", true)
+  }
 
 	this.flipPlayer = type => {
     if (type)
@@ -81,13 +102,15 @@ export default function Player(scene) {
 	  		let y = this.sprite.y
 
 	  		bullet.enableBody(true, x, y, true, true)
-	  		bullet.setVelocityX(this.sprite.flipX ? -1100 : 1100)
+	  		bullet.setVelocityX(this.sprite.flipX ? -1600 : 1600)
 
 	  		console.log("[shoot] Start")
 	  	}			
 
-	  	this.property.fireTime = 20
+	  	this.property.fireTime = 10
 		}
+
+    this.property.isShooting = true
 	}
 
 	this.lavaCollision = () => {
@@ -110,70 +133,4 @@ export default function Player(scene) {
 			this.sprite.clearTint()
 		}
 	}
-
-	animations(scene)
-}
-
-
-function animations(scene) {
-	scene.anims.create({
-    key: "run",
-    frameRate: 15,
-    frames: scene.anims.generateFrameNames("steve", {
-      prefix: "Run",
-      suffix: ".png",
-      start: 1,
-      end: 8,
-      zeroPad: 1
-    }),
-    repeat: -1
-  })
-  scene.anims.create({
-    key: "run-shoot",
-    frameRate: 6,
-    frames: scene.anims.generateFrameNames("steve", {
-      prefix: "Run-shoot",
-      suffix: ".png",
-      start: 1,
-      end: 5,
-      zeroPad: 1
-    }),
-    repeat: -1
-  })
-  scene.anims.create({
-    key: "stopped",
-    frameRate: 15,
-    frames: scene.anims.generateFrameNames("steve", {
-      prefix: "Idle",
-      suffix: ".png",
-      start: 1,
-      end: 10,
-      zeroPad: 1
-    }),
-    repeat: -1
-  })
-  scene.anims.create({
-    key: "stopped-shoot",
-    frameRate: 10,
-    frames: scene.anims.generateFrameNames("steve", {
-      prefix: "Idle-shoot",
-      suffix: ".png",
-      start: 1,
-      end: 10,
-      zeroPad: 1
-    }),
-    repeat: -1
-  })
-  scene.anims.create({
-    key: "jump",
-    frameRate: 5,
-    frames: scene.anims.generateFrameNames("steve", {
-      prefix: "Jump",
-      suffix: ".png",
-      start: 4,
-      end: 9,
-      zeroPad: 1
-    }),
-    repeat: -1
-  })
 }

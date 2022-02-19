@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>5</int>
         <key>texturePackerVersion</key>
-        <string>6.0.0</string>
+        <string>6.0.1</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -32,7 +32,7 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>json-array</string>
+        <string>json</string>
         <key>textureFileName</key>
         <filename></filename>
         <key>flipPVR</key>
@@ -78,7 +78,7 @@
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>pngOptimizationLevel</key>
-        <uint>0</uint>
+        <uint>1</uint>
         <key>webpQualityLevel</key>
         <uint>101</uint>
         <key>textureSubPath</key>
@@ -121,7 +121,7 @@
             <key>basic</key>
             <struct type="AlgorithmBasicSettings">
                 <key>sortBy</key>
-                <enum type="AlgorithmBasicSettings::SortBy">Name</enum>
+                <enum type="AlgorithmBasicSettings::SortBy">Best</enum>
                 <key>order</key>
                 <enum type="AlgorithmBasicSettings::Order">Ascending</enum>
             </struct>
@@ -153,7 +153,7 @@
             <string></string>
         </struct>
         <key>autoAliasEnabled</key>
-        <false/>
+        <true/>
         <key>trimSpriteNames</key>
         <false/>
         <key>prependSmartFolderName</key>
@@ -167,13 +167,13 @@
             <key>scaleMode</key>
             <enum type="ScaleMode">Smooth</enum>
             <key>extrude</key>
-            <uint>0</uint>
+            <uint>1</uint>
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMargin</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">None</enum>
+            <enum type="SpriteSettings::TrimMode">Trim</enum>
             <key>tracerTolerance</key>
             <int>200</int>
             <key>heuristicMask</key>
@@ -185,62 +185,54 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../../../../../png/Dead1.png</key>
-            <key type="filename">../../../../../png/Dead10.png</key>
-            <key type="filename">../../../../../png/Dead2.png</key>
-            <key type="filename">../../../../../png/Dead3.png</key>
-            <key type="filename">../../../../../png/Dead4.png</key>
-            <key type="filename">../../../../../png/Dead5.png</key>
-            <key type="filename">../../../../../png/Dead6.png</key>
-            <key type="filename">../../../../../png/Dead7.png</key>
-            <key type="filename">../../../../../png/Dead8.png</key>
-            <key type="filename">../../../../../png/Dead9.png</key>
-            <key type="filename">../../../../../png/Idle-shoot1.png</key>
-            <key type="filename">../../../../../png/Idle-shoot10.png</key>
-            <key type="filename">../../../../../png/Idle-shoot2.png</key>
-            <key type="filename">../../../../../png/Idle-shoot3.png</key>
-            <key type="filename">../../../../../png/Idle-shoot4.png</key>
-            <key type="filename">../../../../../png/Idle-shoot5.png</key>
-            <key type="filename">../../../../../png/Idle-shoot6.png</key>
-            <key type="filename">../../../../../png/Idle-shoot7.png</key>
-            <key type="filename">../../../../../png/Idle-shoot8.png</key>
-            <key type="filename">../../../../../png/Idle-shoot9.png</key>
-            <key type="filename">../../../../../png/Idle1.png</key>
-            <key type="filename">../../../../../png/Idle10.png</key>
-            <key type="filename">../../../../../png/Idle2.png</key>
-            <key type="filename">../../../../../png/Idle3.png</key>
-            <key type="filename">../../../../../png/Idle4.png</key>
-            <key type="filename">../../../../../png/Idle5.png</key>
-            <key type="filename">../../../../../png/Idle6.png</key>
-            <key type="filename">../../../../../png/Idle7.png</key>
-            <key type="filename">../../../../../png/Idle8.png</key>
-            <key type="filename">../../../../../png/Idle9.png</key>
-            <key type="filename">../../../../../png/Jump4.png</key>
-            <key type="filename">../../../../../png/Jump5.png</key>
-            <key type="filename">../../../../../png/Jump6.png</key>
-            <key type="filename">../../../../../png/Jump7.png</key>
-            <key type="filename">../../../../../png/Jump8.png</key>
-            <key type="filename">../../../../../png/Jump9.png</key>
-            <key type="filename">../../../../../png/Run-shoot1.png</key>
-            <key type="filename">../../../../../png/Run-shoot2.png</key>
-            <key type="filename">../../../../../png/Run-shoot3.png</key>
-            <key type="filename">../../../../../png/Run-shoot4.png</key>
-            <key type="filename">../../../../../png/Run-shoot5.png</key>
-            <key type="filename">../../../../../png/Run1.png</key>
-            <key type="filename">../../../../../png/Run2.png</key>
-            <key type="filename">../../../../../png/Run3.png</key>
-            <key type="filename">../../../../../png/Run4.png</key>
-            <key type="filename">../../../../../png/Run5.png</key>
-            <key type="filename">../../../../../png/Run6.png</key>
-            <key type="filename">../../../../../png/Run7.png</key>
-            <key type="filename">../../../../../png/Run8.png</key>
-            <key type="filename">../../../../../png/Shooting1.png</key>
-            <key type="filename">../../../../../png/Shooting2.png</key>
-            <key type="filename">../../../../../png/Shooting3.png</key>
-            <key type="filename">../../../../../png/Shooting4.png</key>
-            <key type="filename">../../../../../png/Shooting5.png</key>
-            <key type="filename">../../../../../png/Shooting6.png</key>
-            <key type="filename">../../../../../png/Shooting7.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle-shoot1.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle-shoot10.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle-shoot2.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle-shoot3.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle-shoot4.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle-shoot5.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle-shoot6.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle-shoot7.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle-shoot8.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle-shoot9.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle1.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle10.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle2.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle3.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle4.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle5.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle6.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle7.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle8.png</key>
+            <key type="filename">../../../../../splitedSheets/Idle9.png</key>
+            <key type="filename">../../../../../splitedSheets/Jump-shoot1.png</key>
+            <key type="filename">../../../../../splitedSheets/Jump-shoot2.png</key>
+            <key type="filename">../../../../../splitedSheets/Jump-shoot3.png</key>
+            <key type="filename">../../../../../splitedSheets/Jump-shoot4.png</key>
+            <key type="filename">../../../../../splitedSheets/Jump-shoot5.png</key>
+            <key type="filename">../../../../../splitedSheets/Jump-shoot6.png</key>
+            <key type="filename">../../../../../splitedSheets/Jump1.png</key>
+            <key type="filename">../../../../../splitedSheets/Jump2.png</key>
+            <key type="filename">../../../../../splitedSheets/Jump3.png</key>
+            <key type="filename">../../../../../splitedSheets/Jump4.png</key>
+            <key type="filename">../../../../../splitedSheets/Jump5.png</key>
+            <key type="filename">../../../../../splitedSheets/Jump6.png</key>
+            <key type="filename">../../../../../splitedSheets/Run-shoot1.png</key>
+            <key type="filename">../../../../../splitedSheets/Run-shoot2.png</key>
+            <key type="filename">../../../../../splitedSheets/Run-shoot3.png</key>
+            <key type="filename">../../../../../splitedSheets/Run-shoot4.png</key>
+            <key type="filename">../../../../../splitedSheets/Run-shoot5.png</key>
+            <key type="filename">../../../../../splitedSheets/Run-shoot6.png</key>
+            <key type="filename">../../../../../splitedSheets/Run-shoot7.png</key>
+            <key type="filename">../../../../../splitedSheets/Run-shoot8.png</key>
+            <key type="filename">../../../../../splitedSheets/Run1.png</key>
+            <key type="filename">../../../../../splitedSheets/Run2.png</key>
+            <key type="filename">../../../../../splitedSheets/Run3.png</key>
+            <key type="filename">../../../../../splitedSheets/Run4.png</key>
+            <key type="filename">../../../../../splitedSheets/Run5.png</key>
+            <key type="filename">../../../../../splitedSheets/Run6.png</key>
+            <key type="filename">../../../../../splitedSheets/Run7.png</key>
+            <key type="filename">../../../../../splitedSheets/Run8.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -258,62 +250,54 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>../../../../../png/Dead1.png</filename>
-            <filename>../../../../../png/Dead10.png</filename>
-            <filename>../../../../../png/Dead2.png</filename>
-            <filename>../../../../../png/Dead3.png</filename>
-            <filename>../../../../../png/Dead4.png</filename>
-            <filename>../../../../../png/Dead5.png</filename>
-            <filename>../../../../../png/Dead6.png</filename>
-            <filename>../../../../../png/Dead7.png</filename>
-            <filename>../../../../../png/Dead8.png</filename>
-            <filename>../../../../../png/Dead9.png</filename>
-            <filename>../../../../../png/Idle-shoot1.png</filename>
-            <filename>../../../../../png/Idle-shoot10.png</filename>
-            <filename>../../../../../png/Idle-shoot2.png</filename>
-            <filename>../../../../../png/Idle-shoot3.png</filename>
-            <filename>../../../../../png/Idle-shoot4.png</filename>
-            <filename>../../../../../png/Idle-shoot5.png</filename>
-            <filename>../../../../../png/Idle-shoot6.png</filename>
-            <filename>../../../../../png/Idle-shoot7.png</filename>
-            <filename>../../../../../png/Idle-shoot8.png</filename>
-            <filename>../../../../../png/Idle-shoot9.png</filename>
-            <filename>../../../../../png/Idle1.png</filename>
-            <filename>../../../../../png/Idle10.png</filename>
-            <filename>../../../../../png/Idle2.png</filename>
-            <filename>../../../../../png/Idle3.png</filename>
-            <filename>../../../../../png/Idle4.png</filename>
-            <filename>../../../../../png/Idle5.png</filename>
-            <filename>../../../../../png/Idle6.png</filename>
-            <filename>../../../../../png/Idle7.png</filename>
-            <filename>../../../../../png/Idle8.png</filename>
-            <filename>../../../../../png/Idle9.png</filename>
-            <filename>../../../../../png/Jump4.png</filename>
-            <filename>../../../../../png/Jump5.png</filename>
-            <filename>../../../../../png/Jump6.png</filename>
-            <filename>../../../../../png/Jump7.png</filename>
-            <filename>../../../../../png/Jump8.png</filename>
-            <filename>../../../../../png/Jump9.png</filename>
-            <filename>../../../../../png/Run1.png</filename>
-            <filename>../../../../../png/Run2.png</filename>
-            <filename>../../../../../png/Run3.png</filename>
-            <filename>../../../../../png/Run4.png</filename>
-            <filename>../../../../../png/Run5.png</filename>
-            <filename>../../../../../png/Run6.png</filename>
-            <filename>../../../../../png/Run7.png</filename>
-            <filename>../../../../../png/Run8.png</filename>
-            <filename>../../../../../png/Shooting1.png</filename>
-            <filename>../../../../../png/Shooting2.png</filename>
-            <filename>../../../../../png/Shooting3.png</filename>
-            <filename>../../../../../png/Shooting4.png</filename>
-            <filename>../../../../../png/Shooting5.png</filename>
-            <filename>../../../../../png/Shooting6.png</filename>
-            <filename>../../../../../png/Shooting7.png</filename>
-            <filename>../../../../../png/Run-shoot1.png</filename>
-            <filename>../../../../../png/Run-shoot2.png</filename>
-            <filename>../../../../../png/Run-shoot3.png</filename>
-            <filename>../../../../../png/Run-shoot4.png</filename>
-            <filename>../../../../../png/Run-shoot5.png</filename>
+            <filename>../../../../../splitedSheets/Idle-shoot1.png</filename>
+            <filename>../../../../../splitedSheets/Idle-shoot10.png</filename>
+            <filename>../../../../../splitedSheets/Idle-shoot2.png</filename>
+            <filename>../../../../../splitedSheets/Idle-shoot3.png</filename>
+            <filename>../../../../../splitedSheets/Idle-shoot4.png</filename>
+            <filename>../../../../../splitedSheets/Idle-shoot5.png</filename>
+            <filename>../../../../../splitedSheets/Idle-shoot6.png</filename>
+            <filename>../../../../../splitedSheets/Idle-shoot7.png</filename>
+            <filename>../../../../../splitedSheets/Idle-shoot8.png</filename>
+            <filename>../../../../../splitedSheets/Idle-shoot9.png</filename>
+            <filename>../../../../../splitedSheets/Idle1.png</filename>
+            <filename>../../../../../splitedSheets/Idle10.png</filename>
+            <filename>../../../../../splitedSheets/Idle2.png</filename>
+            <filename>../../../../../splitedSheets/Idle3.png</filename>
+            <filename>../../../../../splitedSheets/Idle4.png</filename>
+            <filename>../../../../../splitedSheets/Idle5.png</filename>
+            <filename>../../../../../splitedSheets/Idle6.png</filename>
+            <filename>../../../../../splitedSheets/Idle7.png</filename>
+            <filename>../../../../../splitedSheets/Idle8.png</filename>
+            <filename>../../../../../splitedSheets/Idle9.png</filename>
+            <filename>../../../../../splitedSheets/Jump1.png</filename>
+            <filename>../../../../../splitedSheets/Jump2.png</filename>
+            <filename>../../../../../splitedSheets/Jump3.png</filename>
+            <filename>../../../../../splitedSheets/Jump4.png</filename>
+            <filename>../../../../../splitedSheets/Jump5.png</filename>
+            <filename>../../../../../splitedSheets/Jump6.png</filename>
+            <filename>../../../../../splitedSheets/Run-shoot1.png</filename>
+            <filename>../../../../../splitedSheets/Run-shoot2.png</filename>
+            <filename>../../../../../splitedSheets/Run-shoot3.png</filename>
+            <filename>../../../../../splitedSheets/Run-shoot4.png</filename>
+            <filename>../../../../../splitedSheets/Run-shoot5.png</filename>
+            <filename>../../../../../splitedSheets/Run-shoot6.png</filename>
+            <filename>../../../../../splitedSheets/Run-shoot7.png</filename>
+            <filename>../../../../../splitedSheets/Run-shoot8.png</filename>
+            <filename>../../../../../splitedSheets/Run1.png</filename>
+            <filename>../../../../../splitedSheets/Run2.png</filename>
+            <filename>../../../../../splitedSheets/Run3.png</filename>
+            <filename>../../../../../splitedSheets/Run4.png</filename>
+            <filename>../../../../../splitedSheets/Run5.png</filename>
+            <filename>../../../../../splitedSheets/Run6.png</filename>
+            <filename>../../../../../splitedSheets/Run7.png</filename>
+            <filename>../../../../../splitedSheets/Run8.png</filename>
+            <filename>../../../../../splitedSheets/Jump-shoot1.png</filename>
+            <filename>../../../../../splitedSheets/Jump-shoot2.png</filename>
+            <filename>../../../../../splitedSheets/Jump-shoot3.png</filename>
+            <filename>../../../../../splitedSheets/Jump-shoot4.png</filename>
+            <filename>../../../../../splitedSheets/Jump-shoot5.png</filename>
+            <filename>../../../../../splitedSheets/Jump-shoot6.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

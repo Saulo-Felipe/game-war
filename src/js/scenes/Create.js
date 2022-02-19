@@ -1,11 +1,10 @@
-import Player from '../Player.js'
+import Player from '../components/Player.js'
+import Animations from '../components/Animations.js'
 
 export default function Create() {
 	this.add.image(0, 0, "background").setOrigin(0, 0)
 
-
 	this.player = new Player(this)
-
 
 	// Map
 	this.map = this.make.tilemap({ key: "halloween_tilemap", tileWidth: 120, tileHeight: 120 })
@@ -28,37 +27,38 @@ export default function Create() {
   	})
   })
 
-  // Bullet 
-  	// Collision
+  this.allExplosions = this.add.group({
+    name: "explosions",
+  })
+  this.allExplosions.createMultiple({
+    key: "explosion",
+    quantity: 50,
+    visible: false,
+  })
+
   this.physics.add.collider(this.player.bullets, this.platform, (bullet) => {
-  	const { x, y } = bullet.body.center
-
   	bullet.disableBody(true, true)
-	  console.log("[shoot] End")
-  	this.add.sprite(x, y, "explosion").play("explodeAnimation")
 
+    let [explosion] = this.allExplosions.getMatching('visible', false)
+
+    if (explosion) {
+      explosion.setPosition(bullet.body.center.x, bullet.body.center.y)
+      explosion.visible = true
+      explosion.play("explodeAnimation", true)
+    }
   }, null, this)
 
-  	// fire
+    // fire
   this.input.on('pointerdown', () => {
   	this.player.fire()
   })
 
-  this.anims.create({
-  	key: 'explodeAnimation',
-		frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 11 }),
-    frameRate: 10,
-  })
- 
-
-  //this.explosionSprite.on('animationcomplete', () => this.explosionSprite.destroy())
-
-	// Camera
+	  // Camera
   this.cameras.main.startFollow(this.player.sprite)
   this.cameras.main.setBounds(0, 0, 6000, 1800)
   this.physics.world.setBounds(0, 0, 6000, 1800)
 	
 
-
+  Animations(this)
 	this.keys = this.input.keyboard.createCursorKeys()
 }
