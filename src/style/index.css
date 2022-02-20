@@ -14,96 +14,117 @@ canvas {
 
 /* ---------------- Dashboard ----------------- */
 
-#dashboard {
-  position: absolute;
+.section-dashboard {
+  border: solid 1px red;
   width: 100vw;
   height: 100vh;
-  background-image: url("../assets/dashboard/backgroundAnimated.gif");
-  background-color: white;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-image: repeating-radial-gradient(#071e37, #020a0e);
+  padding: 35px;
+  display: flex;
+
 }
 
-.header-dashboard {
-  display: flex;
-  justify-content: space-between;
+.search-player {
+  background-color: #101417;
+  border: solid 1px blue;
+  padding: 15px;
 }
 
-.section-dashboard {
-  display: flex;
-  padding: 20px;
-  justify-content: space-around;
+.section-one {
+  width: 30%;
 }
 
-.money-container {
+.section-two {
+  width: 40%;
+}
+
+.section-three {
+  width: 30%;
+}
+
+.sub-section-container {
+  border: solid 1px red;
+}
+
+.friend {
+  border: solid 1px yellow;
   display: flex;
+  align-items: center;
+  color: white;
+}
+
+.online-icon {
+  border-radius: 50%;
+  background-color: green;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+}
+.offline-icon {
+  border-radius: 50%;
+  background-color: red;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+}
+
+
+/* ----------------------- Second container --------------------- */
+
+.section-two {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
   align-items: center;
 }
 
-.money-amount {
-  color: black;
-  font-size: 22px;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: 700;
-}
-
-.player-profile {
-  background-color: rgb(169, 169, 169);
-  border-radius: 20px;
-  padding: 10px;
+.select-img-container {
+  border: solid 1px red;
+  height: -webkit-fill-available;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: -webkit-fill-available;
+  transition: 0.5s;
+}
+.select-img-container > img {
+  height: 65%;
 }
 
-.profile-informations-container {
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-}
-
-.profile-player-name {
-  font-size: 20px;
-}
-
-.profile-information-container {
-  font-weight: 500;
-}
-
-.profile-image-container {
-  width: 100px;
-  height: 100px;
-  overflow: hidden;
-  border-radius: 50%;
-}
-
-.init-container {
-  width: 45%;
-  /* background-color: white; */
-}
-
-.choose-character {
-  width: 45%;
-  height: 400px;
-  background-color: rgb(169, 169, 169);
-  border-radius: 20px;
-}
-
-.btn-container {
+.carousel-controls-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
-.button {
-  border: none;
-  background-color: rgb(0, 51, 145);
-  color: white;
-  width: 49%;
-  padding: 8px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  transition: all 0.2s;
+.arrow-control {
+  background-color: white;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  transition: 0.2s;
+  cursor: pointer;
 }
 
-.button:hover {
-  transform: scale(1.01);
-  background-color: rgb(0, 30, 87);
+.arrow-control:hover {
+  box-shadow: 0 0 10px white;
+  transform: scale(1.05);
+}
+
+.carousel-container {
+  border: solid 1px orange;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  display: flex;
+  height: 100%;
+  width: 100%;
 }

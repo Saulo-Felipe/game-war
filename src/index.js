@@ -1,7 +1,7 @@
 import Home from "./js/scenes/Home.js"
 import Game from "./js/scenes/Game.js"
 
-new Phaser.Game({
+var game = new Phaser.Game({
 	type: Phaser.AUTO,
 	width: 2000,
 	height: 1000,
@@ -15,3 +15,6 @@ new Phaser.Game({
 		}
 	}
 })
+
+
+export { game }
