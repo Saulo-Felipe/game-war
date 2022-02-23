@@ -4,88 +4,101 @@ export default class Home extends Phaser.Scene {
   }
 
   preload() {
-    var assetsDir = "../../assets/"
+    try {
+      this.allCharacter = {
+        "ninja": { 
+          element: document.querySelector("#ninja"), 
+          name: "ninja",
+          indexLimit: 9 
+        },
+        "steve": { 
+          element: document.querySelector("#steve"), 
+          name: "steve",
+          indexLimit: 9
+        }
+      }
+      this.selectedCharacter = "ninja"
+      this.frameVelocity = 5
+      this.currentFrame = 0
 
-    this.load.image("background", assetsDir+"maps/halloween/background.png")
-    this.load.image("halloween_tileset", assetsDir+"maps/halloween/map_tileset.png")
-    this.load.tilemapTiledJSON("halloween_tilemap", assetsDir+"maps/halloween/halloween_tilemap.json")
+    } catch(error) {
+      clientError(error)
+    }
+    
   }
 
   create() {
-    // Background Map
-    this.add.image(0, 0, "background").setOrigin(0, 0)
-
-    this.map = this.make.tilemap({ key: "halloween_tilemap", tileWidth: 120, tileHeight: 120 })
-    this.tiles = this.map.addTilesetImage("halloween_tileset", "halloween_tileset", 120, 120)
-
-    this.platform = this.map.createLayer("platforms", this.tiles)
-
-
-    this.input.on('pointerdown', () => console.log("X: ", this.cam.scrollX, "Y: ", this.cam.scrollY))
-
-    this.cam = this.cameras.main
-    this.side = {x: true, y: true}
-    
-    Dashboard(this)
+    Carousel(this)
   }
 
   update() {
-    if (this.side.x)
-      this.cam.scrollX += 2
-    else 
-      this.cam.scrollX -= 2
-    
-    if (this.side.y) 
-      this.cam.scrollY += 2
-    else
-      this.cam.scrollY -= 2
+    try {
+      this.allCharacter[this.selectedCharacter].element.src = `../../assets/dashboard/${this.selectedCharacter}/${this.selectedCharacter}${this.currentFrame}.png`
 
-    
-    if (this.cam.scrollX > 4000)
-      this.side.x = false
-    else if (this.cam.scrollX < 0)
-      this.side.x = true
+      if (this.currentFrame == this.allCharacter[this.selectedCharacter].indexLimit) {
+        this.currentFrame = 0
+        // console.log("alterando frame para 0")
+      }
+      
+      if (this.frameVelocity === 0) {
+        this.frameVelocity = 5
+        this.currentFrame += 1
+      } else
+        this.frameVelocity -= 1
 
-    if (this.cam.scrollY > 800)
-      this.side.y = false
-    else if (this.cam.scrollY < 0)
-      this.side.y = true    
+    } catch(error) {
+      clientError(error)
+    }
   }
 }
 
-function Dashboard(scene) {
-  document.querySelector(".play").addEventListener("click", () => {
-    scene.scene.start("Game")
-  })
+function Carousel(scene) {
+  try {
+    document.querySelector(".play").addEventListener("click", () => {
+      document.querySelector("#dashboard").style.marginLeft = "-100%"
 
-  var allCarouselItems = document.querySelectorAll(".select-img-container")
-  
-  var carouselPosition = 0
-  
-  document.querySelector(".next-person").addEventListener("click", () => {
-    console.log("next")
+      setTimeout(() => { // animation delay
+        scene.scene.start("Game")
+      }, 600);
+    })
+
+
+    // -----------------| Controls |----------------------- //
+    var allCarouselItems = document.querySelectorAll(".select-img-container")
+    var carouselPosition = 0
     
-    if (carouselPosition < allCarouselItems.length) {
-      console.log("Posição: ", carouselPosition)
-      for (var c = 0; c < allCarouselItems.length; c++) {
-        allCarouselItems[c].style.transform = `translateX(-${100*carouselPosition}%)`
+    document.querySelector(".next-person").addEventListener("click", () => {    
+      if (carouselPosition+1 < allCarouselItems.length) {
+
+        carouselPosition++
+
+        for (var c = 0; c < allCarouselItems.length; c++) {
+          allCarouselItems[c].style.transform = `translateX(-${100*carouselPosition}%)`
+        }
+
+        scene.selectedCharacter = Object.keys(scene.allCharacter)[carouselPosition]
       }
-      carouselPosition++
-    }
-  })
+    })
 
-  document.querySelector(".back-person").addEventListener("click", () => {
-    console.log("to go back")
+    document.querySelector(".back-person").addEventListener("click", () => {
+      if (carouselPosition > 0) {      
+        carouselPosition--
 
-    if (carouselPosition > 0) {
-      console.log("Posição: ", carouselPosition)
-      
-      for (var c = 0; c < allCarouselItems.length; c++) {
-        allCarouselItems[c].style.transform = `translateX(-${100*carouselPosition}%)`
-      }  
+        for (var c = 0; c < allCarouselItems.length; c++)
+          allCarouselItems[c].style.transform = `translateX(-${100*carouselPosition}%)`
 
-      carouselPosition--
-    }
+          scene.selectedCharacter = Object.keys(scene.allCharacter)[carouselPosition]
+        }
+    })
 
-  })
+  } catch(error) {
+    clientError(error)
+  }
+}
+
+function clientError(error) {
+  alert("Erro no sistema. A página será recarregada por motivos de segurança.")
+  console.error("Erro no client side: ", error)
+
+  window.location.reload()
 }
