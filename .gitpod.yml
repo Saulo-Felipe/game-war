@@ -1,9 +1,3 @@
-ports:
-  - port: 3000
-    onOpen: open-preview
-    
 tasks:
-  - before: cd frontend/
-    init: yarn install
-
-
+  - name: Install dependencies & start dev environment
+    before: cd frontend
