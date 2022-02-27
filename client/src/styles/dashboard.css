@@ -4,7 +4,6 @@ html, body {
 body {
   margin: 0;
   padding:0;
-  background-color: #000000 !important;
 }
 canvas {
   width: 100%;
@@ -18,7 +17,7 @@ canvas {
   position: absolute;
 }
 .section-dashboard {
-  border: solid 1px red;
+  /* border: solid 1px red; */
   width: 100vw;
   height: 100vh;
   background-image: repeating-radial-gradient(#071e37, #020a0e);
@@ -28,7 +27,7 @@ canvas {
 
 .search-player {
   background-color: #101417;
-  border: solid 1px blue;
+  /* border: solid 1px blue; */
   padding: 15px;
 }
 
@@ -41,15 +40,30 @@ canvas {
 }
 
 .section-three {
+  flex-direction: row;
+  display: flex;
+  align-items: end;  
   width: 30%;
+}
+#btn-play {
+  height: 100px;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+#btn-play:hover {
+  transform: scale(0.95);
 }
 
 .sub-section-container {
-  border: solid 1px red;
+  /* border: solid 1px red; */
 }
 
 .friend {
-  border: solid 1px yellow;
+  /* border: solid 1px yellow; */
   display: flex;
   align-items: center;
   color: white;
@@ -82,16 +96,13 @@ canvas {
 }
 
 .select-img-container {
-  border: solid 1px red;
+  /* border: solid 1px red; */
   height: -webkit-fill-available;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-width: -webkit-fill-available;
   transition: 0.5s;
-}
-.select-img-container > img {
-  height: 65%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
 }
 
 .carousel-controls-container {
@@ -123,7 +134,7 @@ canvas {
 }
 
 .carousel-container {
-  border: solid 1px orange;
+  /* border: solid 1px orange; */
   overflow: hidden;
   display: flex;
   height: 100%;

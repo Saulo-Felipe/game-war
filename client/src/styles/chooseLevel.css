@@ -1,0 +1,21 @@
+#choose-level-container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-image: repeating-radial-gradient(#071e37, #020a0e);
+    border: solid 1px red;
+    padding: 20px;
+}
+
+.levels-container {
+    display: flex;
+    border: solid 1px yellow;
+}
+
+.chooseLevel-card {
+    width: 350px;
+    height: 250px;
+    background-color: white;
+    border: solid 1px blue;
+    margin: 10px;
+}

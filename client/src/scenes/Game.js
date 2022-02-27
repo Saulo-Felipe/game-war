@@ -1,5 +1,5 @@
-import Animations from '../components/Animations.js'
-import Player from '../components/Player.js'
+import Animations from '../components/phaser/Animations.js'
+import Player from '../components/phaser/Player.js'
 import Loading from '../tools/Loading.js'
 import Phaser from 'phaser'
 
