@@ -1,0 +1,1720 @@
+{
+	"textures": [
+		{
+			"image": "GhostGun",
+			"format": "RGBA8888",
+			"size": {
+				"w": 1044,
+				"h": 1141
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "ghostGun-dead10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 19,
+						"y": 66,
+						"w": 146,
+						"h": 89
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 146,
+						"h": 89
+					}
+				},
+				{
+					"filename": "ghostGun-dead11.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 23,
+						"y": 74,
+						"w": 142,
+						"h": 91
+					},
+					"frame": {
+						"x": 0,
+						"y": 89,
+						"w": 142,
+						"h": 91
+					}
+				},
+				{
+					"filename": "ghostGun-dead12.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 23,
+						"y": 74,
+						"w": 142,
+						"h": 91
+					},
+					"frame": {
+						"x": 142,
+						"y": 89,
+						"w": 142,
+						"h": 91
+					}
+				},
+				{
+					"filename": "ghostGun-dead13.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 23,
+						"y": 74,
+						"w": 142,
+						"h": 91
+					},
+					"frame": {
+						"x": 0,
+						"y": 180,
+						"w": 142,
+						"h": 91
+					}
+				},
+				{
+					"filename": "ghostGun-dead14.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 23,
+						"y": 74,
+						"w": 142,
+						"h": 91
+					},
+					"frame": {
+						"x": 142,
+						"y": 180,
+						"w": 142,
+						"h": 91
+					}
+				},
+				{
+					"filename": "ghostGun-dead9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 23,
+						"y": 54,
+						"w": 141,
+						"h": 96
+					},
+					"frame": {
+						"x": 0,
+						"y": 271,
+						"w": 141,
+						"h": 96
+					}
+				},
+				{
+					"filename": "ghostGun-attack9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 74,
+						"y": 13,
+						"w": 90,
+						"h": 139
+					},
+					"frame": {
+						"x": 284,
+						"y": 0,
+						"w": 90,
+						"h": 139
+					}
+				},
+				{
+					"filename": "ghostGun-dead3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 65,
+						"y": 12,
+						"w": 89,
+						"h": 139
+					},
+					"frame": {
+						"x": 284,
+						"y": 139,
+						"w": 89,
+						"h": 139
+					}
+				},
+				{
+					"filename": "ghostGun-dead4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 61,
+						"y": 17,
+						"w": 90,
+						"h": 139
+					},
+					"frame": {
+						"x": 0,
+						"y": 367,
+						"w": 90,
+						"h": 139
+					}
+				},
+				{
+					"filename": "ghostGun-attack10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 72,
+						"y": 14,
+						"w": 90,
+						"h": 137
+					},
+					"frame": {
+						"x": 90,
+						"y": 367,
+						"w": 90,
+						"h": 137
+					}
+				},
+				{
+					"filename": "ghostGun-dead2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 66,
+						"y": 14,
+						"w": 89,
+						"h": 137
+					},
+					"frame": {
+						"x": 180,
+						"y": 271,
+						"w": 89,
+						"h": 137
+					}
+				},
+				{
+					"filename": "ghostGun-dead5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 55,
+						"y": 22,
+						"w": 96,
+						"h": 137
+					},
+					"frame": {
+						"x": 269,
+						"y": 278,
+						"w": 96,
+						"h": 137
+					}
+				},
+				{
+					"filename": "ghostGun-hurt2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 16,
+						"w": 89,
+						"h": 137
+					},
+					"frame": {
+						"x": 374,
+						"y": 0,
+						"w": 89,
+						"h": 137
+					}
+				},
+				{
+					"filename": "ghostGun-hurt1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 70,
+						"y": 16,
+						"w": 89,
+						"h": 136
+					},
+					"frame": {
+						"x": 374,
+						"y": 137,
+						"w": 89,
+						"h": 136
+					}
+				},
+				{
+					"filename": "ghostGun-attack11.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 70,
+						"y": 16,
+						"w": 89,
+						"h": 134
+					},
+					"frame": {
+						"x": 373,
+						"y": 273,
+						"w": 89,
+						"h": 134
+					}
+				},
+				{
+					"filename": "ghostGun-attack8.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 17,
+						"w": 89,
+						"h": 134
+					},
+					"frame": {
+						"x": 463,
+						"y": 0,
+						"w": 89,
+						"h": 134
+					}
+				},
+				{
+					"filename": "ghostGun-dead1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 67,
+						"y": 16,
+						"w": 89,
+						"h": 134
+					},
+					"frame": {
+						"x": 463,
+						"y": 134,
+						"w": 89,
+						"h": 134
+					}
+				},
+				{
+					"filename": "ghostGun-jump1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 18,
+						"w": 89,
+						"h": 133
+					},
+					"frame": {
+						"x": 463,
+						"y": 268,
+						"w": 89,
+						"h": 133
+					}
+				},
+				{
+					"filename": "ghostGun-idle1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 17,
+						"w": 89,
+						"h": 132
+					},
+					"frame": {
+						"x": 180,
+						"y": 408,
+						"w": 89,
+						"h": 132
+					}
+				},
+				{
+					"filename": "ghostGun-idle2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 17,
+						"w": 89,
+						"h": 131
+					},
+					"frame": {
+						"x": 90,
+						"y": 504,
+						"w": 89,
+						"h": 131
+					}
+				},
+				{
+					"filename": "ghostGun-idle3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 17,
+						"w": 88,
+						"h": 131
+					},
+					"frame": {
+						"x": 0,
+						"y": 506,
+						"w": 88,
+						"h": 131
+					}
+				},
+				{
+					"filename": "ghostGun-idle4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 67,
+						"y": 16,
+						"w": 89,
+						"h": 131
+					},
+					"frame": {
+						"x": 462,
+						"y": 401,
+						"w": 89,
+						"h": 131
+					}
+				},
+				{
+					"filename": "ghostGun-idle5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 66,
+						"y": 16,
+						"w": 89,
+						"h": 131
+					},
+					"frame": {
+						"x": 365,
+						"y": 407,
+						"w": 89,
+						"h": 131
+					}
+				},
+				{
+					"filename": "ghostGun-idle11.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 67,
+						"y": 17,
+						"w": 89,
+						"h": 131
+					},
+					"frame": {
+						"x": 269,
+						"y": 415,
+						"w": 89,
+						"h": 131
+					}
+				},
+				{
+					"filename": "ghostGun-dead6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 49,
+						"y": 28,
+						"w": 102,
+						"h": 131
+					},
+					"frame": {
+						"x": 552,
+						"y": 0,
+						"w": 102,
+						"h": 131
+					}
+				},
+				{
+					"filename": "ghostGun-hurt3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 58,
+						"y": 20,
+						"w": 91,
+						"h": 131
+					},
+					"frame": {
+						"x": 552,
+						"y": 131,
+						"w": 91,
+						"h": 131
+					}
+				},
+				{
+					"filename": "ghostGun-jump2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 64,
+						"y": 20,
+						"w": 90,
+						"h": 131
+					},
+					"frame": {
+						"x": 552,
+						"y": 262,
+						"w": 90,
+						"h": 131
+					}
+				},
+				{
+					"filename": "ghostGun-idle0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 18,
+						"w": 88,
+						"h": 130
+					},
+					"frame": {
+						"x": 552,
+						"y": 393,
+						"w": 88,
+						"h": 130
+					}
+				},
+				{
+					"filename": "ghostGun-idle6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 65,
+						"y": 16,
+						"w": 90,
+						"h": 130
+					},
+					"frame": {
+						"x": 179,
+						"y": 540,
+						"w": 90,
+						"h": 130
+					}
+				},
+				{
+					"filename": "ghostGun-idle7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 64,
+						"y": 16,
+						"w": 90,
+						"h": 130
+					},
+					"frame": {
+						"x": 0,
+						"y": 637,
+						"w": 90,
+						"h": 130
+					}
+				},
+				{
+					"filename": "ghostGun-idle9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 65,
+						"y": 17,
+						"w": 89,
+						"h": 130
+					},
+					"frame": {
+						"x": 90,
+						"y": 635,
+						"w": 89,
+						"h": 130
+					}
+				},
+				{
+					"filename": "ghostGun-idle10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 66,
+						"y": 17,
+						"w": 89,
+						"h": 130
+					},
+					"frame": {
+						"x": 551,
+						"y": 523,
+						"w": 89,
+						"h": 130
+					}
+				},
+				{
+					"filename": "ghostGun-attack0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 18,
+						"w": 88,
+						"h": 130
+					},
+					"frame": {
+						"x": 454,
+						"y": 532,
+						"w": 88,
+						"h": 130
+					}
+				},
+				{
+					"filename": "ghostGun-dead0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 18,
+						"w": 88,
+						"h": 130
+					},
+					"frame": {
+						"x": 358,
+						"y": 538,
+						"w": 88,
+						"h": 130
+					}
+				},
+				{
+					"filename": "ghostGun-hurt0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 18,
+						"w": 88,
+						"h": 130
+					},
+					"frame": {
+						"x": 269,
+						"y": 546,
+						"w": 88,
+						"h": 130
+					}
+				},
+				{
+					"filename": "ghostGun-jump0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 18,
+						"w": 88,
+						"h": 130
+					},
+					"frame": {
+						"x": 654,
+						"y": 0,
+						"w": 88,
+						"h": 130
+					}
+				},
+				{
+					"filename": "ghostGun-idle8.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 64,
+						"y": 17,
+						"w": 90,
+						"h": 129
+					},
+					"frame": {
+						"x": 654,
+						"y": 130,
+						"w": 90,
+						"h": 129
+					}
+				},
+				{
+					"filename": "ghostGun-attack1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 64,
+						"y": 17,
+						"w": 89,
+						"h": 129
+					},
+					"frame": {
+						"x": 643,
+						"y": 259,
+						"w": 89,
+						"h": 129
+					}
+				},
+				{
+					"filename": "ghostGun-jump17.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 61,
+						"y": 19,
+						"w": 92,
+						"h": 129
+					},
+					"frame": {
+						"x": 642,
+						"y": 388,
+						"w": 92,
+						"h": 129
+					}
+				},
+				{
+					"filename": "ghostGun-attack7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 59,
+						"y": 17,
+						"w": 92,
+						"h": 128
+					},
+					"frame": {
+						"x": 640,
+						"y": 517,
+						"w": 92,
+						"h": 128
+					}
+				},
+				{
+					"filename": "ghostGun-dead8.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 29,
+						"y": 44,
+						"w": 128,
+						"h": 112
+					},
+					"frame": {
+						"x": 542,
+						"y": 653,
+						"w": 128,
+						"h": 112
+					}
+				},
+				{
+					"filename": "ghostGun-hurt11.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 60,
+						"y": 19,
+						"w": 91,
+						"h": 128
+					},
+					"frame": {
+						"x": 732,
+						"y": 259,
+						"w": 91,
+						"h": 128
+					}
+				},
+				{
+					"filename": "ghostGun-run1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 70,
+						"y": 17,
+						"w": 89,
+						"h": 128
+					},
+					"frame": {
+						"x": 742,
+						"y": 0,
+						"w": 89,
+						"h": 128
+					}
+				},
+				{
+					"filename": "ghostGun-run2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 70,
+						"y": 17,
+						"w": 89,
+						"h": 128
+					},
+					"frame": {
+						"x": 744,
+						"y": 128,
+						"w": 89,
+						"h": 128
+					}
+				},
+				{
+					"filename": "ghostGun-attack2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 60,
+						"y": 17,
+						"w": 91,
+						"h": 127
+					},
+					"frame": {
+						"x": 734,
+						"y": 387,
+						"w": 91,
+						"h": 127
+					}
+				},
+				{
+					"filename": "ghostGun-jump16.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 57,
+						"y": 21,
+						"w": 97,
+						"h": 127
+					},
+					"frame": {
+						"x": 734,
+						"y": 514,
+						"w": 97,
+						"h": 127
+					}
+				},
+				{
+					"filename": "ghostGun-run0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 70,
+						"y": 18,
+						"w": 88,
+						"h": 127
+					},
+					"frame": {
+						"x": 732,
+						"y": 641,
+						"w": 88,
+						"h": 127
+					}
+				},
+				{
+					"filename": "ghostGun-run11.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 18,
+						"w": 89,
+						"h": 127
+					},
+					"frame": {
+						"x": 0,
+						"y": 768,
+						"w": 89,
+						"h": 127
+					}
+				},
+				{
+					"filename": "ghostGun-run3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 69,
+						"y": 17,
+						"w": 89,
+						"h": 127
+					},
+					"frame": {
+						"x": 89,
+						"y": 768,
+						"w": 89,
+						"h": 127
+					}
+				},
+				{
+					"filename": "ghostGun-jump3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 54,
+						"y": 23,
+						"w": 101,
+						"h": 126
+					},
+					"frame": {
+						"x": 178,
+						"y": 768,
+						"w": 101,
+						"h": 126
+					}
+				},
+				{
+					"filename": "ghostGun-run4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 18,
+						"w": 89,
+						"h": 126
+					},
+					"frame": {
+						"x": 279,
+						"y": 768,
+						"w": 89,
+						"h": 126
+					}
+				},
+				{
+					"filename": "ghostGun-run5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 67,
+						"y": 18,
+						"w": 89,
+						"h": 126
+					},
+					"frame": {
+						"x": 368,
+						"y": 768,
+						"w": 89,
+						"h": 126
+					}
+				},
+				{
+					"filename": "ghostGun-run6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 66,
+						"y": 18,
+						"w": 90,
+						"h": 126
+					},
+					"frame": {
+						"x": 457,
+						"y": 768,
+						"w": 90,
+						"h": 126
+					}
+				},
+				{
+					"filename": "ghostGun-attack3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 56,
+						"y": 17,
+						"w": 92,
+						"h": 125
+					},
+					"frame": {
+						"x": 547,
+						"y": 768,
+						"w": 92,
+						"h": 125
+					}
+				},
+				{
+					"filename": "ghostGun-attack4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 55,
+						"y": 17,
+						"w": 92,
+						"h": 125
+					},
+					"frame": {
+						"x": 639,
+						"y": 765,
+						"w": 92,
+						"h": 125
+					}
+				},
+				{
+					"filename": "ghostGun-attack5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 53,
+						"y": 17,
+						"w": 94,
+						"h": 125
+					},
+					"frame": {
+						"x": 731,
+						"y": 768,
+						"w": 94,
+						"h": 125
+					}
+				},
+				{
+					"filename": "ghostGun-hurt10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 53,
+						"y": 21,
+						"w": 96,
+						"h": 125
+					},
+					"frame": {
+						"x": 820,
+						"y": 641,
+						"w": 96,
+						"h": 125
+					}
+				},
+				{
+					"filename": "ghostGun-hurt4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 47,
+						"y": 23,
+						"w": 98,
+						"h": 125
+					},
+					"frame": {
+						"x": 833,
+						"y": 0,
+						"w": 98,
+						"h": 125
+					}
+				},
+				{
+					"filename": "ghostGun-jump15.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 52,
+						"y": 22,
+						"w": 103,
+						"h": 125
+					},
+					"frame": {
+						"x": 825,
+						"y": 766,
+						"w": 103,
+						"h": 125
+					}
+				},
+				{
+					"filename": "ghostGun-run10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 67,
+						"y": 19,
+						"w": 89,
+						"h": 125
+					},
+					"frame": {
+						"x": 823,
+						"y": 256,
+						"w": 89,
+						"h": 125
+					}
+				},
+				{
+					"filename": "ghostGun-run7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 65,
+						"y": 19,
+						"w": 90,
+						"h": 125
+					},
+					"frame": {
+						"x": 833,
+						"y": 125,
+						"w": 90,
+						"h": 125
+					}
+				},
+				{
+					"filename": "ghostGun-run8.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 65,
+						"y": 19,
+						"w": 90,
+						"h": 125
+					},
+					"frame": {
+						"x": 825,
+						"y": 381,
+						"w": 90,
+						"h": 125
+					}
+				},
+				{
+					"filename": "ghostGun-run9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 66,
+						"y": 19,
+						"w": 90,
+						"h": 125
+					},
+					"frame": {
+						"x": 831,
+						"y": 506,
+						"w": 90,
+						"h": 125
+					}
+				},
+				{
+					"filename": "ghostGun-attack6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 51,
+						"y": 18,
+						"w": 95,
+						"h": 124
+					},
+					"frame": {
+						"x": 0,
+						"y": 895,
+						"w": 95,
+						"h": 124
+					}
+				},
+				{
+					"filename": "ghostGun-jump14.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 47,
+						"y": 23,
+						"w": 108,
+						"h": 124
+					},
+					"frame": {
+						"x": 825,
+						"y": 891,
+						"w": 108,
+						"h": 124
+					}
+				},
+				{
+					"filename": "ghostGun-hurt8.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 40,
+						"y": 22,
+						"w": 104,
+						"h": 123
+					},
+					"frame": {
+						"x": 95,
+						"y": 895,
+						"w": 104,
+						"h": 123
+					}
+				},
+				{
+					"filename": "ghostGun-hurt9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 46,
+						"y": 22,
+						"w": 100,
+						"h": 123
+					},
+					"frame": {
+						"x": 199,
+						"y": 894,
+						"w": 100,
+						"h": 123
+					}
+				},
+				{
+					"filename": "ghostGun-jump10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 40,
+						"y": 23,
+						"w": 115,
+						"h": 123
+					},
+					"frame": {
+						"x": 299,
+						"y": 894,
+						"w": 115,
+						"h": 123
+					}
+				},
+				{
+					"filename": "ghostGun-jump11.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 40,
+						"y": 23,
+						"w": 114,
+						"h": 123
+					},
+					"frame": {
+						"x": 414,
+						"y": 894,
+						"w": 114,
+						"h": 123
+					}
+				},
+				{
+					"filename": "ghostGun-jump12.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 40,
+						"y": 23,
+						"w": 114,
+						"h": 123
+					},
+					"frame": {
+						"x": 528,
+						"y": 894,
+						"w": 114,
+						"h": 123
+					}
+				},
+				{
+					"filename": "ghostGun-jump13.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 43,
+						"y": 23,
+						"w": 112,
+						"h": 123
+					},
+					"frame": {
+						"x": 642,
+						"y": 893,
+						"w": 112,
+						"h": 123
+					}
+				},
+				{
+					"filename": "ghostGun-jump4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 45,
+						"y": 24,
+						"w": 111,
+						"h": 123
+					},
+					"frame": {
+						"x": 933,
+						"y": 0,
+						"w": 111,
+						"h": 123
+					}
+				},
+				{
+					"filename": "ghostGun-jump7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 40,
+						"y": 23,
+						"w": 115,
+						"h": 123
+					},
+					"frame": {
+						"x": 928,
+						"y": 125,
+						"w": 115,
+						"h": 123
+					}
+				},
+				{
+					"filename": "ghostGun-jump8.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 40,
+						"y": 23,
+						"w": 115,
+						"h": 123
+					},
+					"frame": {
+						"x": 928,
+						"y": 248,
+						"w": 115,
+						"h": 123
+					}
+				},
+				{
+					"filename": "ghostGun-jump9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 40,
+						"y": 23,
+						"w": 115,
+						"h": 123
+					},
+					"frame": {
+						"x": 928,
+						"y": 371,
+						"w": 115,
+						"h": 123
+					}
+				},
+				{
+					"filename": "ghostGun-dead7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 38,
+						"y": 37,
+						"w": 117,
+						"h": 122
+					},
+					"frame": {
+						"x": 921,
+						"y": 494,
+						"w": 117,
+						"h": 122
+					}
+				},
+				{
+					"filename": "ghostGun-hurt6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 35,
+						"y": 23,
+						"w": 106,
+						"h": 122
+					},
+					"frame": {
+						"x": 933,
+						"y": 616,
+						"w": 106,
+						"h": 122
+					}
+				},
+				{
+					"filename": "ghostGun-hurt7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 37,
+						"y": 23,
+						"w": 105,
+						"h": 122
+					},
+					"frame": {
+						"x": 933,
+						"y": 738,
+						"w": 105,
+						"h": 122
+					}
+				},
+				{
+					"filename": "ghostGun-jump5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 41,
+						"y": 24,
+						"w": 114,
+						"h": 122
+					},
+					"frame": {
+						"x": 0,
+						"y": 1019,
+						"w": 114,
+						"h": 122
+					}
+				},
+				{
+					"filename": "ghostGun-jump6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 41,
+						"y": 24,
+						"w": 114,
+						"h": 122
+					},
+					"frame": {
+						"x": 114,
+						"y": 1018,
+						"w": 114,
+						"h": 122
+					}
+				},
+				{
+					"filename": "ghostGun-hurt5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 235,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 37,
+						"y": 24,
+						"w": 105,
+						"h": 121
+					},
+					"frame": {
+						"x": 228,
+						"y": 1017,
+						"w": 105,
+						"h": 121
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "http://free-tex-packer.com",
+		"version": "0.6.7"
+	}
+}

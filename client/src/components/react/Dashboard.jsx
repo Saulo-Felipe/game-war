@@ -4,13 +4,16 @@ import ChooseLevel from './ChooseLevel'
 
 export default function Dashboard() {
   const [currentScreen, setCurrentScreen] = useState("home")
+  const [sceneInformation, setSceneInformation] = useState({
+    character: "steve",
+  })
 
 
   return (
     <>{
       currentScreen === "home" 
-      ? <ChooseLevel screenState={{ currentScreen, setCurrentScreen }} />
-      : <Home screenState={{ currentScreen, setCurrentScreen }} />
+      ? <Home screenState={{ setCurrentScreen, sceneInformation, setSceneInformation }} />
+      : <ChooseLevel screenState={{ setCurrentScreen, sceneInformation, setSceneInformation }} />
     }</>
   )
 }

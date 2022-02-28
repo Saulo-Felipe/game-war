@@ -1,4 +1,4 @@
-import Animations from '../components/phaser/Animations.js'
+import {Animations} from '../components/phaser/Animations.js'
 import Player from '../components/phaser/Player.js'
 import Loading from '../tools/Loading.js'
 import Phaser from 'phaser'
@@ -9,14 +9,22 @@ export default class Game extends Phaser.Scene {
     super("Game")
   }
 
+  init(data) {
+    this.data = data
+  }
+
   preload() {
+    console.log("teste de data: ", this.data)
+
     // Map
     this.load.image("background", require("../assets/maps/halloween/background.png"))
     this.load.image("halloween_tileset", require("../assets/maps/halloween/map_tileset.png"))
     this.load.tilemapTiledJSON("halloween_tilemap", require("../assets/maps/halloween/halloween_tilemap.json"))
   
     // Player
-    this.load.atlas("steve", require("../assets/sprites/steve/spritesheet.png"), require("../assets/sprites/steve/spritesheet.json"))
+    // this.load.atlas("steve", require("../assets/sprites/steve/spritesheet.png"), require("../assets/sprites/steve/spritesheet.json"))
+    this.load.atlas(`${this.data.character}`, require(`../assets/sprites/${this.data.character}.png`), require(`../assets/sprites/${this.data.character}.json`))
+
   
     // Weapons
     this.textures.addBase64('purpleBullet', require("../assets/weapons/bullet.png"))

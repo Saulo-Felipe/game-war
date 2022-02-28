@@ -10,7 +10,7 @@ export default function Player(scene) {
 	this.sprite = scene.physics.add.sprite(300, 1000, "steve")
 	this.sprite.setCollideWorldBounds(true)
 	this.sprite.body.setSize(this.sprite.width*0.3, this.sprite.height*0.75)
-  this.sprite.setOffset(80, 25)
+  // this.sprite.setOffset(80, 25)
 
   // Bullets
   this.bullets = scene.physics.add.group({
@@ -48,7 +48,6 @@ export default function Player(scene) {
         this.sprite.play("jump", true)
 
     
-
 		this.flipPlayer(side)
 	}
 
@@ -80,10 +79,10 @@ export default function Player(scene) {
   }
 
 	this.flipPlayer = type => {
-    if (type)
-      this.sprite.setOffset(55, 25)
-    else
-      this.sprite.setOffset(80, 25)      
+    // if (type)
+    //   this.sprite.setOffset(55, 25)
+    // else
+    //   this.sprite.setOffset(80, 25)      
   
     this.sprite.flipX = type
 	}

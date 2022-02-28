@@ -1,21 +1,76 @@
 #choose-level-container {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-image: repeating-radial-gradient(#071e37, #020a0e);
-    border: solid 1px red;
-    padding: 20px;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-image: repeating-radial-gradient(#071e37, #020a0e);
+  border: solid 1px red;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .levels-container {
-    display: flex;
-    border: solid 1px yellow;
+  display: flex;
+  border: solid 1px yellow;
 }
 
+.btn-back-home {
+  border-radius: 50%;
+  padding: 5px;
+  width: 50px;
+  height: 50px;
+  font-size: x-large;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.choose-level-footer {
+  height: -webkit-fill-available;
+  display:flex;
+  align-items: flex-end;
+}
+
+/* -------------- Cards ----------------- */
 .chooseLevel-card {
-    width: 350px;
-    height: 250px;
-    background-color: white;
-    border: solid 1px blue;
-    margin: 10px;
+  width: 350px;
+  height: 250px;
+  border: solid 1px blue;
+  margin: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+#halloween-card {
+  background-image: url("../assets/dashboard/preview-halloween-card.png");
+}
+.card-play {
+  font-size: 3rem;
+  color: white;
+  z-index: 1;
+  box-shadow: 0px 0px 50px 3px #000000ad;
+  border-radius: 10px;
+  height: min-content;
+  padding: 10px;
+  opacity: 0;
+  transition: all 0.5s;
+}
+.card-bg-blur {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #00000096;
+  filter: blur(1px);
+  opacity: 0;
+  transition: all 0.5s;
+
+}
+
+.chooseLevel-card:hover > .card-play {
+  opacity: 1;
+}
+.chooseLevel-card:hover > .card-bg-blur {
+  opacity: 1;
+
 }

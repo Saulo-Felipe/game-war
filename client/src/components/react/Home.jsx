@@ -1,40 +1,42 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import '../../styles/dashboard.css'
-import { game } from '../../App'
-import Game from '../../scenes/Game'
 
 export default function Home({ screenState }) {
   const [translateCarousel, setTranslateCarousel] = useState(0)
   const [allCharacter, setAllCharacter] = useState([
     {
-      url: require(`../../assets/dashboard/ninja-animation.gif`),
-      name: "ninja",
-      indexLimit: 9,
+      url: require(`../../assets/dashboard/steve-animation.gif`),
+      name: "steve", 
       first: true
     },
     {
-      url: require(`../../assets/dashboard/steve-animation.gif`),
-      name: "steve", 
-      indexLimit: 9, 
+      url: require(`../../assets/dashboard/ghostGun-animation.gif`),
+      name: "ghostGun",
       last: true
     }
   ])
 
   function nextCharacter() {
-    if (!(allCharacter[translateCarousel*-1].last))
+    if (!(allCharacter[translateCarousel*-1].last)) {
       setTranslateCarousel(translateCarousel-1)
+    }
   }
 
   function backCharacter() {
-    if (allCharacter[translateCarousel+1].first)
+    if (allCharacter[translateCarousel+1].first) {
       setTranslateCarousel(translateCarousel+1)
+    }
   }
     
-  function startGame() {
+  function goToLevels() {
     screenState.setCurrentScreen("choose-level")
-    // game.scene.add("Game", Game)
-    // game.scene.start("Game")
   }
+
+  useEffect(() => {
+    screenState.setSceneInformation({
+      character: allCharacter[translateCarousel < 0 ? translateCarousel*-1 : translateCarousel].name,
+    })
+  }, [translateCarousel])
 
 
   return (
@@ -108,7 +110,7 @@ export default function Home({ screenState }) {
           <div 
             id="btn-play" 
             style={{ backgroundImage: `url(${require("../../assets/dashboard/btn-play.png")})`}}
-            onClick={() => startGame()}
+            onClick={() => goToLevels()}
           ></div>
         </div>
       </section>
