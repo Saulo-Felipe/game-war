@@ -1,19 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Home from './Home'
 import ChooseLevel from './ChooseLevel'
+import { useSelector } from 'react-redux'
+import { selectGameState } from '../../redux/gameSlice'
 
 export default function Dashboard() {
-  const [currentScreen, setCurrentScreen] = useState("home")
-  const [sceneInformation, setSceneInformation] = useState({
-    character: "steve",
-  })
+  const { currentScreen } = useSelector(selectGameState)
+  console.log("teste de tela: ", currentScreen)
 
-
-  return (
-    <>{
-      currentScreen === "home" 
-      ? <Home screenState={{ setCurrentScreen, sceneInformation, setSceneInformation }} />
-      : <ChooseLevel screenState={{ setCurrentScreen, sceneInformation, setSceneInformation }} />
-    }</>
-  )
+  if (currentScreen === "home") 
+    return <Home />
+  else if (currentScreen === "select-room")
+    return <ChooseLevel />
+  else if (currentScreen === "play-game")
+    return <></>
+  else return <></>
 }

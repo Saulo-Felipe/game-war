@@ -1,7 +1,8 @@
-import {Animations} from '../components/phaser/Animations.js'
+import {ghostGun,steve } from '../components/phaser/Animations.js'
 import Player from '../components/phaser/Player.js'
 import Loading from '../tools/Loading.js'
 import Phaser from 'phaser'
+
 
 export default class Game extends Phaser.Scene {
 
@@ -9,12 +10,7 @@ export default class Game extends Phaser.Scene {
     super("Game")
   }
 
-  init(data) {
-    this.data = data
-  }
-
   preload() {
-    console.log("teste de data: ", this.data)
 
     // Map
     this.load.image("background", require("../assets/maps/halloween/background.png"))
@@ -23,7 +19,7 @@ export default class Game extends Phaser.Scene {
   
     // Player
     // this.load.atlas("steve", require("../assets/sprites/steve/spritesheet.png"), require("../assets/sprites/steve/spritesheet.json"))
-    this.load.atlas(`${this.data.character}`, require(`../assets/sprites/${this.data.character}.png`), require(`../assets/sprites/${this.data.character}.json`))
+    this.load.atlas("steve", require(`../assets/sprites/steve.png`), require(`../assets/sprites/steve.json`))
 
   
     // Weapons
@@ -93,7 +89,8 @@ export default class Game extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, 6000, 1800)
     
   
-    Animations(this)
+    steve(this)
+    
     this.keys = this.input.keyboard.createCursorKeys()
   }
 

@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react'
 import '../../styles/dashboard.css'
+import { useDispatch } from 'react-redux'
+import { changeCharacter, changeScreen } from '../../redux/gameSlice'
 
-export default function Home({ screenState }) {
+export default function Home() {
+  const dispatch = useDispatch()
+
   const [translateCarousel, setTranslateCarousel] = useState(0)
   const [allCharacter, setAllCharacter] = useState([
     {
@@ -29,14 +33,11 @@ export default function Home({ screenState }) {
   }
     
   function goToLevels() {
-    screenState.setCurrentScreen("choose-level")
-  }
+    var selectedCharacter = allCharacter[translateCarousel < 0 ? translateCarousel*-1 : translateCarousel].name
 
-  useEffect(() => {
-    screenState.setSceneInformation({
-      character: allCharacter[translateCarousel < 0 ? translateCarousel*-1 : translateCarousel].name,
-    })
-  }, [translateCarousel])
+    dispatch(changeCharacter(selectedCharacter))
+    dispatch(changeScreen("select-room"))
+  }
 
 
   return (
