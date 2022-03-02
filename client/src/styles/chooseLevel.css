@@ -1,3 +1,14 @@
+.loading-screen {
+  background-color: rgba(0, 0, 0, 0.524);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #choose-level-container {
   position: absolute;
   width: 100vw;
@@ -72,5 +83,5 @@
 }
 .chooseLevel-card:hover > .card-bg-blur {
   opacity: 1;
-
 }
+

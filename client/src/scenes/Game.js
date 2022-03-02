@@ -10,6 +10,10 @@ export default class Game extends Phaser.Scene {
     super("Game")
   }
 
+  init(data) {
+    console.log("Seu estado: ", data)
+  }
+
   preload() {
 
     // Map
@@ -18,7 +22,6 @@ export default class Game extends Phaser.Scene {
     this.load.tilemapTiledJSON("halloween_tilemap", require("../assets/maps/halloween/halloween_tilemap.json"))
   
     // Player
-    // this.load.atlas("steve", require("../assets/sprites/steve/spritesheet.png"), require("../assets/sprites/steve/spritesheet.json"))
     this.load.atlas("steve", require(`../assets/sprites/steve.png`), require(`../assets/sprites/steve.json`))
 
   
@@ -122,3 +125,4 @@ export default class Game extends Phaser.Scene {
 
 
 }
+

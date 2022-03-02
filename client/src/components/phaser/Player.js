@@ -30,8 +30,10 @@ export default function Player(scene) {
 
 	// Tools functions
 	this.moveHorizontal = side => {
-		if (side)
+		if (side) {
 			this.sprite.setVelocityX(-this.property.velocityX)
+			console.log("Moving")
+		}
 		else
 			this.sprite.setVelocityX(this.property.velocityX)
 

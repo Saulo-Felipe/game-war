@@ -1,34 +1,39 @@
-import { useDispatch } from 'react-redux'
-import { game } from '../../App'
-import { changeScreen } from '../../redux/gameSlice'
-import Game from '../../scenes/Game'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectGameState, changeLoading, changeScreen, changeSelectedRoom } from '../../redux/gameSlice'
+
 import '../../styles/chooseLevel.css'
 
 export default function ChooseLevel() {
-
-  /* -----------  Passar parametros para scene do game ------------- */
   const dispatch = useDispatch()
+  const { isLoading } = useSelector(selectGameState)
 
-  function startGame() {
-    game.scene.add("Game", Game)
-    game.scene.start("Game", {
-      character: "steve"
-    })
-    dispatch(changeScreen("play-game"))
+  function startGame(room) {
+    dispatch(changeSelectedRoom(room))
+    dispatch(changeLoading(true))
   }
-
+  
   function backToHome() {
     dispatch(changeScreen("home"))
   }
 
   return (
     <div id="choose-level-container">
+      {
+        isLoading 
+        ? <div className="loading-screen">
+          <img 
+            src={require("../../assets/dashboard/loading.gif")}
+            width="90px"
+          />
+        </div>
+        : <></>
+      }
       <header>
         <h1 className="fs-1 fw-light text-light">Salas disponíveis</h1>
       </header>
 
       <section className="levels-container">
-        <div id="halloween-card" className="chooseLevel-card" onClick={() => startGame()}>
+        <div id="halloween-card" className="chooseLevel-card" onClick={() => startGame("halloween")}>
           <div className="card-bg-blur">
             
           </div>
@@ -37,7 +42,7 @@ export default function ChooseLevel() {
           </div>
         </div>
 
-        <div className="chooseLevel-card">
+        <div className="chooseLevel-card" onClick={() => startGame("ice-map")}>
           <div className="card-bg-blur">
             
           </div>

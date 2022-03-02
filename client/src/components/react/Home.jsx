@@ -21,6 +21,7 @@ export default function Home() {
   ])
 
   function nextCharacter() {
+
     if (!(allCharacter[translateCarousel*-1].last)) {
       setTranslateCarousel(translateCarousel-1)
     }
