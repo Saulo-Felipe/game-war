@@ -1,8 +1,8 @@
-export const steve = (scene) => {
+export const steveAnimation = (scene) => {
 
   // Player
 	scene.anims.create({
-    key: "run",
+    key: "steve-run",
     frameRate: 15,
     frames: scene.anims.generateFrameNames("steve", {
       prefix: "Run",
@@ -14,7 +14,7 @@ export const steve = (scene) => {
     repeat: -1
   })
   scene.anims.create({
-    key: "run-shoot",
+    key: "steve-run-shoot",
     frameRate: 15,
     frames: scene.anims.generateFrameNames("steve", {
       prefix: "Run-shoot",
@@ -26,7 +26,7 @@ export const steve = (scene) => {
     repeat: -1
   })
   scene.anims.create({
-    key: "stopped-shoot",
+    key: "steve-stopped-shoot",
     frameRate: 15,
     frames: scene.anims.generateFrameNames("steve", {
       prefix: "Idle",
@@ -38,7 +38,7 @@ export const steve = (scene) => {
     repeat: -1
   })
   scene.anims.create({
-    key: "stopped",
+    key: "steve-stopped",
     frameRate: 10,
     frames: scene.anims.generateFrameNames("steve", {
       prefix: "Idle",
@@ -50,7 +50,7 @@ export const steve = (scene) => {
     repeat: -1
   })
   scene.anims.create({
-    key: "jump",
+    key: "steve-jump",
     frameRate: 15,
     frames: scene.anims.generateFrameNames("steve", {
       prefix: "Jump",
@@ -62,7 +62,7 @@ export const steve = (scene) => {
     repeat: -1
   })
   scene.anims.create({
-    key: "jump-shoot",
+    key: "steve-jump-shoot",
     frameRate: 15,
     frames: scene.anims.generateFrameNames("steve", {
       prefix: "Jump-shoot",
@@ -85,9 +85,9 @@ export const steve = (scene) => {
   })
 }
 
-export const ghostGun = (scene) => {
+export const ghostGunAnimation = (scene) => {
   scene.anims.create({
-    key: "idle",
+    key: "ghostGun-stopped",
     frameRate: 15,
     frames: scene.anims.generateFrameNames("ghostGun", {
       prefix: "ghostGun-idle",
@@ -100,7 +100,7 @@ export const ghostGun = (scene) => {
   })
 
   scene.anims.create({
-    key: "run",
+    key: "ghostGun-run",
     frameRate: 15,
     frames: scene.anims.generateFrameNames("ghostGun", {
       prefix: "ghostGun-run",
@@ -113,7 +113,7 @@ export const ghostGun = (scene) => {
   })
 
   scene.anims.create({
-    key: "jump",
+    key: "ghostGun-jump",
     frameRate: 15,
     frames: scene.anims.generateFrameNames("ghostGun", {
       prefix: "ghostGun-jump",
@@ -126,7 +126,7 @@ export const ghostGun = (scene) => {
   })
 
   scene.anims.create({
-    key: "attack",
+    key: "ghostGun-attack",
     frameRate: 15,
     frames: scene.anims.generateFrameNames("ghostGun", {
       prefix: "ghostGun-attack",
@@ -139,7 +139,7 @@ export const ghostGun = (scene) => {
   })
 
   scene.anims.create({
-    key: "dead",
+    key: "ghostGun-dead",
     frameRate: 15,
     frames: scene.anims.generateFrameNames("ghostGun", {
       prefix: "ghostGun-dead",
@@ -152,7 +152,7 @@ export const ghostGun = (scene) => {
   })
 
   scene.anims.create({
-    key: "hurt",
+    key: "ghostGun-hurt",
     frameRate: 15,
     frames: scene.anims.generateFrameNames("ghostGun", {
       prefix: "ghostGun-hurt",
@@ -163,5 +163,13 @@ export const ghostGun = (scene) => {
     }),
     repeat: -1
   })
-
+  
+  // Explosion
+  scene.anims.create({
+    key: 'explodeAnimation',
+    frames: scene.anims.generateFrameNumbers('explosion', { start: 0, end: 6 }),
+    frameRate: 13,
+    hideOnComplete: true,
+    showOnStarte: true
+  })
 }

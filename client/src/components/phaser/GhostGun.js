@@ -1,4 +1,8 @@
-export default function Player(scene) {
+import { ghostGunAnimation } from './Animations'
+
+export default function GhostGun(scene) {
+  ghostGunAnimation(scene)
+
 	this.property = {
 		velocityX: 650,
 		velocityY: 1150,
@@ -7,7 +11,7 @@ export default function Player(scene) {
 	}
 
 	// Player
-	this.sprite = scene.physics.add.sprite(300, 1000, "steve")
+	this.sprite = scene.physics.add.sprite(300, 1000, "ghostGun")
 	this.sprite.setCollideWorldBounds(true)
 	this.sprite.body.setSize(this.sprite.width*0.3, this.sprite.height*0.75)
   this.sprite.setOffset(80, 25)
@@ -38,17 +42,10 @@ export default function Player(scene) {
 			this.sprite.setVelocityX(this.property.velocityX)
 
     if (this.sprite.body.onFloor())
-      if (this.property.isShooting)
-        this.sprite.play("run-shoot", true)
-      else
-  			this.sprite.play("run", true)
+  		this.sprite.play("ghostGun-run", true)
 
 		else
-      if (this.property.isShooting)
-        this.sprite.play("jump-shoot", true)
-      else
-        this.sprite.play("jump", true)
-
+      this.sprite.play("ghostGun-jump", true)
     
 		this.flipPlayer(side)
 	}
@@ -57,27 +54,17 @@ export default function Player(scene) {
 		this.sprite.setVelocityX(0)
 
 		if (this.sprite.body.onFloor()) {
-      if (this.property.isShooting)
-        this.sprite.play("stopped-shoot", true)
-      else
-        this.sprite.play("stopped", true)
-
+      this.sprite.play("ghostGun-stopped", true)
 		}
 		else {
-      if (this.property.isShooting)
-        this.sprite.play("jump-shoot", true)
-      else
-			  this.sprite.play("jump", true)
+			this.sprite.play("ghostGun-jump", true)
 		}
 	}
 
 	this.moveJump = () => {
 		this.sprite.setVelocityY(-this.property.velocityY)
     
-    if (this.property.isShooting)
-      this.sprite.play("jump-shoot", true)
-    else
-      this.sprite.play("jump", true)
+    this.sprite.play("ghostGun-jump", true)
   }
 
 	this.flipPlayer = type => {
@@ -134,4 +121,5 @@ export default function Player(scene) {
 			this.sprite.clearTint()
 		}
 	}
+
 }

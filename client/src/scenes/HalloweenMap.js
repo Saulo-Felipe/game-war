@@ -1,16 +1,21 @@
-import {ghostGun,steve } from '../components/phaser/Animations.js'
-import Player from '../components/phaser/Player.js'
+import Steve from '../components/phaser/Steve.js'
+import GhostGun from '../components/phaser/GhostGun.js'
 import Loading from '../tools/Loading.js'
 import Phaser from 'phaser'
+import socket from '../tools/Socket.js'
 
 
-export default class Game extends Phaser.Scene {
+export default class HalloweenMap extends Phaser.Scene {
 
   constructor() {
-    super("Game")
+    super("Game-Halloween")
   }
 
   init(data) {
+    this.gameState = {
+      useDispatch: data.useDispatch,
+      self: null
+    }
     console.log("Seu estado: ", data)
   }
 
@@ -23,8 +28,9 @@ export default class Game extends Phaser.Scene {
   
     // Player
     this.load.atlas("steve", require(`../assets/sprites/steve.png`), require(`../assets/sprites/steve.json`))
+    this.load.atlas("ghostGun", require(`../assets/sprites/ghostGun.png`), require(`../assets/sprites/ghostGun.json`))
+    
 
-  
     // Weapons
     this.textures.addBase64('purpleBullet', require("../assets/weapons/bullet.png"))
     this.load.spritesheet("explosion", require("../assets/weapons/explosion.png"), { 
@@ -37,7 +43,7 @@ export default class Game extends Phaser.Scene {
   create() {
     this.add.image(0, 0, "background").setOrigin(0, 0)
 
-    this.player = new Player(this)
+    this.player = new Steve(this)
   
     // Map
     this.map = this.make.tilemap({ key: "halloween_tilemap", tileWidth: 120, tileHeight: 120 })
@@ -49,6 +55,7 @@ export default class Game extends Phaser.Scene {
       // Map collision
     this.platform.setCollisionByProperty({ collides: true })
     this.physics.add.collider(this.player.sprite, this.platform, null, null, this)
+
   
       // Lava positions
     this.lavaPositions = []
@@ -68,6 +75,12 @@ export default class Game extends Phaser.Scene {
       quantity: 50,
       visible: false,
     })
+
+    this.allEnemies = this.physics.add.group({
+      name: "allEnemies",
+    })
+
+    // this.allEnemies.create
   
     this.physics.add.collider(this.player.bullets, this.platform, (bullet) => {
       bullet.disableBody(true, true)
@@ -90,37 +103,60 @@ export default class Game extends Phaser.Scene {
     this.cameras.main.startFollow(this.player.sprite)
     this.cameras.main.setBounds(0, 0, 6000, 1800)
     this.physics.world.setBounds(0, 0, 6000, 1800)
-    
-  
-    steve(this)
-    
+        
     this.keys = this.input.keyboard.createCursorKeys()
+
+    socket.on("move-player", (data) => this.receiveMoveHorizontal(data))
+
+    this.sendMoveHorizontal = (data) => {
+      console.log("Enviando dados")
+      socket.emit("move-player", {
+        id: socket.id,
+        side: data,
+      })
+    }
+
+    this.receiveMoveHorizontal = (data) => {
+      console.log("Recebendo dados...")
+    }
+
+    this.sendMoveStopped = () => {
+      
+    }
+
+    this.sendMoveJump = () => {
+
+    } 
+    this.sendFire = () => {
+
+    }
+
   }
 
   update() {
     let {up, left, right, space} = this.keys
 
     if (right.isDown)
-      this.player.moveHorizontal(false)
+      this.sendMoveHorizontal(false)
     else if (left.isDown)
-      this.player.moveHorizontal(true)
+      this.sendMoveHorizontal(true)
     else
-      this.player.moveStopped()
+      this.sendMoveStopped()
   
-    if (up.isDown && this.player.sprite.body.onFloor())
-      this.player.moveJump()
+    // if (up.isDown && this.sprite.body.onFloor())
+      // this.sendMoveJump()
   
     if (space.isDown)
-      this.player.fire()
-    else if (space.isUp)
-      this.player.property.isShooting = false
+      this.sendFire()
+    // else if (space.isUp)
+      // this.player.property.isShooting = false
   
-    if (this.player.property.fireTime > 0) 
-      this.player.property.fireTime -= 1
+    // if (this.player.property.fireTime > 0) 
+      // this.player.property.fireTime -= 1
   
-    if (this.player.sprite.body.speed > 0) {
-      this.player.lavaCollision()
-    }
+    // if (this.player.sprite.body.speed > 0) {
+      // this.player.lavaCollision()
+    // }
   }
 
 

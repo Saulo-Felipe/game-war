@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { changeLoading, changeScreen, selectGameState } from '../../redux/gameSlice'
 import socket from '../../tools/Socket'
 import { game } from '../../App'
-import Game from '../../scenes/Game'
+import Halloween from '../../scenes/HalloweenMap'
 
 
 export default function Dashboard() {
@@ -16,6 +16,8 @@ export default function Dashboard() {
   useEffect(() => {
     socket.on("connect", () => {
       console.log("[new connection] id -> ", socket.id)
+      console.log("dados: ", socket)
+      console.log("persistente: ", socket.userID)
     })
   }, [])
 
@@ -28,12 +30,14 @@ export default function Dashboard() {
         dispatch(changeLoading(false))
         dispatch(changeScreen("play-game"))
 
-        game.scene.add("Game", Game) 
-        game.scene.start("Game", { 
-          character,
-          selectedRoom,
-        })
-
+        if (selectedRoom === "halloween") {
+          game.scene.add("Game-Halloween", Halloween) 
+          game.scene.start("Game-Halloween", { 
+            dispatch,
+            changeLoading,
+            character,
+          })  
+        }
 
       })
 
