@@ -1,10 +1,12 @@
 tasks:
   - name: client-side
+    init: cd client && yarn install && cd ../
     command: >
-      cd client &&
+      cd client ||
       yarn start
 
   - name: server-side
+    init: cd server && yarn install && cd ../
     command: >
       cd server &&
       npm install -g nodemon &&
