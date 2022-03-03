@@ -1,3 +1,5 @@
 tasks:
-  - name: Install dependencies & start dev environment
-    before: cd frontend
+  - init: cd client
+    command: >
+      npm i -g nodemon
+      
