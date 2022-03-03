@@ -1,6 +1,10 @@
 tasks:
   - init: npm install -g nodemon
     command: cd client
+    
+  - before: npm install -g nodemon
+
+
 
 # Ports to expose on workspace startup
 ports:
