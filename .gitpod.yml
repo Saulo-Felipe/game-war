@@ -1,14 +1,10 @@
 tasks:
-  - init: npm install -g nodemon
-    command: cd client
-    
   - before: npm install -g nodemon
-
-
-
-# Ports to expose on workspace startup
-ports:
-  - port: 3000
-    onOpen: open-preview
-  - port: 8081
-    onOpen: open-preview
+    init: npm install
+    command: cd client
+  # - name: Database
+  #   init: sh ./scripts/seed-database.sh
+  #   command: npm start-db
+  #   env:
+  #     DB_HOST: localhost:3306
+  #     DB_USER: readOnlyUser
