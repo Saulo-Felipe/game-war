@@ -1,10 +1,25 @@
 tasks:
-  - before: npm install -g nodemon
-    init: npm install
-    command: cd client
-  # - name: Database
-  #   init: sh ./scripts/seed-database.sh
-  #   command: npm start-db
-  #   env:
-  #     DB_HOST: localhost:3306
-  #     DB_USER: readOnlyUser
+  - name: client-side
+    command: >
+      cd client &&
+      yarn start
+
+  - name: server-side
+    command: >
+      cd server &&
+      npm install -g nodemon &&
+      yarn start
+
+vscode:
+  extensions:
+    - dracula-theme.theme-dracula
+    - file-icons.file-icons
+
+ports:
+  - port: 3000
+    onOpen: open-browser
+    visibility: public
+
+  -port: 8081
+    onOpen: open-browser
+    visibility: public
