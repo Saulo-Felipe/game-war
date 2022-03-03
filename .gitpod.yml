@@ -1,5 +1,10 @@
 tasks:
-  - init: cd client
-    command: >
-      npm i -g nodemon
-      
+  - init: npm install -g nodemon
+    command: cd client
+
+# Ports to expose on workspace startup
+ports:
+  - port: 3000
+    onOpen: open-preview
+  - port: 8081
+    onOpen: open-preview
