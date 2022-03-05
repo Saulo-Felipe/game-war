@@ -1,8 +1,8 @@
 import Steve from '../components/phaser/Steve.js'
 import GhostGun from '../components/phaser/GhostGun.js'
-import Loading from '../tools/Loading.js'
+import Loading from '../components/phaser/Loading.js'
 import Phaser from 'phaser'
-import socket from '../tools/Socket.js'
+import socket from '../services/Socket.js'
 
 
 export default class HalloweenMap extends Phaser.Scene {

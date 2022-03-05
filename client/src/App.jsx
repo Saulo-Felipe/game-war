@@ -1,10 +1,12 @@
 import Phaser from 'phaser'
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
-import RequireAuth from './tools/PrivateRoutes'
+import { BrowserRouter, Route, Routes, Navigate  } from 'react-router-dom'
+import RequireAuth from './services/PrivateRoutes'
 
-import Dashboard from './components/react/Dashboard'
-import Rooms from './components/react/ChooseLevel'
+import Home from './components/react/Home'
+import Rooms from './components/react/Rooms'
 import Login from './components/react/Login'
+import PlayGame from './components/react/PlayGame'
+import Register from './components/react/Register'
 
 export const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -26,9 +28,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/home" element={<RequireAuth> <Dashboard /> </RequireAuth>}/>
+        <Route path="/" element={ <Navigate to="/home" replace={true} />} />
+        <Route path="/home" element={<RequireAuth> <Home /> </RequireAuth>}/>
         <Route path="/rooms" element={<RequireAuth> <Rooms /> </RequireAuth>}/>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/play-game" element={<RequireAuth> <PlayGame /> </RequireAuth> } />
       </Routes>
     </BrowserRouter>  
   )

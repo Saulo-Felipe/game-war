@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import '../../styles/dashboard.css'
 import { useDispatch } from 'react-redux'
-import { changeCharacter, changeScreen } from '../../redux/gameSlice'
+import { changeCharacter } from '../../redux/gameSlice'
+import { Link } from 'react-router-dom'
+import socket from '../../services/Socket'
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -21,7 +23,6 @@ export default function Home() {
   ])
 
   function nextCharacter() {
-
     if (!(allCharacter[translateCarousel*-1].last)) {
       setTranslateCarousel(translateCarousel-1)
     }
@@ -37,8 +38,11 @@ export default function Home() {
     var selectedCharacter = allCharacter[translateCarousel < 0 ? translateCarousel*-1 : translateCarousel].name
 
     dispatch(changeCharacter(selectedCharacter))
-    dispatch(changeScreen("select-room"))
   }
+
+  useEffect(() => {
+
+  }, [])
 
 
   return (
@@ -109,11 +113,13 @@ export default function Home() {
         </div>
 
         <div className="section-three sub-section-container">
-          <div 
-            id="btn-play" 
-            style={{ backgroundImage: `url(${require("../../assets/dashboard/btn-play.png")})`}}
-            onClick={() => goToLevels()}
-          ></div>
+          <Link to={"/rooms"} className="w-100 no-href">
+            <div 
+              id="btn-play" 
+              style={{ backgroundImage: `url(${require("../../assets/dashboard/btn-play.png")})`}}
+              onClick={() => goToLevels()}
+            ></div>
+          </Link>
         </div>
       </section>
 

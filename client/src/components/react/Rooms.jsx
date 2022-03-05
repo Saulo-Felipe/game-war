@@ -1,25 +1,26 @@
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectGameState, changeLoading, changeScreen, changeSelectedRoom } from '../../redux/gameSlice'
+import { Link } from 'react-router-dom'
+import { selectGameState, changeScreen, changeSelectedRoom } from '../../redux/gameSlice'
+import socket from '../../services/Socket'
+import { game } from '../../App'
+import HalloweenMap from '../../scenes/HalloweenMap'
 
 import '../../styles/chooseLevel.css'
 
 export default function ChooseLevel() {
   const dispatch = useDispatch()
-  const { isLoading } = useSelector(selectGameState)
+  const [loading, setLoading] = useState(false)
+  const { character } = useSelector(selectGameState)
 
   function startGame(room) {
-    dispatch(changeSelectedRoom(room))
-    dispatch(changeLoading(true))
-  }
-  
-  function backToHome() {
-    dispatch(changeScreen("home"))
+    setLoading(true)
   }
 
   return (
     <div id="choose-level-container">
       {
-        isLoading 
+        loading 
         ? <div className="loading-screen">
           <img 
             src={require("../../assets/dashboard/loading.gif")}
@@ -53,9 +54,11 @@ export default function ChooseLevel() {
       </section>
 
       <footer className="choose-level-footer">
-        <button className="btn-back-home" onClick={() => backToHome()}>
-          <i className="fas fa-chevron-left"></i>
-        </button>
+        <Link to={"/home"} className="no-href">
+          <button className="btn-back-home" >
+            <i className="fas fa-chevron-left"></i>
+          </button>
+        </Link>
       </footer>
     </div>
   )

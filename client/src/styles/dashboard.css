@@ -140,3 +140,9 @@ canvas {
   height: 100%;
   width: 100%;
 }
+
+.no-href {
+  color: unset;
+  text-decoration: unset;
+  cursor: pointer;
+}

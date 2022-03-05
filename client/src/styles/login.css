@@ -35,7 +35,7 @@
   text-align: center;
 }
 .login-footer {
-  background-color: #414578;
+  background-color: #f8f8f8;
   width: 100%;
   height: 15%;
   border-radius: 8px;
@@ -68,6 +68,16 @@
   background-color: #569aed;
   color: white;
 }
+
+.error-container {
+  color: rgb(193, 0, 0);
+  text-align: center;
+}
+.success-container {
+  color: green;
+  text-align: center;
+}
+
 
 @keyframes login_container {
   from { top: 100%; }
