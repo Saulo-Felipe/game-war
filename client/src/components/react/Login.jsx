@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import '../../styles/small-form.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import api from '../../services/api'
 import errorValidation from '../../services/errorValidation'
+import { useDispatch } from 'react-redux'
+import { changePlayer } from '../../redux/playerSlice'
 
 export default function Login() {
   const [loading, setLoading] = useState(false)
@@ -14,6 +16,8 @@ export default function Login() {
   const [logsStatus, setLogsStatus] = useState({
     msg: ""
   })
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   function handleChangeForm(element) {
     if (element.email)
@@ -42,16 +46,25 @@ export default function Login() {
 
     if (!errorValidation(data)) return false
 
-    if (data.invalidEmail)
+    if (!data.success)
       return setLogsStatus({
         error: true,
-        msg: data.invalidEmail
+        msg: data.msg
       })
     
-    
+    if (data.success) {
+      localStorage.setItem("token_login", data.token)
+      dispatch(changePlayer(data.userID))
 
+      setLogsStatus({
+        success: true,
+        msg: "Login realizado com sucesso!"
+      })
 
-
+      setTimeout(() => {
+        navigate("/home")
+      }, 2500)
+    }
   }
 
   return (
@@ -112,7 +125,7 @@ export default function Login() {
           <button 
             className="form-btn-iceBlue btn" 
             onClick={() => { finishLogin() }}
-            disabled={ logsStatus.error ? true : false }
+            disabled={ logsStatus.error || loading || logsStatus.success ? true : false }
           >Entrar</button>
         </section>
         <footer className="small-form-footer">

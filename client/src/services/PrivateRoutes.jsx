@@ -2,12 +2,9 @@ import { Route, Navigate } from 'react-router-dom'
 
 
 function verifyAuth() {
-  const token = localStorage.getItem("login_token")
+  const token = localStorage.getItem("token_login")
 
-  // if (token)
-    return true
-  // else 
-  //   return false
+  return token ? true : false
 }
 
 export default function RequireAuth({ children }) {

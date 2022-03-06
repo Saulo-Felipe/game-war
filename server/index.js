@@ -1,16 +1,19 @@
 const express = require('express')
 const app = express()
 const cors = require("cors")
-const Routers = require("./Routes.js")
 
 const { createServer } = require("http") 
 const { Server } = require("socket.io")
 const httpServer = createServer(app)
 
+const openToAll = require("./routes/openToAll.js")
+const needLogin = require("./routes/needLogin.js")
+
 const io = new Server(httpServer,   {cors: {
   origin: ["https://3000-saulofelipe-gamewar-t1xjx75yjq2.ws-us34.gitpod.io"]
 }})
 
+require("dotenv").config()
 
 // Middlewares
   app.use(express.json())
@@ -27,7 +30,9 @@ io.on("connection", (socket) => {
 })
 
 
-app.use("/", Routers)
+app.use("/", openToAll)
+app.use("/game", needLogin)
+
 
 
 httpServer.listen(8081, (err) => {

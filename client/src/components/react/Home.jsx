@@ -3,11 +3,9 @@ import '../../styles/dashboard.css'
 import { useDispatch } from 'react-redux'
 import { changeCharacter } from '../../redux/gameSlice'
 import { Link } from 'react-router-dom'
-import socket from '../../services/Socket'
 
 export default function Home() {
   const dispatch = useDispatch()
-
   const [translateCarousel, setTranslateCarousel] = useState(0)
   const [allCharacter, setAllCharacter] = useState([
     {
@@ -22,13 +20,13 @@ export default function Home() {
     }
   ])
 
-  function nextCharacter() {
+  function carouselNext() {
     if (!(allCharacter[translateCarousel*-1].last)) {
       setTranslateCarousel(translateCarousel-1)
     }
   }
 
-  function backCharacter() {
+  function carouselBack() {
     if (allCharacter[translateCarousel+1].first) {
       setTranslateCarousel(translateCarousel+1)
     }
@@ -39,10 +37,6 @@ export default function Home() {
 
     dispatch(changeCharacter(selectedCharacter))
   }
-
-  useEffect(() => {
-
-  }, [])
 
 
   return (
@@ -107,8 +101,8 @@ export default function Home() {
           </div>
 
           <div className="carousel-controls-container">
-            <span className="back-person arrow-control" onClick={() => backCharacter()}><i className="fas fa-angle-left"></i></span>
-            <span className="next-person arrow-control" onClick={() => nextCharacter()}><i className="fas fa-angle-right"></i></span>
+            <span className="back-person arrow-control" onClick={() => carouselBack()}><i className="fas fa-angle-left"></i></span>
+            <span className="next-person arrow-control" onClick={() => carouselNext()}><i className="fas fa-angle-right"></i></span>
           </div>
         </div>
 
