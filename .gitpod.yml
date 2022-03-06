@@ -19,9 +19,9 @@ vscode:
 
 ports:
   - port: 3000
-    onOpen: open-browser
+    onOpen: notify
     visibility: public
 
   - port: 8081
-    onOpen: open-browser
+    onOpen: notify
     visibility: public

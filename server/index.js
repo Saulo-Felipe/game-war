@@ -1,71 +1,34 @@
 const express = require('express')
 const app = express()
-const { v4: uuid } = require('uuid')
+const cors = require("cors")
+const Routers = require("./Routes.js")
 
 const { createServer } = require("http") 
 const { Server } = require("socket.io")
-
 const httpServer = createServer(app)
+
 const io = new Server(httpServer,   {cors: {
-  origin: ["https://3000-saulofelipe-gamewar-8u76ax1ddpc.ws-us34.gitpod.io"]
+  origin: ["https://3000-saulofelipe-gamewar-t1xjx75yjq2.ws-us34.gitpod.io"]
 }})
 
-var game = {
-  allPlayer: {
-    // "id": { x: y: }
-  },
-}
 
-function refresh() {
-  function pad(s) {
-    return (s < 10) ? '0' + s : s;
-  }
-  var date = new Date();
-  return [date.getHours(), date.getMinutes(), date.getSeconds()].map(pad).join(':');
-}
+// Middlewares
+  app.use(express.json())
+  app.use(cors({
+    origin: "https://3000-saulofelipe-gamewar-t1xjx75yjq2.ws-us34.gitpod.io",
+    credentials: true,
+    optionSuccessStatus: 200,
+  }))
+
 
 
 io.on("connection", (socket) => {
-  console.log(`[${refresh()}] new connection!`)
-
-  socket.on("new-player", (data, arg2, callback) => {
-    socket.join(`${data.room}`)
-
-    socket.userID = uuid()
-
-    game.allPlayer[socket.id] = {
-      id: socket.id,
-      skin: data.character,
-      room: data.room,
-    }
-
-    callback({
-      status: "ok"
-    })
-  })
-
-  socket.on("move-player", (data) => {
-    console.log("Todas as sala: ")
-    console.log(io.sockets.adapter.rooms)
-    console.log("ALl persons: ", game.allPlayer)
-
-    // console.log("dados receidos: ", data)
-  })
+  console.log(`[new connection] -> `, socket.id)
 })
 
 
+app.use("/", Routers)
 
-
-
-
-
-
-
-
-
-app.get("/", (request, response) => {
-  response.send("<h1>Hello OK!</h1>")
-})
 
 httpServer.listen(8081, (err) => {
   if (err)
