@@ -8,7 +8,7 @@ import Login from './components/react/Login'
 import PlayGame from './components/react/PlayGame'
 import Register from './components/react/Register'
 
-export const game = new Phaser.Game({
+export const game = `new Phaser.Game({
   type: Phaser.AUTO,
   width: window.innerWidth*2, // 6000
   height: window.innerHeight*2, // 1800
@@ -21,7 +21,7 @@ export const game = new Phaser.Game({
       tileBias: 120,
     }
   }
-})
+})`
 
 function App() {
 
