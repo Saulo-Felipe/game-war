@@ -31,7 +31,10 @@ router.post("/login", async (request, response) => {
         
         request.token_login = token
 
-        return response.json({ success: true, token: token, userID: user[0].id })
+        return response.json({
+          success: true,
+          token: token,
+        })
         
       } else {
         return response.json({ success: false, msg: "Senha incorreta" })
