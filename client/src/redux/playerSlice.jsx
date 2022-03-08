@@ -2,14 +2,18 @@ import { createSlice } from '@reduxjs/toolkit'
 
 
 export const slice = createSlice({
-  name: "Player",
+  name: "player",
   initialState: {
-    playerID: null,
+    name: null,
+    email: null,
+    level: null,
   },
   reducers: {
     changePlayer(state, { payload }) {
-      return { 
-        playerID: payload.playerID
+      return {
+        name: payload.name,
+        email: payload.email,
+        level: payload.level,
       }
     }
   }
@@ -17,5 +21,5 @@ export const slice = createSlice({
 
 
 export const { changePlayer } = slice.actions
-export const selectPlayer = state => state.Player
+export const selectPlayer = state => state.player
 export default slice.reducer

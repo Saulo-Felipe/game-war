@@ -53,8 +53,8 @@ export default function Login() {
       })
     
     if (data.success) {
+      console.log("token: ", data)
       localStorage.setItem("token_login", data.token)
-      dispatch(changePlayer(data.userID))
 
       setLogsStatus({
         success: true,
