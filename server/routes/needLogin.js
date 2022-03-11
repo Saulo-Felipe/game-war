@@ -30,7 +30,6 @@ route.post("/get-player", (request, response) => {
         }
       })
 
-      console.log("id recebido: ", id)
     } else {
       console.log("Token inválido ou não informado.")
       return response.json({ success: false, msg: "Token inválido ou não informado." })

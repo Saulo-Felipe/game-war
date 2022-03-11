@@ -60,7 +60,6 @@ export default function Register() {
         return navigate("/login")
       }, 2000 )
 
-      console.log("data", data)
     }
   }
 

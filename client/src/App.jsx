@@ -28,7 +28,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={ <Navigate to="/home" replace={true} />} />
+        <Route path="/" element={ <Navigate to="/home" />} />
         <Route path="/home" element={<RequireAuth> <Home /> </RequireAuth>}/>
         <Route path="/rooms" element={<RequireAuth> <Rooms /> </RequireAuth>}/>
         <Route path="/login" element={<Login />} />

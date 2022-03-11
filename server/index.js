@@ -9,9 +9,14 @@ const httpServer = createServer(app)
 const openToAll = require("./routes/openToAll.js")
 const needLogin = require("./routes/needLogin.js")
 
+const jwt = require("jsonwebtoken")
+const sequelize = require("./database/connect.js")
+
 const io = new Server(httpServer,   {cors: {
   origin: ["https://3000-saulofelipe-gamewar-t1xjx75yjq2.ws-us34.gitpod.io"]
 }})
+
+require("./sockets.js")(io)
 
 require("dotenv").config()
 
@@ -24,15 +29,8 @@ require("dotenv").config()
   }))
 
 
-
-io.on("connection", (socket) => {
-  console.log(`[new connection] -> `, socket.id)
-})
-
-
 app.use("/", openToAll)
 app.use("/game", needLogin)
-
 
 
 httpServer.listen(8081, (err) => {
@@ -41,4 +39,4 @@ httpServer.listen(8081, (err) => {
 
     console.clear()
     console.log("Server is running! In PORT: 8081")
-})  
+})

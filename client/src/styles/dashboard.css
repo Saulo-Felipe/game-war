@@ -56,7 +56,7 @@ canvas {
   /* border: solid 1px red; */
 }
 
-.friend {
+.available-player {
   /* border: solid 1px yellow; */
   display: flex;
   align-items: center;
@@ -65,7 +65,7 @@ canvas {
 
 .online-icon {
   border-radius: 50%;
-  background-color: green;
+  background-color: rgb(18, 185, 18);
   width: 10px;
   height: 10px;
   margin-right: 10px;

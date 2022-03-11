@@ -1,10 +1,8 @@
 import { useState } from 'react'
 import '../../styles/small-form.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import api from '../../services/api'
 import errorValidation from '../../services/errorValidation'
-import { useDispatch } from 'react-redux'
-import { changePlayer } from '../../redux/playerSlice'
 
 export default function Login() {
   const [loading, setLoading] = useState(false)
@@ -16,8 +14,6 @@ export default function Login() {
   const [logsStatus, setLogsStatus] = useState({
     msg: ""
   })
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   function handleChangeForm(element) {
     if (element.email)
@@ -53,7 +49,6 @@ export default function Login() {
       })
     
     if (data.success) {
-      console.log("token: ", data)
       localStorage.setItem("token_login", data.token)
 
       setLogsStatus({
@@ -62,7 +57,7 @@ export default function Login() {
       })
 
       setTimeout(() => {
-        navigate("/home")
+        window.location.href = "/home"
       }, 2500)
     }
   }
@@ -81,7 +76,7 @@ export default function Login() {
         <section className="small-form-section pb-5">
           <div>
             <div className="input-container">
-              <i class="fas fa-envelope"></i>
+              <i className="fas fa-envelope"></i>
               <input 
                 className="form-beautiful" 
                 id="user"

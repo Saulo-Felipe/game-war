@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import { changePlayer, selectPlayer } from '../../redux/playerSlice'
 import api from '../../services/api'
 import errorValidation from '../../services/errorValidation'
+import socket from '../../services/Socket'
+
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -22,7 +24,10 @@ export default function Home() {
       last: true
     }
   ])
+  const [globalOnlinePlayers, setGlobalOnlinePlayers] = useState([])
+
   const userState = useSelector(selectPlayer)
+
 
   function carouselNext() {
     if (!(allCharacter[translateCarousel*-1].last)) {
@@ -53,7 +58,34 @@ export default function Home() {
       }))
 
     })();
+
+  // ------------- Sockets --------------------
+
+  socket.on("connect", (data) => {
+    console.log("conectado: ", data)
+
+    socket.emit("new-player-online", localStorage.getItem("token_login"), (response) => {
+      if (response === false) {
+        alert("Você ja está jogando em outro dispositivo")
+      } else {
+        setGlobalOnlinePlayers(response)
+      }
+    })
+
+    socket.on("disconnect", () => {
+      setGlobalOnlinePlayers(globalOnlinePlayers.filter(player => player.id !== socket.id))
+    })
+
+  })
+
+  socket.on("new-player-online", (newPlayer) => {
+    console.log("novo player: ", newPlayer)
+    setGlobalOnlinePlayers([...globalOnlinePlayers, newPlayer])
+  })
+
   }, [])
+
+
 
   return (
     <div id="dashboard">
@@ -79,17 +111,29 @@ export default function Home() {
                 <span className="input-group-text" id="basic-addon1"><i className="fas fa-search"></i></span>
               </div>
 
-              <hr />
+              <hr style={{ opacity: 1 }}/>
+              <div className="text-white">Jogadores online neste momento</div>
 
-              <div className="text-light">Seus Amigos</div>
+              <div>
+                {
+                  globalOnlinePlayers.map(item => 
+                    <div className="available-player">
+                      <div className="online-icon"></div>
+                      <div>{ item.name }</div>
+                    </div>    
+                  )
+                }
+              </div>
+
+              <div className="text-light">Meus Amigos</div>
 
               <div className="friends-container">
-                <div className="friend">
+                <div className="available-player">
                   <div className="online-icon"></div>
                   <div>Cachorro caramelo</div>
                 </div>
 
-                <div className="friend">
+                <div className="available-player">
                   <div className="offline-icon"></div>
                   <div>Katarine M'smeils</div>
                 </div>
@@ -97,7 +141,7 @@ export default function Home() {
             </div>         
           </div>
             <div className="big-btn-store big-btn">
-              LOJA <i class="ms-3 fa-solid fa-boxes-stacked"></i>
+              LOJA <i className="ms-3 fa-solid fa-boxes-stacked"></i>
             </div>
         </div>
 
@@ -137,25 +181,25 @@ export default function Home() {
             <div className="card-dashboard mb-2 p-0">
 
               <div className="card-line" style={{ color: "gold"}}>
-                <div className="card-line-icon"><i class="fas fa-award"></i></div>
+                <div className="card-line-icon"><i className="fas fa-award"></i></div>
                 <div className="part-card-1 part-card">Nível: </div>
                 <div className="part-card-2 part-card">{userState.level}</div>
               </div>
 
               <div className="card-line" style={{ color: "#fe6262"}}>
-                <div className="card-line-icon"><i class="fas fa-skull-crossbones"></i></div>
+                <div className="card-line-icon"><i className="fas fa-skull-crossbones"></i></div>
                 <div className="part-card-1 part-card">Abatidos: </div>
                 <div className="part-card-2 part-card">1990</div>
               </div>           
 
               <div className="card-line" style={{ color: "lightskyblue"}}>
-                <div className="card-line-icon"><i class="fas fa-trophy"></i> </div>
+                <div className="card-line-icon"><i className="fas fa-trophy"></i> </div>
                 <div className="part-card-1 part-card">Vitórias: </div>
                 <div className="part-card-2 part-card">15</div>
               </div>
 
               <div className="card-line" style={{ color: "#ffee91"}}>
-                <div className="card-line-icon"><i class="fas fa-meh"></i></div>
+                <div className="card-line-icon"><i className="fas fa-meh"></i></div>
                 <div className="part-card-1 part-card">Derrotas: </div>
                 <div className="part-card-2 part-card">12</div>
               </div>
@@ -172,7 +216,7 @@ export default function Home() {
               className="big-btn-play big-btn"
               // style={{ backgroundImage: `url(${require("../../assets/dashboard/btn-play.png")})`}}
               onClick={() => goToLevels()}
-            >JOGAR <i class="ms-3 fas fa-gamepad"></i></div>
+            >JOGAR <i className="ms-3 fas fa-gamepad"></i></div>
           </Link>
         </div>
       </section>
