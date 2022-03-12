@@ -1,9 +1,9 @@
 const sequelize = require("../database/connect.js")
 const jwt = require("jsonwebtoken")
 
-module.exports = (socket, globalOnlinePlayers, io) => {
+module.exports = (socket, globalOnlinePlayers, onlinePlayers) => {
 
-  socket.on("[GP] new player", (token) => {
+  socket.on("new player", (token) => {
     console.log("\nAntes: ", globalOnlinePlayers)
     console.log("[Token recebido]")
     if (token && typeof token !== 'undefined' && token !== null && token.length !== 0) {
@@ -23,7 +23,7 @@ module.exports = (socket, globalOnlinePlayers, io) => {
           }
           
           console.log("[enviando dados para outros clients]")
-          socket.broadcast.emit("[GP] new player", {
+          socket.broadcast.emit("new player", {
             userID: decoded.userID,
             name: user[0].name,
             socketID: socket.id
@@ -47,7 +47,7 @@ module.exports = (socket, globalOnlinePlayers, io) => {
       if (globalOnlinePlayers[c].socketID === socket.id) {
         console.log("[delete player] ", globalOnlinePlayers[c])
 
-        io.emit("[GP] delete player", globalOnlinePlayers[c].userID)
+        onlinePlayers.emit("delete player", globalOnlinePlayers[c].userID)
 
         globalOnlinePlayers.splice(c, 1)
         console.log("[new state] ", globalOnlinePlayers)
@@ -55,7 +55,7 @@ module.exports = (socket, globalOnlinePlayers, io) => {
     }
   })
 
-  socket.on("[GP] get players", (data, callback) => {
+  socket.on("get players", (data, callback) => {
     console.log("[send players] ", globalOnlinePlayers)
     callback(globalOnlinePlayers)
   })

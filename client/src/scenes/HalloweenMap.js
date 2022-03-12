@@ -2,7 +2,7 @@ import Steve from '../components/phaser/Steve.js'
 import GhostGun from '../components/phaser/GhostGun.js'
 import Loading from '../components/phaser/Loading.js'
 import Phaser from 'phaser'
-import socket from '../services/Socket.js'
+import { halloweenRoom } from '../services/Socket.js'
 
 
 export default class HalloweenMap extends Phaser.Scene {
@@ -16,7 +16,8 @@ export default class HalloweenMap extends Phaser.Scene {
       dispatch: data.dispatch,
       self: data.character
     }
-    console.log("Seu estado: ", data)
+
+    console.log("[Game iniciado] Your state -> ", data)
   }
 
   preload() {
@@ -29,7 +30,6 @@ export default class HalloweenMap extends Phaser.Scene {
     // Player
     this.load.atlas("steve", require(`../assets/sprites/steve.png`), require(`../assets/sprites/steve.json`))
     this.load.atlas("ghostGun", require(`../assets/sprites/ghostGun.png`), require(`../assets/sprites/ghostGun.json`))
-    
 
     // Weapons
     this.textures.addBase64('purpleBullet', require("../assets/weapons/bullet.png"))
@@ -72,13 +72,13 @@ export default class HalloweenMap extends Phaser.Scene {
       player.tipoDeDado = 146613
     }, this)
 
-    this.players.createFromConfig({
-      key: "ghostGun",
-      name: "phanta",
-      "setXY.x": 500,
-      "setXY.y": 800,
-      "body.teste": "ola isso funciona kkkk"
-    })
+    // this.players.createFromConfig({
+    //   key: "ghostGun",
+    //   name: "phanta",
+    //   "setXY.x": 500,
+    //   "setXY.y": 800,
+    //   "body.teste": "ola isso funciona kkkk"
+    // })
 
     console.log("Teste: ", this.players.children)
     
@@ -126,7 +126,7 @@ export default class HalloweenMap extends Phaser.Scene {
         
     this.keys = this.input.keyboard.createCursorKeys()
 
-    socket.on("move-player", (data) => this.receiveMoveHorizontal(data))
+    halloweenRoom.on("move-player", (data) => this.receiveMoveHorizontal(data))
 
 
 
@@ -167,8 +167,9 @@ export default class HalloweenMap extends Phaser.Scene {
       quantity: 50,
       visible: false,
     })
+  
 
-    socket.emit("[halloween] new player", {
+    halloweenRoom.emit("new player", {
       token: localStorage.getItem("token_login"),
       character: this.gameState.self
     }, (response) => {
@@ -184,7 +185,7 @@ export default class HalloweenMap extends Phaser.Scene {
       console.log("initial data: ", response)
     })
 
-    socket.on("[halloween] new player", (newPlayer) => {
+    halloweenRoom.on("new player", (newPlayer) => {
       console.log("Player recebido: ", newPlayer)
       this.players.createFromConfig({
         key: newPlayer.character,
@@ -194,7 +195,7 @@ export default class HalloweenMap extends Phaser.Scene {
       })
     })
 
-    socket.on("[halloween] delete player", (playerID) => {
+    halloweenRoom.on("delete player", (playerID) => {
       console.log("player disconectado: ", playerID)
 
       this.players.children.each((player) => {

@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react'
 import '../../styles/dashboard.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeCharacter } from '../../redux/gameSlice'
+import { changeCharacter, selectGameState } from '../../redux/gameSlice'
 import { Link } from 'react-router-dom'
 import { changePlayer, selectPlayer } from '../../redux/playerSlice'
 import api from '../../services/api'
 import errorValidation from '../../services/errorValidation'
-import socket from '../../services/Socket'
 
 
 export default function Home() {
-  const dispatch = useDispatch()
   const [translateCarousel, setTranslateCarousel] = useState(0)
   const [allCharacter, setAllCharacter] = useState([
     {
@@ -24,9 +22,10 @@ export default function Home() {
       last: true
     }
   ])
-  const [globalOnlinePlayers, setGlobalOnlinePlayers] = useState([])
 
   const userState = useSelector(selectPlayer)
+  const { onlinePlayers } = useSelector(selectGameState)
+  const dispatch = useDispatch()
 
 
   function carouselNext() {
@@ -61,33 +60,14 @@ export default function Home() {
 
     // ------------- Sockets --------------------
 
-    socket.on("connect", () => {
-      console.log("Successfully Connected")
 
-      socket.emit("[GP] new player", localStorage.getItem("token_login"))
-    })
 
-    socket.on("[GP] new player", (player) => {
-      console.log("[new player] ", player)
-      setGlobalOnlinePlayers((prev) => [...prev, player])
-    })
-    
-    socket.on("[GP] delete player", playerID => {
-      console.log("[delete player] ", playerID)
-      setGlobalOnlinePlayers((prevState) => prevState.filter(player => player.userID !== playerID))
-    })
-
-    socket.emit("[GP] get players", null, (response) => {
-      console.log("[initial state] ", response)
-      setGlobalOnlinePlayers(response)
-    })
-
-    return () => {
-      socket.off("connect")
-      socket.off("[GP] new player")
-      socket.off("[GP] delete player")
-      socket.off("[GP] get players")
-    }
+    // return () => {
+    //   socket.off("connect")
+    //   socket.off("[GP] new player")
+    //   socket.off("[GP] delete player")
+    //   socket.off("[GP] get players")
+    // }
   }, [])
 
 
@@ -122,9 +102,9 @@ export default function Home() {
 
               <div>
                 {
-                  globalOnlinePlayers.length === 0
+                  onlinePlayers.length === 0
                   ? <div className="text-secondary">Nenhum jogador está online no momento :(</div>
-                  : globalOnlinePlayers.map((item, index) => 
+                  : onlinePlayers.map((item, index) => 
                     <div key={index} className="available-player">
                       <div className="online-icon"></div>
                       <div>{ item.name }</div>

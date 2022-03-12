@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { selectGameState } from '../../redux/gameSlice'
-import socket from '../../services/Socket'
+import { halloweenRoom } from '../../services/Socket'
 import { game } from '../../App'
 import HalloweenMap from '../../scenes/HalloweenMap'
 

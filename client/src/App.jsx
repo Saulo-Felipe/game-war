@@ -1,12 +1,17 @@
 import Phaser from 'phaser'
-import { BrowserRouter, Route, Routes, Navigate  } from 'react-router-dom'
+import { useEffect } from 'react'
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import RequireAuth from './services/PrivateRoutes'
+import { socketOnlinePlayers } from './services/Socket'
+import { useSelector, useDispatch } from 'react-redux'
+import { changeOnlinePlayers, selectGameState } from './redux/gameSlice'
 
 import Home from './components/react/Home'
 import Rooms from './components/react/Rooms'
 import Login from './components/react/Login'
 import PlayGame from './components/react/PlayGame'
 import Register from './components/react/Register'
+
 
 export const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -24,6 +29,37 @@ export const game = new Phaser.Game({
 })
 
 function App() {
+  const { onlinePlayers } = useSelector(selectGameState)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const location = window.location.pathname
+
+
+    if (location === "/home" || location === "/rooms" || location === "/play-game") {
+
+      socketOnlinePlayers.on("connect", () => {
+        console.log("[online-players] -> Successfully Connected")
+  
+        socketOnlinePlayers.emit("new player", localStorage.getItem("token_login"))
+      })
+  
+      socketOnlinePlayers.on("new player", (player) => {
+        console.log("[new player] ", player)
+        dispatch(changeOnlinePlayers([...onlinePlayers, player]))
+      })
+      
+      socketOnlinePlayers.on("delete player", playerID => {
+        console.log("[delete player] ", playerID)
+        dispatch(changeOnlinePlayers(onlinePlayers.filter(player => player.userID !== playerID)))
+      })
+  
+      socketOnlinePlayers.emit("get players", null, (response) => {
+        console.log("[initial state] ", response)
+        dispatch(changeOnlinePlayers(response))
+      })
+    }
+  }, [])
 
   return (
     <BrowserRouter>

@@ -9,10 +9,19 @@ const httpServer = createServer(app)
 const openToAll = require("./routes/openToAll.js")
 const needLogin = require("./routes/needLogin.js")
 
-const io = new Server(httpServer,   {cors: {
-  origin: ["https://3000-saulofelipe-gamewar-t1xjx75yjq2.ws-us34.gitpod.io"]
-}})
+const io = new Server(httpServer, {
+  cors: {
+    origin: ["https://3000-saulofelipe-gamewar-t1xjx75yjq2.ws-us34.gitpod.io"]
+  }
+})
 
+// Name spaces
+  const onlinePlayers = io.of("/online-players")
+  const halloweenSpace = io.of("/halloweenRoom")
+
+// players state
+  const globalOnlinePlayers = []
+  const playersInHalloweenRoom = []
 
 
 require("dotenv").config()
@@ -25,14 +34,16 @@ require("dotenv").config()
     optionSuccessStatus: 200,
   }))
 
-  io.on("connection", (socket) => {
-    console.log(`[new connection] -> `, socket.id)
+  onlinePlayers.on("connection", (socket) => {
+    console.log(`[new connection][online-players] -> `, socket.id)
 
-    const globalOnlinePlayers = []
-    const halloweenRoom = []
+    require("./sockets/dashboardSocket.js")(socket, globalOnlinePlayers, onlinePlayers)
+  })
 
-    require("./sockets/dashboardSocket.js")(socket, globalOnlinePlayers, io)
-    require("./sockets/gameSocket.js")(socket, halloweenRoom, io)
+  halloweenSpace.on("connection", (socket) => {
+    console.log(`[new connection][halloween] -> `, socket.id)
+
+    require("./sockets/halloweenMap.js")(socket, playersInHalloweenRoom, halloweenSpace)
   })
 
 

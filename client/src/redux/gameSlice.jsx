@@ -6,6 +6,7 @@ export const slice = createSlice({
   initialState: {
     character: "steve",
     selectedRoom: null,
+    onlinePlayers: [],
   },
   reducers: {
     changeCharacter(state, { payload }) {
@@ -13,12 +14,15 @@ export const slice = createSlice({
     },
     changeSelectedRoom(state, { payload }) {
       return { ...state, selectedRoom: payload }
+    },
+    changeOnlinePlayers(state, { payload }) {
+      return { ...state, onlinePlayers: payload }
     }
   }
 })
 
 
-export const { changeCharacter, changeSelectedRoom } = slice.actions
+export const { changeCharacter, changeSelectedRoom, changeOnlinePlayers } = slice.actions
 
 export const selectGameState = state => state.gameState
 
