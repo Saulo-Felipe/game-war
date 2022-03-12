@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { selectGameState, changeScreen, changeSelectedRoom } from '../../redux/gameSlice'
+import { Link, useNavigate } from 'react-router-dom'
+import { selectGameState } from '../../redux/gameSlice'
 import socket from '../../services/Socket'
 import { game } from '../../App'
 import HalloweenMap from '../../scenes/HalloweenMap'
@@ -12,9 +12,21 @@ export default function ChooseLevel() {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
   const { character } = useSelector(selectGameState)
+  const navigate = useNavigate()
 
   function startGame(room) {
-    setLoading(true)
+    // setLoading(true)
+    if (room === "halloween") {
+      game.scene.add('Game-Halloween', HalloweenMap)
+      game.scene.start("Game-Halloween", {
+        character,
+        dispatch,
+      })
+      navigate("/play-game")
+
+    } else if (room === "ice-map") {
+      alert("Ainda não disponível")
+    }
   }
 
   return (

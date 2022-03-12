@@ -59,31 +59,37 @@ export default function Home() {
 
     })();
 
-  // ------------- Sockets --------------------
+    // ------------- Sockets --------------------
 
-  socket.on("connect", (data) => {
-    console.log("conectado: ", data)
+    socket.on("connect", () => {
+      console.log("Successfully Connected")
 
-    socket.emit("new-player-online", localStorage.getItem("token_login"), (response) => {
-      if (response === false) {
-        alert("Você ja está jogando em outro dispositivo")
-      } else {
-        setGlobalOnlinePlayers(response)
-      }
+      socket.emit("[GP] new player", localStorage.getItem("token_login"))
     })
 
-    socket.on("disconnect", () => {
-      setGlobalOnlinePlayers(globalOnlinePlayers.filter(player => player.id !== socket.id))
+    socket.on("[GP] new player", (player) => {
+      console.log("[new player] ", player)
+      setGlobalOnlinePlayers((prev) => [...prev, player])
+    })
+    
+    socket.on("[GP] delete player", playerID => {
+      console.log("[delete player] ", playerID)
+      setGlobalOnlinePlayers((prevState) => prevState.filter(player => player.userID !== playerID))
     })
 
-  })
+    socket.emit("[GP] get players", null, (response) => {
+      console.log("[initial state] ", response)
+      setGlobalOnlinePlayers(response)
+    })
 
-  socket.on("new-player-online", (newPlayer) => {
-    console.log("novo player: ", newPlayer)
-    setGlobalOnlinePlayers([...globalOnlinePlayers, newPlayer])
-  })
-
+    return () => {
+      socket.off("connect")
+      socket.off("[GP] new player")
+      socket.off("[GP] delete player")
+      socket.off("[GP] get players")
+    }
   }, [])
+
 
 
 
@@ -116,8 +122,10 @@ export default function Home() {
 
               <div>
                 {
-                  globalOnlinePlayers.map(item => 
-                    <div className="available-player">
+                  globalOnlinePlayers.length === 0
+                  ? <div className="text-secondary">Nenhum jogador está online no momento :(</div>
+                  : globalOnlinePlayers.map((item, index) => 
+                    <div key={index} className="available-player">
                       <div className="online-icon"></div>
                       <div>{ item.name }</div>
                     </div>    
@@ -125,7 +133,7 @@ export default function Home() {
                 }
               </div>
 
-              <div className="text-light">Meus Amigos</div>
+              {/* <div className="text-light">Meus Amigos</div>
 
               <div className="friends-container">
                 <div className="available-player">
@@ -137,7 +145,7 @@ export default function Home() {
                   <div className="offline-icon"></div>
                   <div>Katarine M'smeils</div>
                 </div>
-              </div>
+              </div> */}
             </div>         
           </div>
             <div className="big-btn-store big-btn">
@@ -173,7 +181,7 @@ export default function Home() {
         <div className="section-three sub-section-container">
           <div className="w-100">
             <div className="mb-2">
-              <div className="player-name">{userState.name}</div>
+              <div className="player-name">{userState.name || <div className="spinner-grow text-light" role="status"><span className="visually-hidden">Loading...</span></div>}</div>
 
               <div></div>
             </div>

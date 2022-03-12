@@ -5,7 +5,7 @@ export const slice = createSlice({
   name: "gameState",
   initialState: {
     character: "steve",
-    selectedRoom: null
+    selectedRoom: null,
   },
   reducers: {
     changeCharacter(state, { payload }) {
