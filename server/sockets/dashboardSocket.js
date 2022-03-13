@@ -18,7 +18,7 @@ module.exports = (socket, globalOnlinePlayers, onlinePlayers) => {
           `)
 
           for (var c=0; c < globalOnlinePlayers.length; c++) {
-            if (globalOnlinePlayers.userID === decoded.userID)
+            if (globalOnlinePlayers[c].userID === decoded.userID)
               return
           }
           

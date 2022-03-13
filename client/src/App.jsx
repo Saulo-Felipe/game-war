@@ -29,6 +29,7 @@ export const game = new Phaser.Game({
 })
 
 function App() {
+  // const { onlinePlayers } = useSelector(selectGameState)
   const { onlinePlayers } = useSelector(selectGameState)
   const dispatch = useDispatch()
 
@@ -46,17 +47,24 @@ function App() {
   
       socketOnlinePlayers.on("new player", (player) => {
         console.log("[new player] ", player)
-        dispatch(changeOnlinePlayers([...onlinePlayers, player]))
+
+        console.log("antes de alterar: ", onlinePlayers)
+        dispatch(changeOnlinePlayers({ action: "new-player", player }))
+
+        // dispatch(changeOnlinePlayers({[...onlinePlayers, player]}))
       })
       
       socketOnlinePlayers.on("delete player", playerID => {
         console.log("[delete player] ", playerID)
-        dispatch(changeOnlinePlayers(onlinePlayers.filter(player => player.userID !== playerID)))
+        
+        dispatch(changeOnlinePlayers({ action: "delete-player", id: playerID }))
+
       })
   
       socketOnlinePlayers.emit("get players", null, (response) => {
         console.log("[initial state] ", response)
-        dispatch(changeOnlinePlayers(response))
+
+        dispatch(changeOnlinePlayers({ action: "initial-state", response }))
       })
     }
   }, [])

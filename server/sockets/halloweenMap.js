@@ -15,7 +15,7 @@ module.exports = (socket, playersInHalloweenRoom, halloweenSpace) => {
           `)
 
           for (var c = 0; c < playersInHalloweenRoom.length; c++) { // Verifica se o player já está jogando na sala
-            if (playersInHalloweenRoom[c].id === decoded.userID)
+            if (playersInHalloweenRoom[c].userID === decoded.userID)
               return callback(false)
           }
 
@@ -44,8 +44,12 @@ module.exports = (socket, playersInHalloweenRoom, halloweenSpace) => {
         halloweenSpace.emit("delete player", playersInHalloweenRoom[c].userID)
         playersInHalloweenRoom.splice(c, 1)
         
-        console.log("[disconnected] -> new state: ", playersInHalloweenRoom)
+        console.log("[halloween][disconnected] -> new state: ", playersInHalloweenRoom)
       }
     }
+  })
+
+  socket.on("move-player", (data) => {
+    halloweenSpace.emit("move-player", data)
   })
 }

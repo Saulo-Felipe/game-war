@@ -18,6 +18,7 @@ export default class HalloweenMap extends Phaser.Scene {
     }
 
     console.log("[Game iniciado] Your state -> ", data)
+    this.tick = 35
   }
 
   preload() {
@@ -64,13 +65,11 @@ export default class HalloweenMap extends Phaser.Scene {
       allowGravity: true,
     })
 
-    this.players.children.each((player) => {
-      player.setOffset(80, 25)
-	    player.setSize(player.width*0.3, player.height*0.75)
-      console.log("For: ", player),
-      player.name = "stesves"
-      player.tipoDeDado = 146613
-    }, this)
+    this.currentPlayer = false
+
+
+
+
 
     // this.players.createFromConfig({
     //   key: "ghostGun",
@@ -120,13 +119,11 @@ export default class HalloweenMap extends Phaser.Scene {
 
 
       // Camera
-    // this.cameras.main.startFollow(this.player.sprite)
     this.cameras.main.setBounds(0, 0, 6000, 1800)
     this.physics.world.setBounds(0, 0, 6000, 1800)
         
     this.keys = this.input.keyboard.createCursorKeys()
 
-    halloweenRoom.on("move-player", (data) => this.receiveMoveHorizontal(data))
 
 
 
@@ -134,18 +131,7 @@ export default class HalloweenMap extends Phaser.Scene {
 
 
 
-    this.sendMoveHorizontal = (data) => {
-      console.log("Enviando dados")
-      socket.emit("move-player", {
-        id: socket.id,
-        side: data,
-      })
-    }
 
-    
-    this.receiveMoveHorizontal = (data) => {
-      console.log("Recebendo dados...")
-    }
 
     this.sendMoveStopped = () => {
       
@@ -167,7 +153,7 @@ export default class HalloweenMap extends Phaser.Scene {
       quantity: 50,
       visible: false,
     })
-  
+
 
     halloweenRoom.emit("new player", {
       token: localStorage.getItem("token_login"),
@@ -177,62 +163,114 @@ export default class HalloweenMap extends Phaser.Scene {
       for (var c = 0; c < response.length; c++) {
         this.players.createFromConfig({
           key: response[c].character,
-          name: response[c].name,
-          "setXY.x": 500,
+          "setXY.x": 300*c,
           "setXY.y": 800,
-        })  
+        })
+        
+        this.players.getLast(true).user = {
+          id: response[c].userID,
+          name: response[c].name,
+          socketID: response[c].socketID,
+          character: response[c].character
+        }
       }
-      console.log("initial data: ", response)
+
+      this.currentPlayer = {
+        socketID: halloweenRoom.id,
+        sprite: this.players.getLast(true)
+      }
+
+      this.cameras.main.startFollow(this.currentPlayer.sprite)
+
+
+      console.log("[halloween][initial state]", response)
+      console.log("[halloween][update state]", this.players.children)
+    })
+
+    this.sendMoveHorizontal = (data) => {
+      // console.log("[halloween] -> send moviment")
+
+      halloweenRoom.emit("move-player", {
+        id: halloweenRoom.id,
+        side: data ? "right" : "left",
+      })
+    }
+
+    halloweenRoom.on("move-player", (data) => {
+      // console.log("[halloween] -> receive moviment", data)
+      
+      this.players.children.each((player) => {
+        if (player.user.socketID === data.id) {
+
+          player.setVelocityX(data.side === "right" ? 500 : -500 )
+          console.log("[Moving] ", player)
+        }
+      }, this)
     })
 
     halloweenRoom.on("new player", (newPlayer) => {
-      console.log("Player recebido: ", newPlayer)
       this.players.createFromConfig({
         key: newPlayer.character,
-        name: newPlayer.name,
-        "setXY.x": this.players.children.entries.length*300 === 0 ? 300 : this.players.children.entries.length*300,
+        "setXY.x": 300,
         "setXY.y": 800,
       })
+
+      this.players.getLast(true).user = {
+        id: newPlayer.userID,
+        name: newPlayer.name,
+        socketID: newPlayer.socketID,
+        character: newPlayer.character
+      }
+      
+      console.log("[halloween][new player]")
+      console.log("[halloween][update state]", this.players.children)
     })
 
     halloweenRoom.on("delete player", (playerID) => {
       console.log("player disconectado: ", playerID)
 
       this.players.children.each((player) => {
-        // if (player.playerID === playerID) {
-          player.destroy()
+        if (player.user.id === playerID) {
+
           console.log("[destruido] ", player)
-          // return
-        // }
+          player.destroy()
+        }
       }, this)
+      console.log("[halloween][update state]", this.players.children)
     })
 
   }
 
   update() {
-    let {up, left, right, space} = this.keys
+    if (this.tick === 0) {
+      this.tick = 35
+      console.log("update")
+      let {up, left, right, space} = this.keys
 
-    if (right.isDown)
-      this.sendMoveHorizontal(false)
-    else if (left.isDown)
-      this.sendMoveHorizontal(true)
-    else
-      this.sendMoveStopped()
-  
-    // if (up.isDown && this.sprite.body.onFloor())
-      // this.sendMoveJump()
-  
-    if (space.isDown)
-      this.sendFire()
-    // else if (space.isUp)
-      // this.player.property.isShooting = false
-  
-    // if (this.player.property.fireTime > 0) 
-      // this.player.property.fireTime -= 1
-  
-    // if (this.player.sprite.body.speed > 0) {
-      // this.player.lavaCollision()
-    // }
+      if (right.isDown)
+        this.sendMoveHorizontal(true)
+      else if (left.isDown)
+        this.sendMoveHorizontal(false)
+      else
+        this.sendMoveStopped()
+    
+      // if (up.isDown && this.sprite.body.onFloor())
+        // this.sendMoveJump()
+    
+      if (space.isDown)
+        this.sendFire()
+      // else if (space.isUp)
+        // this.player.property.isShooting = false
+    
+      // if (this.player.property.fireTime > 0) 
+        // this.player.property.fireTime -= 1
+    
+      // if (this.player.sprite.body.speed > 0) {
+        // this.player.lavaCollision()
+      // }
+    } else {
+      this.tick -= 1
+    }
   }
 
 
