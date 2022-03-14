@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken")
 const sequelize = require("../database/connect.js")
 
 module.exports = (socket, playersInHalloweenRoom, halloweenSpace) => {
+  const playerMovimentState = []
+
   socket.on("new player", (data, callback) => {
 
     if (data.token && typeof data.token !== 'undefined' && data.token !== null && data.token.length !== 0) {
@@ -23,7 +25,9 @@ module.exports = (socket, playersInHalloweenRoom, halloweenSpace) => {
             userID: decoded.userID,
             name: user[0].name,
             socketID: socket.id,
-            character: data.character
+            character: data.character,
+            x: 300,
+            y: 800,
           }
           playersInHalloweenRoom.push(newPlayer)
 
@@ -50,6 +54,26 @@ module.exports = (socket, playersInHalloweenRoom, halloweenSpace) => {
   })
 
   socket.on("move-player", (data) => {
-    halloweenSpace.emit("move-player", data)
+    for (var c = 0; c < playersInHalloweenRoom.length; c++) {
+      if (playersInHalloweenRoom[c].socketID === data.id) {
+        // playersInHalloweenRoom[c].x += 100
+        
+        halloweenSpace.emit("move-player", data)
+        return 
+      }
+    }
   })
+
+  // setInterval(() => {
+  //   onChangePlayerMoviment()    
+
+  // }, 50)
+
+
+  function onChangePlayerMoviment() {
+    if (playerMovimentState.length > 0) {
+
+      halloweenSpace.emit("move-player", data)
+    }
+  }
 }
