@@ -21,7 +21,6 @@ const io = new Server(httpServer, {
 
 // players state
   const globalOnlinePlayers = []
-  const playersInHalloweenRoom = []
 
 
 require("dotenv").config()
@@ -43,7 +42,7 @@ require("dotenv").config()
   halloweenSpace.on("connection", (socket) => {
     console.log(`[new connection][halloween] -> `, socket.id)
 
-    require("./sockets/halloweenMap.js")(socket, playersInHalloweenRoom, halloweenSpace)
+    require("./sockets/halloweenMap.js")(socket, halloweenSpace)
   })
 
 

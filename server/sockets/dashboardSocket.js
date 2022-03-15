@@ -4,12 +4,9 @@ const jwt = require("jsonwebtoken")
 module.exports = (socket, globalOnlinePlayers, onlinePlayers) => {
 
   socket.on("new player", (token) => {
-    console.log("\nAntes: ", globalOnlinePlayers)
-    console.log("[Token recebido]")
     if (token && typeof token !== 'undefined' && token !== null && token.length !== 0) {
 
       jwt.verify(token, process.env.SECRETE_TOKEN, async (err, decoded) => {
-        console.log("[Token verificado]")
 
         if (!err && decoded && decoded.userID) {
 
@@ -22,7 +19,6 @@ module.exports = (socket, globalOnlinePlayers, onlinePlayers) => {
               return
           }
           
-          console.log("[enviando dados para outros clients]")
           socket.broadcast.emit("new player", {
             userID: decoded.userID,
             name: user[0].name,
@@ -35,7 +31,6 @@ module.exports = (socket, globalOnlinePlayers, onlinePlayers) => {
             socketID: socket.id
           })
 
-          console.log("[Updated players] ", globalOnlinePlayers)
         }
       })
     }
@@ -45,18 +40,15 @@ module.exports = (socket, globalOnlinePlayers, onlinePlayers) => {
     for (var c=0; c < globalOnlinePlayers.length; c++) {
 
       if (globalOnlinePlayers[c].socketID === socket.id) {
-        console.log("[delete player] ", globalOnlinePlayers[c])
 
         onlinePlayers.emit("delete player", globalOnlinePlayers[c].userID)
 
         globalOnlinePlayers.splice(c, 1)
-        console.log("[new state] ", globalOnlinePlayers)
       }
     }
   })
 
   socket.on("get players", (data, callback) => {
-    console.log("[send players] ", globalOnlinePlayers)
     callback(globalOnlinePlayers)
   })
 

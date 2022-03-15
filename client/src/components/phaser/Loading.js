@@ -20,19 +20,19 @@ export default function Loading(scene) {
   loadingText.setOrigin(0.5, 0.5);  
 
   scene.load.on("progress", (value) => {
-    console.log("value: ", value)
+    // console.log("value: ", value)
 
     progressBar.clear()
     progressBar.fillStyle(0xffffff, 1)
     progressBar.fillRect(width/2-(680*value)/2, height/2-50/2, 680 * value, 50)
   })
 
-  scene.load.on("fileprogress", (file) => {
-    console.log(file.src)
-  })
+  // scene.load.on("fileprogress", (file) => {
+  //   console.log(file.src)
+  // })
 
   scene.load.on("complete", () => {
-    console.log("Finish!")
+    // console.log("Finish!")
     progressBar.destroy()
     progressBox.destroy()
   })

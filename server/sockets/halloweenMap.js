@@ -1,14 +1,59 @@
 const jwt = require("jsonwebtoken")
 const sequelize = require("../database/connect.js")
 
-module.exports = (socket, playersInHalloweenRoom, halloweenSpace) => {
-  const playerMovimentState = []
+module.exports = (socket, mapSocket) => {
+  const allPlayers = []
+  const game = {
+    addPlayer,
+    newPlayer,
+    deletePlayer,
+    disconnected,
+    movePlayer,
+  }
+
+  // Lembrar de arrumar o bug
 
   socket.on("new player", (data, callback) => {
+    game.newPlayer(data, callback)
+  })
 
-    if (data.token && typeof data.token !== 'undefined' && data.token !== null && data.token.length !== 0) {
+  socket.on("disconnect", (reason) => {
+    game.disconnected(reason)
+  })
 
-      jwt.verify(data.token, process.env.SECRETE_TOKEN, async (err, decoded) => {
+  socket.on("move-player", (data) => {
+    movePlayer(data)
+  })
+
+
+
+  /* ----------- Tools Functions ---------- */
+  function addPlayer(newPlayer) {
+    allPlayers[newPlayer.socketID] = newPlayer
+
+    console.log("[HW: addPlayer]: ", newPlayer)
+    console.log("all players: ", allPlayers)
+  }
+
+  function deletePlayer(socketID) {
+    delete allPlayers[socketID]
+
+    console.log("[HW: deletePlayer]")
+  }
+
+  function movePlayer(moviment) {
+    for (var c = 0; c < allPlayers.length; c++) {
+      if (allPlayers[c].socketID === moviment.id) {
+        
+        mapSocket.emit("move-player", moviment)
+        return 
+      }
+    }
+  }
+
+  function newPlayer(player, callback) {
+    if (player.token && typeof player.token !== 'undefined' && player.token !== null && player.token.length !== 0) {
+      jwt.verify(player.token, process.env.SECRETE_TOKEN, async (err, decoded) => {
         if (err) return callback(false)
 
         if (decoded && decoded.userID) {
@@ -16,64 +61,36 @@ module.exports = (socket, playersInHalloweenRoom, halloweenSpace) => {
             SELECT name FROM player WHERE id = ${decoded.userID}
           `)
 
-          for (var c = 0; c < playersInHalloweenRoom.length; c++) { // Verifica se o player já está jogando na sala
-            if (playersInHalloweenRoom[c].userID === decoded.userID)
+          for (var c = 0; c < allPlayers.length; c++) {
+            if (allPlayers[c].userID === decoded.userID)
               return callback(false)
-          }
+          } // checks if the player is already in a room
 
           let newPlayer = {
             userID: decoded.userID,
             name: user[0].name,
             socketID: socket.id,
-            character: data.character,
+            character: player.character,
             x: 300,
             y: 800,
           }
-          playersInHalloweenRoom.push(newPlayer)
 
-          console.log("[halloween]: ", playersInHalloweenRoom)
-          
-          callback(playersInHalloweenRoom)
+          game.addPlayer(newPlayer)
+
+          callback(allPlayers)
+
           socket.broadcast.emit("new player", newPlayer)
         }
       })
     }
-  })
+  }
 
-  socket.on("disconnect", (reason) => {
-    for (var c=0; c < playersInHalloweenRoom.length; c++) {
-      if (playersInHalloweenRoom[c].socketID === socket.id) {
-        console.log("[before] ", playersInHalloweenRoom)
+  function disconnected(reason) {
+    console.warn("Teste de send: ", allPlayers[socket.id])
+    mapSocket.emit("delete player", allPlayers[socket.id].userID)
 
-        halloweenSpace.emit("delete player", playersInHalloweenRoom[c].userID)
-        playersInHalloweenRoom.splice(c, 1)
-        
-        console.log("[halloween][disconnected] -> new state: ", playersInHalloweenRoom)
-      }
-    }
-  })
+    game.deletePlayer(socket.id)
 
-  socket.on("move-player", (data) => {
-    for (var c = 0; c < playersInHalloweenRoom.length; c++) {
-      if (playersInHalloweenRoom[c].socketID === data.id) {
-        // playersInHalloweenRoom[c].x += 100
-        
-        halloweenSpace.emit("move-player", data)
-        return 
-      }
-    }
-  })
-
-  // setInterval(() => {
-  //   onChangePlayerMoviment()    
-
-  // }, 50)
-
-
-  function onChangePlayerMoviment() {
-    if (playerMovimentState.length > 0) {
-
-      halloweenSpace.emit("move-player", data)
-    }
+    console.log("[HW: disconnected] -> ", reason, allPlayers)
   }
 }
