@@ -38,11 +38,12 @@ require("dotenv").config()
 
     require("./sockets/dashboardSocket.js")(socket, globalOnlinePlayers, onlinePlayers)
   })
+  const allPlayers = []
 
   halloweenSpace.on("connection", (socket) => {
     console.log(`[new connection][halloween] -> `, socket.id)
 
-    require("./sockets/halloweenMap.js")(socket, halloweenSpace)
+    require("./sockets/halloweenMap.js")(socket, allPlayers, halloweenSpace)
   })
 
 

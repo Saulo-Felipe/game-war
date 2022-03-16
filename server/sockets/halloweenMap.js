@@ -1,41 +1,48 @@
 const jwt = require("jsonwebtoken")
 const sequelize = require("../database/connect.js")
 
-module.exports = (socket, mapSocket) => {
-  const allPlayers = []
+module.exports = (socket, allPlayers, mapSocket) => {
+
   const game = {
     addPlayer,
     newPlayer,
     deletePlayer,
     disconnected,
     movePlayer,
+    sendCurrentData,
   }
 
   // Lembrar de arrumar o bug
 
-  socket.on("new player", (data, callback) => {
-    game.newPlayer(data, callback)
+  socket.on("new player", (data) => {
+    console.log("[new player]: ", data)
+
+    game.newPlayer(data)
   })
 
+
   socket.on("disconnect", (reason) => {
+    console.log("disconecte: ", reason, socket.id)
+
     game.disconnected(reason)
   })
 
   socket.on("move-player", (data) => {
-    movePlayer(data)
+    game.movePlayer(data)
   })
 
 
 
   /* ----------- Tools Functions ---------- */
-  function addPlayer(newPlayer) {
-    allPlayers[newPlayer.socketID] = newPlayer
+  function addPlayer(player) {
+    allPlayers[player.socketID] = player
 
-    console.log("[HW: addPlayer]: ", newPlayer)
+    console.log("[HW: addPlayer]: ", player)
     console.log("all players: ", allPlayers)
   }
 
   function deletePlayer(socketID) {
+    console.log("antes dde deletar", allPlayers)
     delete allPlayers[socketID]
 
     console.log("[HW: deletePlayer]")
@@ -51,22 +58,35 @@ module.exports = (socket, mapSocket) => {
     }
   }
 
-  function newPlayer(player, callback) {
+  function sendCurrentData() {
+    let currentGame = { ...allPlayers }
+
+    socket.emit("initial state", currentGame)
+  }
+
+  function newPlayer(player) {
+
     if (player.token && typeof player.token !== 'undefined' && player.token !== null && player.token.length !== 0) {
       jwt.verify(player.token, process.env.SECRETE_TOKEN, async (err, decoded) => {
-        if (err) return callback(false)
+        if (err) {
+          console.log("Returned false")
+
+          return false
+        }
 
         if (decoded && decoded.userID) {
           var [user] = await sequelize.query(`
             SELECT name FROM player WHERE id = ${decoded.userID}
           `)
-
-          for (var c = 0; c < allPlayers.length; c++) {
-            if (allPlayers[c].userID === decoded.userID)
+          
+          for (var c in allPlayers) {
+            if (allPlayers[c].userID === decoded.userID) {
+              console.log("Returned false")
               return callback(false)
+            }
           } // checks if the player is already in a room
 
-          let newPlayer = {
+          let newPlayerData = {
             userID: decoded.userID,
             name: user[0].name,
             socketID: socket.id,
@@ -75,19 +95,21 @@ module.exports = (socket, mapSocket) => {
             y: 800,
           }
 
-          game.addPlayer(newPlayer)
-
-          callback(allPlayers)
-
-          socket.broadcast.emit("new player", newPlayer)
+          game.addPlayer(newPlayerData)
+          game.sendCurrentData()
+          socket.broadcast.emit("new player", newPlayerData)
         }
       })
+    } else {
+      return callback(false)
     }
   }
 
   function disconnected(reason) {
-    console.warn("Teste de send: ", allPlayers[socket.id])
-    mapSocket.emit("delete player", allPlayers[socket.id].userID)
+    let disconnectedPlayer = { ...allPlayers[socket.id] }
+    console.log("removendo ele: ", disconnectedPlayer)
+
+    mapSocket.emit("delete player", disconnectedPlayer.userID)
 
     game.deletePlayer(socket.id)
 

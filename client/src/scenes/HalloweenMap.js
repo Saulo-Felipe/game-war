@@ -61,8 +61,18 @@ export default class HalloweenMap extends Phaser.Scene {
     halloweenRoom.emit("new player", {
       token: localStorage.getItem("token_login"),
       character: "steve"
-    }, (response) => {
-      this.startGame(response)
+    })
+    
+    halloweenRoom.on("initial state", (data) => {
+      this.startGame(data)
+    })
+
+    halloweenRoom.on("new player", (player) => {
+      this.createPlayer(player)
+    })
+
+    halloweenRoom.on("delete player", (playerID) => {
+      this.deletePlayer(playerID)
     })
 
 
@@ -72,14 +82,33 @@ export default class HalloweenMap extends Phaser.Scene {
     }
 
     this.createPlayer = (newPlayer) => {
-      
+      this.players.createFromConfig({
+        key: newPlayer.character,
+        "setXY.x": newPlayer.x,
+        "setXY.y": newPlayer.y,
+      })
+
+      this.players.getLast(true).configs = { ...newPlayer }
     }
 
     this.startGame = (initialData) => {
       if (initialData) {
+        for (var c in initialData) {
+          this.createPlayer(initialData[c])
+        }
         console.log("[game started] -> ", initialData)
+      } else {
+        console.error("[initialization error]", initialData)
       }
     }
+
+    this.deletePlayer = (playerID) => {
+      for (var c in this.players.children.entries) {
+        if (this.players.children.entries[c].configs.userID === playerID) {
+          this.players.children.entries[c].destroy()
+        }
+      }
+    } 
 
 
     /* -------- Layers and collisions --------- */    
