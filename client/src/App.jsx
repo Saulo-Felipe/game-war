@@ -36,6 +36,7 @@ function App() {
   useEffect(() => {
     const location = window.location.pathname
 
+    console.log("receba: ", process.env.SERVER_URL)
 
     if (location === "/home" || location === "/rooms" || location === "/play-game") {
 

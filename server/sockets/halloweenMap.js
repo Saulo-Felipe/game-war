@@ -91,7 +91,7 @@ module.exports = (socket, allPlayers, mapSocket) => {
             name: user[0].name,
             socketID: socket.id,
             character: player.character,
-            x: 300,
+            x: 1000,
             y: 800,
           }
 

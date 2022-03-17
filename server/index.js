@@ -9,11 +9,21 @@ const httpServer = createServer(app)
 const openToAll = require("./routes/openToAll.js")
 const needLogin = require("./routes/needLogin.js")
 
+require("dotenv").config()
+
 const io = new Server(httpServer, {
   cors: {
-    origin: ["https://3000-saulofelipe-gamewar-t1xjx75yjq2.ws-us34.gitpod.io"]
+    origin: [process.env.CLIENT_URL]
   }
 })
+
+// Middlewares
+app.use(express.json())
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+  optionSuccessStatus: 200,
+}))
 
 // Name spaces
   const onlinePlayers = io.of("/online-players")
@@ -21,17 +31,6 @@ const io = new Server(httpServer, {
 
 // players state
   const globalOnlinePlayers = []
-
-
-require("dotenv").config()
-
-// Middlewares
-  app.use(express.json())
-  app.use(cors({
-    origin: "https://3000-saulofelipe-gamewar-t1xjx75yjq2.ws-us34.gitpod.io",
-    credentials: true,
-    optionSuccessStatus: 200,
-  }))
 
   onlinePlayers.on("connection", (socket) => {
     console.log(`[new connection][online-players] -> `, socket.id)
@@ -55,7 +54,7 @@ app.use("/game", needLogin)
 httpServer.listen(8081, (err) => {
   if (err)
     return console.log("Erro no server: ", err)
-
-    console.clear()
-    console.log("Server is running! In PORT: 8081")
+  
+  console.clear()
+  console.log("Server is running! In PORT: 8081")
 })

@@ -88,7 +88,9 @@ export default class HalloweenMap extends Phaser.Scene {
         "setXY.y": newPlayer.y,
       })
 
-      this.players.getLast(true).configs = { ...newPlayer }
+      let thePlayer = this.players.getLast(true)
+      thePlayer.configs = { ...newPlayer }
+      this.startFollow(thePlayer)
     }
 
     this.startGame = (initialData) => {
