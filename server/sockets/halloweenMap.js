@@ -12,7 +12,16 @@ module.exports = (socket, allPlayers, mapSocket) => {
     sendCurrentData,
   }
 
+  var movimentState = []
+  
   // Lembrar de arrumar o bug
+
+  setInterval(() => {
+    if (movimentState.length > 0) {
+      socket.emit("many-moviments", movimentState)
+      movimentState = []
+    }
+  }, 100)
 
   socket.on("new player", (data) => {
     console.log("[new player]: ", data)
@@ -20,18 +29,15 @@ module.exports = (socket, allPlayers, mapSocket) => {
     game.newPlayer(data)
   })
 
-
   socket.on("disconnect", (reason) => {
     console.log("disconecte: ", reason, socket.id)
 
     game.disconnected(reason)
   })
 
-  socket.on("move-player", (data) => {
-    game.movePlayer(data)
+  socket.on("move-player", (id, side) => {
+    game.movePlayer(id, side)
   })
-
-
 
   /* ----------- Tools Functions ---------- */
   function addPlayer(player) {
@@ -48,18 +54,13 @@ module.exports = (socket, allPlayers, mapSocket) => {
     console.log("[HW: deletePlayer]")
   }
 
-  function movePlayer(moviment) {
-    for (var c = 0; c < allPlayers.length; c++) {
-      if (allPlayers[c].socketID === moviment.id) {
-        
-        mapSocket.emit("move-player", moviment)
-        return 
-      }
-    }
+  function movePlayer(id, side) {
+    movimentState.push({id, side})
   }
 
   function sendCurrentData() {
     let currentGame = { ...allPlayers }
+    //console.log("emitiando: ", currentGame, allPlayers)
 
     socket.emit("initial state", currentGame)
   }
@@ -82,7 +83,7 @@ module.exports = (socket, allPlayers, mapSocket) => {
           for (var c in allPlayers) {
             if (allPlayers[c].userID === decoded.userID) {
               console.log("Returned false")
-              return callback(false)
+              return false
             }
           } // checks if the player is already in a room
 
@@ -101,7 +102,7 @@ module.exports = (socket, allPlayers, mapSocket) => {
         }
       })
     } else {
-      return callback(false)
+      return false
     }
   }
 

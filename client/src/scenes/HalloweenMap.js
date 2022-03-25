@@ -56,7 +56,6 @@ export default class HalloweenMap extends Phaser.Scene {
     })
 
 
-
     /* -------- Sockets --------- */
     halloweenRoom.emit("new player", {
       token: localStorage.getItem("token_login"),
@@ -75,6 +74,18 @@ export default class HalloweenMap extends Phaser.Scene {
       this.deletePlayer(playerID)
     })
 
+    halloweenRoom.on("many-moviments", (data) => {
+      for (var i in this.players.children.entries) {
+        for (var c=0; c < data.length; c++) {
+         
+          if (this.players.children.entries[i].configs.socketID === data[c].id) {
+            this.players.children.entries[i].configs.move(data[c].side)
+          }
+          
+        }
+      }
+    })
+
 
     /* -------- Functions --------- */
     this.startFollow = (sprite) => {
@@ -89,7 +100,12 @@ export default class HalloweenMap extends Phaser.Scene {
       })
 
       let thePlayer = this.players.getLast(true)
-      thePlayer.configs = { ...newPlayer }
+      thePlayer.configs = { ...newPlayer, move: (side) => {
+        if (side === "left")
+          thePlayer.setVelocityX(-300)
+        else if (side === "right")
+          thePlayer.setVelocityX(300)
+      }}
       this.startFollow(thePlayer)
     }
 
@@ -99,6 +115,7 @@ export default class HalloweenMap extends Phaser.Scene {
           this.createPlayer(initialData[c])
         }
         console.log("[game started] -> ", initialData)
+        this.gameState.start = true
       } else {
         console.error("[initialization error]", initialData)
       }
@@ -110,19 +127,46 @@ export default class HalloweenMap extends Phaser.Scene {
           this.players.children.entries[c].destroy()
         }
       }
-    } 
+    }
+
+    this.sendPlayerMoviment = (side) => {
+      halloweenRoom.emit("move-player", halloweenRoom.id, side)
+    }
+
+    this.movePlayer = (sprite, side) => {
+      console.log("[Moviment captado]")
+
+    }
 
 
     /* -------- Layers and collisions --------- */    
     this.platform = this.map.createLayer("platforms", this.tiles)
     this.platform.setCollisionByProperty({ collides: true })
     this.physics.add.collider(this.players, this.platform, null, null, this)    
+
+    this.keys = this.input.keyboard.createCursorKeys()
   }
 
   update() {
     if(this.gameState.start) {
 
+      const { up, left, right } = this.keys
 
+      if (this.gameState.tick === 0) {
+        if (up.isDown) {
+          this.sendPlayerMoviment("up")
+        }
+        if (left.isDown) {
+          this.sendPlayerMoviment("left")
+        }
+        if (right.isDown) {
+          this.sendPlayerMoviment("right")
+        }
+      
+        this.gameState.tick = 10
+      } else {
+        this.gameState.tick -= 1
+      }
     }
   }
 
