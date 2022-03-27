@@ -78,7 +78,7 @@ export default class HalloweenMap extends Phaser.Scene {
     })
 
     halloweenRoom.on("many-moviments", (data) => {
-      //console.log("moviment: ", data)
+      console.log("moviment: ", data)
       for (var i in this.players.children.entries) {
         for (var c=0; c < data.move.length; c++) {
           
@@ -115,17 +115,21 @@ export default class HalloweenMap extends Phaser.Scene {
         ...newPlayer, 
         move: (side) => {
           if (side === "left")
-            thePlayer.setVelocityX(-300)
+            thePlayer.setVelocityX(-600)
           else if (side === "right")
-            thePlayer.setVelocityX(300)
+            thePlayer.setVelocityX(600)
           else if (side === "up")
-            thePlayer.setVelocityY(-1000)
+            thePlayer.setVelocityY(-1300)
         },
         stop: () => {
           thePlayer.setVelocityX(0);
         },
       }
-      this.startFollow(thePlayer)
+
+      if (thePlayer.configs.socketID === halloweenRoom.id) {
+        this.gameState.currentPlayer = thePlayer
+        this.startFollow(this.gameState.currentPlayer)
+      }
     }
 
     this.startGame = (initialData) => {
@@ -149,8 +153,12 @@ export default class HalloweenMap extends Phaser.Scene {
     }
 
     this.sendPlayerMoviment = (side) => {
-      if (this.gameState.tick === 0 || !this.gameState.moving) {
+      if ((side == "right" || side == "left")) {
         this.gameState.moving = true
+        console.log("ENviando movimento")
+        halloweenRoom.emit("move-player", halloweenRoom.id, side)
+
+      } else if (side == "up" && this.gameState.currentPlayer.body.onFloor()) {
         halloweenRoom.emit("move-player", halloweenRoom.id, side)
       }
     }
@@ -178,17 +186,26 @@ export default class HalloweenMap extends Phaser.Scene {
         this.gameState.moving = false
       }
     })
-    
-  }
 
-  this.cursor = this.input.keyboard.createCursorKeys();
+    this.keys = this.input.keyboard.createCursorKeys() 
+  }
 
 
   update() {
     if(this.gameState.start) {
+      let { up, left, right } = this.keys
+
 
       if (this.gameState.tick === 0) {
-
+        if (up.isDown) {
+          this.sendPlayerMoviment("up")
+        }
+        if (left.isDown) {
+          this.sendPlayerMoviment("left")
+        }
+        else if (right.isDown) {
+          this.sendPlayerMoviment("right")
+        }
       
         this.gameState.tick = 10
       } else {

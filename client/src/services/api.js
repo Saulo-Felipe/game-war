@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: "http://localhost:8081/",
+  baseURL: "https://8081-saulofelipe-gamewar-3cgum9w3a43.ws-us38.gitpod.io/",
   withCredentials: true
 })
 
