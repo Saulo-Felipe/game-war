@@ -10,16 +10,23 @@ module.exports = (socket, allPlayers, mapSocket) => {
     disconnected,
     movePlayer,
     sendCurrentData,
+    stopPlayer
   }
 
-  var movimentState = []
+  var movimentState = {
+    move: [],
+    stop: []
+  }
   
   // Lembrar de arrumar o bug
 
   setInterval(() => {
-    if (movimentState.length > 0) {
+    if (movimentState.move.length > 0 || movimentState.stop.length > 0) {
       socket.emit("many-moviments", movimentState)
-      movimentState = []
+      movimentState = {
+        move: [],
+        stop: []
+      }
     }
   }, 100)
 
@@ -39,6 +46,10 @@ module.exports = (socket, allPlayers, mapSocket) => {
     game.movePlayer(id, side)
   })
 
+  socket.on("stop-player", (id) => {
+    game.stopPlayer(id)
+  })
+
   /* ----------- Tools Functions ---------- */
   function addPlayer(player) {
     allPlayers[player.socketID] = player
@@ -55,7 +66,11 @@ module.exports = (socket, allPlayers, mapSocket) => {
   }
 
   function movePlayer(id, side) {
-    movimentState.push({id, side})
+    movimentState.move.push({id, side})
+  }
+
+  function stopPlayer(id) {
+    movimentState.stop.push(id)
   }
 
   function sendCurrentData() {
@@ -108,7 +123,6 @@ module.exports = (socket, allPlayers, mapSocket) => {
 
   function disconnected(reason) {
     let disconnectedPlayer = { ...allPlayers[socket.id] }
-    console.log("removendo ele: ", disconnectedPlayer)
 
     mapSocket.emit("delete player", disconnectedPlayer.userID)
 

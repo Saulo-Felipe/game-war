@@ -1,6 +1,7 @@
 import Loading from '../components/phaser/Loading.js'
 import Phaser from 'phaser'
 import { halloweenRoom } from '../services/Socket.js'
+import { game } from '../App'
 
 
 export default class HalloweenMap extends Phaser.Scene {
@@ -15,8 +16,10 @@ export default class HalloweenMap extends Phaser.Scene {
       skin: data.character,
       start: false,
       tick: 10,
+      moving: false,
       currentPlayer: false,
-      followPlayer: null
+      followPlayer: null,
+      pressedKeys: [],
     }
   }
 
@@ -75,13 +78,21 @@ export default class HalloweenMap extends Phaser.Scene {
     })
 
     halloweenRoom.on("many-moviments", (data) => {
+      //console.log("moviment: ", data)
       for (var i in this.players.children.entries) {
-        for (var c=0; c < data.length; c++) {
-         
-          if (this.players.children.entries[i].configs.socketID === data[c].id) {
-            this.players.children.entries[i].configs.move(data[c].side)
+        for (var c=0; c < data.move.length; c++) {
+          
+          if (this.players.children.entries[i].configs.socketID === data.move[c].id) {
+            this.players.children.entries[i].configs.move(data.move[c].side)
           }
           
+        }
+        for (var c=0; c < data.stop.length; c++) {
+
+          if (this.players.children.entries[i].configs.socketID === data.stop[c]) {
+            this.players.children.entries[i].configs.stop()
+          }
+
         }
       }
     })
@@ -100,12 +111,20 @@ export default class HalloweenMap extends Phaser.Scene {
       })
 
       let thePlayer = this.players.getLast(true)
-      thePlayer.configs = { ...newPlayer, move: (side) => {
-        if (side === "left")
-          thePlayer.setVelocityX(-300)
-        else if (side === "right")
-          thePlayer.setVelocityX(300)
-      }}
+      thePlayer.configs = { 
+        ...newPlayer, 
+        move: (side) => {
+          if (side === "left")
+            thePlayer.setVelocityX(-300)
+          else if (side === "right")
+            thePlayer.setVelocityX(300)
+          else if (side === "up")
+            thePlayer.setVelocityY(-1000)
+        },
+        stop: () => {
+          thePlayer.setVelocityX(0);
+        },
+      }
       this.startFollow(thePlayer)
     }
 
@@ -130,7 +149,14 @@ export default class HalloweenMap extends Phaser.Scene {
     }
 
     this.sendPlayerMoviment = (side) => {
-      halloweenRoom.emit("move-player", halloweenRoom.id, side)
+      if (this.gameState.tick === 0 || !this.gameState.moving) {
+        this.gameState.moving = true
+        halloweenRoom.emit("move-player", halloweenRoom.id, side)
+      }
+    }
+
+    this.sendStopMoviment = () => {
+      halloweenRoom.emit("stop-player", halloweenRoom.id)
     }
 
     this.movePlayer = (sprite, side) => {
@@ -144,24 +170,25 @@ export default class HalloweenMap extends Phaser.Scene {
     this.platform.setCollisionByProperty({ collides: true })
     this.physics.add.collider(this.players, this.platform, null, null, this)    
 
-    this.keys = this.input.keyboard.createCursorKeys()
+
+
+    window.addEventListener("keyup", (e) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        this.sendStopMoviment()
+        this.gameState.moving = false
+      }
+    })
+    
   }
+
+  this.cursor = this.input.keyboard.createCursorKeys();
+
 
   update() {
     if(this.gameState.start) {
 
-      const { up, left, right } = this.keys
-
       if (this.gameState.tick === 0) {
-        if (up.isDown) {
-          this.sendPlayerMoviment("up")
-        }
-        if (left.isDown) {
-          this.sendPlayerMoviment("left")
-        }
-        if (right.isDown) {
-          this.sendPlayerMoviment("right")
-        }
+
       
         this.gameState.tick = 10
       } else {
