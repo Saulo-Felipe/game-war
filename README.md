@@ -56,7 +56,7 @@ $ cd server && yarn install && yarn start
 
 ## 🤖 Tecnologias <a id="tecnologias"></a>
 
-Neste e-commerce, foram utilizadas as seguintes tecnologias: 
+Neste jogo, foram utilizadas as seguintes tecnologias: 
 
 * Bootstrap <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" width="20px" />
 * HTML5 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original-wordmark.svg" width="20px"/> 
