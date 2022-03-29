@@ -65,6 +65,7 @@ Neste e-commerce, foram utilizadas as seguintes tecnologias:
 * Nodejs <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="20px"/>
 * React <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="20px"/>
 * PostgreSQL <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="20px"/>
+* Phaser <img src="./logo-download-vector.png" width="20px"/>
 
 
 ------------------------------------
