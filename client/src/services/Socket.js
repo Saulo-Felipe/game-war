@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 
-const ENDPOINT = "https://8081-saulofelipe-gamewar-3cgum9w3a43.ws-us38.gitpod.io"
+const ENDPOINT = "http://localhost:8081"
 
 // const socket = io(ENDPOINT)
 const socketOnlinePlayers = io(`${ENDPOINT}/online-players`)

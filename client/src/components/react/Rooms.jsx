@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { selectGameState } from '../../redux/gameSlice'
 import { halloweenRoom } from '../../services/Socket'
 import { game } from '../../App'
-import HalloweenMap from '../../scenes/HalloweenMap'
+import HalloweenMap from '../../scenes/halloween/map'
 
 import '../../styles/chooseLevel.css'
 

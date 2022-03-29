@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { game } from "../../App"
-import HalloweenMap from "../../scenes/HalloweenMap"
+import HalloweenMap from "../../scenes/halloween/map"
 
 
 export default function PlayGame() {
