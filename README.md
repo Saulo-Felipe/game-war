@@ -12,7 +12,7 @@
 * [Tecnologias](#tecnologias)
 * [Autor](#autor)
 * [Licença](#licenca)
-* <a href="https://e-commerce-frontend-saulo.herokuapp.com/" target="_blank"> 🏪 E-commerce com React e Nodejs ---- Concluído ✅ ----</a>
+
 
 ------------------------------------
 
@@ -34,16 +34,9 @@ Este projeto foi descontinuado. Decidi não finaliza-lo.
 <a href="https://e-commerce-frontend-saulo.herokuapp.com/"><img src="https://img.shields.io/badge/Site-E--commerce-blue"/></a>
 <img src="https://img.shields.io/badge/Backend-NodeJs-green">
 <img src="https://img.shields.io/badge/Frontend-ReactJS-green">
-<p>*O Layout completo do site está disponível <a href="https://e-commerce-frontend-saulo.herokuapp.com/">aqui</a>.</p>
 
-<img src="github/layout_08.png">
-<img src="github/layout_07.png">
-<img src="github/layout_06.png">
-<img src="github/layout_05.png">
-<img src="github/layout_04.png">
-<img src="github/layout_03.png">
-<img src="github/layout_02.png">
-<img src="github/layout_01.png">
+<img src="screen01.png">
+<img src="screen02.png">
 
 ------------------------------------
 
