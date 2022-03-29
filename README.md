@@ -52,16 +52,11 @@ Este projeto foi descontinuado. Decidi não finaliza-lo.
 Para executar o projeto na sua máquina, basta seguir a sequencia de passos:
 
 ```
-# Clone o repositório
-$ git clone https://github.com/Saulo-Felipe/eCommerce-ReactJS-NodeJS.git
+# Execute o servidor e o cliente
 
-# Inicie o servidor do Nodejs e React
+$ cd cliente && yarn install && yarn start
 
-eCommerce-ReactJS-NodeJS/frontend $ yarn dev
-eCommerce-ReactJS-NodeJS/backend $ yarn dev
-
-* é necessario a configuração de um banco de dados para adição dos produtos
-
+$ cd server && yarn install && yarn start
 ```
 
 ------------------------------------
@@ -70,14 +65,14 @@ eCommerce-ReactJS-NodeJS/backend $ yarn dev
 
 Neste e-commerce, foram utilizadas as seguintes tecnologias: 
 
-* Bootstrap <img src="./github/bootstrap.png"></img>
-* HTML5 <img src="./github/html5.png"></img>
-* CSS3 <img src="./github/css3.png"></img>
-* Javascript <img src="./github/javascript.png"></img>
-* FontAewsome <img src="./github/fontaewsome.png"></img>
-* Nodejs <img src="./github/node.jpeg"></img>
-* React <img src="./github/react.png"></img>
-* PostgreSQL <img src="./github/postgre.png"></img>
+* Bootstrap <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" width="20px" />
+* HTML5 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original-wordmark.svg" width="20px"/> 
+* CSS3 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="20px"/>
+* Javascript <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="20px"/>
+* Nodejs <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="20px"/>
+* React <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="20px"/>
+* PostgreSQL <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="20px"/>
+
 
 ------------------------------------
 
